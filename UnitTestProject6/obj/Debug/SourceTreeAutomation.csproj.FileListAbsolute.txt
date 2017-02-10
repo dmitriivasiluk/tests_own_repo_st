@@ -20,7 +20,6 @@ C:\projects\bitbucket.org\okornieva\sourcetreeqaautomation\UnitTestProject6\bin\
 C:\projects\bitbucket.org\okornieva\sourcetreeqaautomation\UnitTestProject6\bin\Debug\UnitTestProject6.dll
 C:\projects\bitbucket.org\okornieva\sourcetreeqaautomation\UnitTestProject6\bin\Debug\UnitTestProject6.pdb
 C:\projects\bitbucket.org\okornieva\sourcetreeqaautomation\UnitTestProject6\bin\Debug\Castle.Core.dll
-C:\projects\bitbucket.org\okornieva\sourcetreeqaautomation\UnitTestProject6\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 C:\projects\bitbucket.org\okornieva\sourcetreeqaautomation\UnitTestProject6\bin\Debug\nunit.framework.dll
 C:\projects\bitbucket.org\okornieva\sourcetreeqaautomation\UnitTestProject6\bin\Debug\TestStack.White.dll
 C:\projects\bitbucket.org\okornieva\sourcetreeqaautomation\UnitTestProject6\bin\Debug\TestStack.White.Reporting.dll
