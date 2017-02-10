@@ -21,35 +21,21 @@ namespace SourceTreeAutomation.Tests
     class BasicTest
     {
         protected Window MainWindow;
-        private Process sourceTreeProcess;
+        protected string sourceTreeExePath;
+        protected Process sourceTreeProcess;
 
         [SetUp]
         public void SetUp()
         {
-            var sourceTreeType = string.Empty; // "Beta", "Alpha" ....
-            var sourceTreeInstallParentDir = Environment.ExpandEnvironmentVariables(@"%localappdata%\SourceTree" + sourceTreeType);
+            sourceTreeExePath = FindSourceTree();
 
-            // TODO find SourceTree
-            // assumption that it is a squirrel install.
-            string[] sourceTreeAppDirs = Directory.GetDirectories(sourceTreeInstallParentDir, "app-*", SearchOption.TopDirectoryOnly);
-            Array.Sort(sourceTreeAppDirs);
-            string sourceTreeAppDir = sourceTreeAppDirs.Last();
+            RunSourceTree(sourceTreeExePath);
 
-            var sourceTreeInstallationFolder =
-                Environment.ExpandEnvironmentVariables(@"%localappdata%\SourceTree\app-1.10.20.1");
-            // TODO reset config to known state
-            // TODO run SourceTree
-            var sourceTreeExe = Path.Combine(sourceTreeAppDir, "SourceTree.exe");
+            AttachToSourceTree();
+        }
 
-            ProcessStartInfo psi = new ProcessStartInfo(sourceTreeExe);
-            psi.WorkingDirectory = sourceTreeInstallationFolder;
-            psi.RedirectStandardOutput = true;
-            psi.RedirectStandardError = true;
-            psi.UseShellExecute = false;
-            sourceTreeProcess = new Process();
-            sourceTreeProcess.StartInfo = psi;
-
-            sourceTreeProcess.Start();
+        private void AttachToSourceTree()
+        {
             MainWindow = null;
             int testCount = 0;
             while (!sourceTreeProcess.HasExited && MainWindow == null && testCount < 30)
@@ -58,6 +44,37 @@ namespace SourceTreeAutomation.Tests
                 Thread.Sleep(1000);
                 testCount++;
             }
+        }
+
+        private void RunSourceTree(string sourceTreeExe)
+        {
+            // run SourceTree
+            ProcessStartInfo psi = new ProcessStartInfo(sourceTreeExe);
+            psi.RedirectStandardOutput = true;
+            psi.RedirectStandardError = true;
+            psi.UseShellExecute = false;
+            sourceTreeProcess = new Process();
+            sourceTreeProcess.StartInfo = psi;
+
+            sourceTreeProcess.Start();
+        }
+
+        private static string FindSourceTree()
+        {
+            var sourceTreeType = string.Empty; // "Beta", "Alpha" ....
+            var sourceTreeInstallParentDir =
+                Environment.ExpandEnvironmentVariables(@"%localappdata%\SourceTree" + sourceTreeType);
+
+            // TODO find SourceTree
+            // assumption that it is a squirrel install.
+            string[] sourceTreeAppDirs = Directory.GetDirectories(sourceTreeInstallParentDir, "app-*",
+                SearchOption.TopDirectoryOnly);
+            Array.Sort(sourceTreeAppDirs);
+            string sourceTreeAppDir = sourceTreeAppDirs.Last();
+
+            // TODO reset config to known state
+            // TODO run SourceTree
+            return Path.Combine(sourceTreeAppDir, "SourceTree.exe");
         }
 
         [TearDown]
