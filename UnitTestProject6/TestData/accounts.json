@@ -1,0 +1,35 @@
+[
+  {
+    "$id": "16",
+    "$type": "SourceTree.Api.Host.Identity.Model.IdentityAccount, SourceTree.Api.Host.Identity",
+    "IsDefault": false,
+    "Authenticate": true,
+    "HostInstance": {
+      "$id": "17",
+      "$type": "SourceTree.Host.Atlassianaccount.AtlassianAccountInstance, SourceTree.Host.AtlassianAccount",
+      "Host": {
+        "$id": "18",
+        "$type": "SourceTree.Host.Atlassianaccount.AtlassianAccountHost, SourceTree.Host.AtlassianAccount",
+        "Id": "atlassian account"
+      },
+      "BaseUrl": "https://id.atlassian.com/"
+    },
+    "Credentials": {
+      "$id": "19",
+      "$type": "SourceTree.Model.BasicAuthCredentials, SourceTree.Api.Account",
+      "Username": "test@atlassian.com",
+      "Email": null,
+      "AvatarURL": null,
+      "AuthenticationScheme": {
+        "$type": "SourceTree.Model.BasicAuthAuthenticationScheme, SourceTree.Api.Account",
+        "Value": "Username/Password",
+        "Name": "Basic",
+        "Description": "Password",
+        "HeaderValuePrefix": "Basic",
+        "UsernameIsRequired": true
+      },
+      "Id": "test@atlassian.com",
+      "DisplayName": null
+    }
+  }
+]
