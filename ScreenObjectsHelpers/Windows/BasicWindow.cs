@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SourceTreeAutomation.Windows
+namespace ScreenObjectsHelpers.Windows
 {
-    class BasicWindow
+public    class BasicWindow
     {
 
       

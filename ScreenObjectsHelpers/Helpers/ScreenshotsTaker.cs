@@ -1,9 +1,10 @@
-﻿using System.Drawing.Imaging;
+﻿
+using System.Drawing.Imaging;
 using System.Drawing;
 using System.Windows;
 using TestStack.White;
 
-namespace SourceTreeAutomation.Helpers
+namespace ScreenObjectsHelpers.Helpers
 {
     public class ScreenshotsTaker {
         public void  TakeScreenShot() {

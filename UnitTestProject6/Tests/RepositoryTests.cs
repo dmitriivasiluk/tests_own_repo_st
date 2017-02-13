@@ -11,9 +11,9 @@ using TestStack.White.WindowsAPI;
 using TestStack.White;
 using NUnit.Framework;
 using TestStack.White.UIItems.WindowItems;
-using SourceTreeAutomation.Helpers;
+using ScreenObjectsHelpers.Helpers;
 
-namespace SourceTreeAutomation.Tests
+namespace AutomationTests.Tests
 {
     class RepositoryTests : BasicTest
     {
@@ -41,8 +41,8 @@ namespace SourceTreeAutomation.Tests
             }
             catch (Exception e)
             {
-                ScreenshotsTaker a = new ScreenshotsTaker();
-                a.TakeScreenShot();
+                ScreenshotsTaker screenshot = new ScreenshotsTaker();
+                screenshot.TakeScreenShot();
             }
 
         }
