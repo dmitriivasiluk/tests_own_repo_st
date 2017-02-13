@@ -18,6 +18,7 @@ using TestStack.White.UIItems.WindowItems;
 
 namespace SourceTreeAutomation.Tests
 {
+
     class BasicTest
     {
         private string BackupSuffix = "st_ui_test_bak";
