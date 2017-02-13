@@ -1,0 +1,17 @@
+C:\Users\okornie\Pictures\123\ScreenObjectsHelpers\obj\Debug\ScreenObjectsHelpers.csprojResolveAssemblyReference.cache
+C:\Users\okornie\Pictures\123\ScreenObjectsHelpers\bin\Debug\ScreenObjectsHelpers.dll
+C:\Users\okornie\Pictures\123\ScreenObjectsHelpers\bin\Debug\ScreenObjectsHelpers.pdb
+C:\Users\okornie\Pictures\123\ScreenObjectsHelpers\bin\Debug\Castle.Core.dll
+C:\Users\okornie\Pictures\123\ScreenObjectsHelpers\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\okornie\Pictures\123\ScreenObjectsHelpers\bin\Debug\System.Drawing.OCR.dll
+C:\Users\okornie\Pictures\123\ScreenObjectsHelpers\bin\Debug\System.Drawing.Primitives.dll
+C:\Users\okornie\Pictures\123\ScreenObjectsHelpers\bin\Debug\System.Extended.dll
+C:\Users\okornie\Pictures\123\ScreenObjectsHelpers\bin\Debug\TestStack.White.dll
+C:\Users\okornie\Pictures\123\ScreenObjectsHelpers\bin\Debug\Castle.Core.xml
+C:\Users\okornie\Pictures\123\ScreenObjectsHelpers\bin\Debug\System.Drawing.OCR.xml
+C:\Users\okornie\Pictures\123\ScreenObjectsHelpers\bin\Debug\System.Extended.xml
+C:\Users\okornie\Pictures\123\ScreenObjectsHelpers\bin\Debug\TestStack.White.pdb
+C:\Users\okornie\Pictures\123\ScreenObjectsHelpers\bin\Debug\TestStack.White.xml
+C:\Users\okornie\Pictures\123\ScreenObjectsHelpers\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
+C:\Users\okornie\Pictures\123\ScreenObjectsHelpers\obj\Debug\ScreenObjectsHelpers.dll
+C:\Users\okornie\Pictures\123\ScreenObjectsHelpers\obj\Debug\ScreenObjectsHelpers.pdb

@@ -16,7 +16,7 @@ using NUnit.Framework;
 using TestStack.White.UIItems.WindowItems;
 
 
-namespace SourceTreeAutomation.Tests
+namespace AutomationTests.Tests
 {
 
     class BasicTest
