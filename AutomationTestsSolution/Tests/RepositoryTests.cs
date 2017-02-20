@@ -13,7 +13,7 @@ using NUnit.Framework;
 using TestStack.White.UIItems.WindowItems;
 using ScreenObjectsHelpers.Helpers;
 
-namespace AutomationTests.Tests
+namespace AutomationTestsSolution.Tests
 {
     class RepositoryTests : BasicTest
     {
