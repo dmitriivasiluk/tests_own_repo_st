@@ -39,18 +39,18 @@ namespace AutomationTestsSolution.Tests
             var exeAndVersion = FindSourceTree();
             sourceTreeExePath = exeAndVersion.Item1;
             sourceTreeVersion = exeAndVersion.Item2;
-            sourceTreeUserConfigPath = FindSourceTreeUserConfig(sourceTreeVersion);
+         //   sourceTreeUserConfigPath = FindSourceTreeUserConfig(sourceTreeVersion);
             
             sourceTreeDataPath = FindSourceTreeData();
 
-            SetUserConfig(sourceTreeUserConfigPath);
-            SetData(sourceTreeDataPath);
+        //    SetUserConfig(sourceTreeUserConfigPath);
+        //    SetData(sourceTreeDataPath);
 
             RunSourceTree(sourceTreeExePath);
 
             AttachToSourceTree();
         }
-
+        /*
         private void SetData(string dataFolder)
         {
             BackupFile(Path.Combine(dataFolder, "bookmarks.xml"));
@@ -64,7 +64,7 @@ namespace AutomationTestsSolution.Tests
         {
             File.Copy(sourceFile, targetFile);
         }
-
+        */
         private void RestoreData(string dataFolder)
         {
             RestoreFile(Path.Combine(dataFolder, "bookmarks.xml"));
@@ -109,9 +109,9 @@ namespace AutomationTestsSolution.Tests
 
         private string FindSourceTreeData()
         {
-            return Environment.ExpandEnvironmentVariables(@"%localappdata%\Atlassian\SourceTree");
+            return Environment.ExpandEnvironmentVariables(@"%localappdata%\Atlassian\SourceTreeBeta");
         }
-
+       /*
         private string FindSourceTreeUserConfig(string version)
         {
             var sourceTreeInstallParentDir =
@@ -127,7 +127,7 @@ namespace AutomationTestsSolution.Tests
             var folder = userConfigDirectories.Last(d => !d.Contains("vshost"));
             return Path.Combine(folder, "user.config");
         }
-
+        */
         private void AttachToSourceTree()
         {
             MainWindow = null;
@@ -159,7 +159,7 @@ namespace AutomationTestsSolution.Tests
             var sourceTreeType =  string.IsNullOrWhiteSpace(sourceTreeTypeEnvVar) ? string.Empty : sourceTreeTypeEnvVar;
 
             var sourceTreeInstallParentDir =
-                Environment.ExpandEnvironmentVariables(@"%localappdata%\SourceTree" + sourceTreeType);
+                Environment.ExpandEnvironmentVariables(@"%localappdata%\SourceTreeBeta" + sourceTreeType);
 
             // TODO find SourceTree
             // assumption that it is a squirrel install.
@@ -184,7 +184,7 @@ namespace AutomationTestsSolution.Tests
 
             if (!sourceTreeProcess.HasExited)
             {
-                sourceTreeProcess.CloseMainWindow();
+         //       sourceTreeProcess.CloseMainWindow();
                 sourceTreeProcess.Close();
             }
 

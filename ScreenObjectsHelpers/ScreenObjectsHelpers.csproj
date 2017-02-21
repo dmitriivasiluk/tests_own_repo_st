@@ -70,6 +70,9 @@
     <Compile Include="Helpers\ScreenshotsTaker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Windows\BasicWindow.cs" />
+    <Compile Include="Windows\OptionsWindow.cs" />
+    <Compile Include="Windows\RepositoryWindow.cs" />
+    <Compile Include="Windows\UpdatesWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

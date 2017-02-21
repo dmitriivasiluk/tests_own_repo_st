@@ -12,6 +12,7 @@ using TestStack.White;
 using NUnit.Framework;
 using TestStack.White.UIItems.WindowItems;
 using ScreenObjectsHelpers.Helpers;
+using ScreenObjectsHelpers.Windows;
 
 namespace AutomationTestsSolution.Tests
 {
@@ -21,32 +22,22 @@ namespace AutomationTestsSolution.Tests
         private Button OKButton;
         private Button UpdateCheckForUpdateButton;
         private UIItem UpdatesTab;
-        [Test]
+        OptionsWindow optionsWindows;
+       [Test]
         public void CheckForUpdatesTest()
         {
-            Action = MainWindow.Get<Menu>(SearchCriteria.ByText("Tools"));
-            Action.SubMenu("Options").Click();
-            MainWindow.WaitWhileBusy();
-            var OptionsWindow = MainWindow.MdiChild(SearchCriteria.ByText("Options"));
-            OptionsWindow.Click();   
-             UpdatesTab =OptionsWindow.Get<UIItem>(SearchCriteria.ByText("Updates"));
-            UpdatesTab.Click();
-             UpdateCheckForUpdateButton = OptionsWindow.Get<Button>(SearchCriteria.ByText("Check For Updates"));
-            UpdateCheckForUpdateButton.Click();
-            MainWindow.WaitWhileBusy();
-            OKButton = OptionsWindow.Get<Button>(SearchCriteria.ByText("OK"));
-            try
-            {
-                OKButton.Click();
-            }
-            catch (Exception e)
-            {
-                ScreenshotsTaker screenshot = new ScreenshotsTaker();
-                screenshot.TakeScreenShot();
-            }
+            RepositoryWindow mainWindow = new RepositoryWindow(MainWindow);
+            mainWindow.getOptionsWindow();
+            mainWindow.SwithToOptionsWindow();
+            OptionsWindow optionsWindows = mainWindow.SwithToOptionsWindow();
+            UpdatesWindow updatesWindow = optionsWindows.GetUpdatesWindow();
+            updatesWindow.ClickCheckForUpdateButton();
+
 
         }
 
     }
+
     }
+    
 
