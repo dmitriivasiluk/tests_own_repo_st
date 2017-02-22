@@ -13,7 +13,6 @@ namespace ScreenObjectsHelpers.Windows
 {
     public class BasicWindow
     {
-
         public Window MainWindow;
 
         public BasicWindow(Window mainWindow)
@@ -31,11 +30,11 @@ namespace ScreenObjectsHelpers.Windows
 
         }
 
-        protected void threadWait(int time)
+        protected void ThreadWait(int time)
         {
             try
             {
-                //1000 milliseconds is on   e second.
+                //1000 milliseconds is on  e second.
                 Thread.Sleep(time);
             }
             catch (ThreadInterruptedException ex)

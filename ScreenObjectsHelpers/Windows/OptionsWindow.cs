@@ -14,8 +14,8 @@ namespace ScreenObjectsHelpers.Windows
    public class OptionsWindow 
     {
    
-        private Button OKButton;
-        private Button UpdateCheckForUpdateButton;
+        private Button oKButton;
+        private Button checkForUpdateButton;
         private UIItemContainer optionsWindow;
         private Window mainWindow;
 
@@ -27,19 +27,19 @@ namespace ScreenObjectsHelpers.Windows
 
         public UpdatesWindow GetUpdatesWindow()
         {
-            var UpdatesFromOptionTab = optionsWindow.Get<UIItem>(SearchCriteria.ByText("Updates"));
-            UpdatesFromOptionTab.Click();
-            return new UpdatesWindow(UpdatesFromOptionTab, mainWindow);
+            var updatesFromOptionTab = optionsWindow.Get<UIItem>(SearchCriteria.ByText("Updates"));
+            updatesFromOptionTab.Click();
+            return new UpdatesWindow(updatesFromOptionTab, mainWindow);
 
 
         }
         public UIItem ClickOkButton()
         {
-            UpdateCheckForUpdateButton = optionsWindow.Get<Button>(SearchCriteria.ByText("Check For Updates"));
-            UpdateCheckForUpdateButton.Click();
-            OKButton = optionsWindow.Get<Button>(SearchCriteria.ByText("OK"));
-            OKButton.Click();
-            return OKButton;
+            checkForUpdateButton = optionsWindow.Get<Button>(SearchCriteria.ByText("Check For Updates"));
+            checkForUpdateButton.Click();
+            oKButton = optionsWindow.Get<Button>(SearchCriteria.ByText("OK"));
+            oKButton.Click();
+            return oKButton;
 
         }
     }

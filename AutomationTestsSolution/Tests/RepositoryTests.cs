@@ -14,26 +14,24 @@ using TestStack.White.UIItems.WindowItems;
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows;
 
+
+
 namespace AutomationTestsSolution.Tests
 {
     class RepositoryTests : BasicTest
     {
-        private Menu Action;
-        private Button OKButton;
-        private Button UpdateCheckForUpdateButton;
-        private UIItem UpdatesTab;
-        OptionsWindow optionsWindows;
+        private Menu action;
+        private Button oKButton;
+        private Button updateCheckForUpdateButton;
+        private UIItem updatesTab;
+     
        [Test]
         public void CheckForUpdatesTest()
         {
             RepositoryWindow mainWindow = new RepositoryWindow(MainWindow);
-            mainWindow.getOptionsWindow();
-            mainWindow.SwithToOptionsWindow();
             OptionsWindow optionsWindows = mainWindow.SwithToOptionsWindow();
             UpdatesWindow updatesWindow = optionsWindows.GetUpdatesWindow();
             updatesWindow.ClickCheckForUpdateButton();
-
-
         }
 
     }

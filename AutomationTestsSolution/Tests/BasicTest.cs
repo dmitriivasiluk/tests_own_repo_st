@@ -39,18 +39,18 @@ namespace AutomationTestsSolution.Tests
             var exeAndVersion = FindSourceTree();
             sourceTreeExePath = exeAndVersion.Item1;
             sourceTreeVersion = exeAndVersion.Item2;
-         //   sourceTreeUserConfigPath = FindSourceTreeUserConfig(sourceTreeVersion);
+            sourceTreeUserConfigPath = FindSourceTreeUserConfig(sourceTreeVersion);
             
             sourceTreeDataPath = FindSourceTreeData();
 
-        //    SetUserConfig(sourceTreeUserConfigPath);
-        //    SetData(sourceTreeDataPath);
+           SetUserConfig(sourceTreeUserConfigPath);
+           SetData(sourceTreeDataPath);
 
             RunSourceTree(sourceTreeExePath);
 
             AttachToSourceTree();
         }
-        /*
+       
         private void SetData(string dataFolder)
         {
             BackupFile(Path.Combine(dataFolder, "bookmarks.xml"));
@@ -64,7 +64,7 @@ namespace AutomationTestsSolution.Tests
         {
             File.Copy(sourceFile, targetFile);
         }
-        */
+        
         private void RestoreData(string dataFolder)
         {
             RestoreFile(Path.Combine(dataFolder, "bookmarks.xml"));
@@ -111,7 +111,7 @@ namespace AutomationTestsSolution.Tests
         {
             return Environment.ExpandEnvironmentVariables(@"%localappdata%\Atlassian\SourceTreeBeta");
         }
-       /*
+       
         private string FindSourceTreeUserConfig(string version)
         {
             var sourceTreeInstallParentDir =
@@ -127,7 +127,7 @@ namespace AutomationTestsSolution.Tests
             var folder = userConfigDirectories.Last(d => !d.Contains("vshost"));
             return Path.Combine(folder, "user.config");
         }
-        */
+       
         private void AttachToSourceTree()
         {
             MainWindow = null;

@@ -13,24 +13,17 @@ namespace ScreenObjectsHelpers.Windows
 {
    public class RepositoryWindow : BasicWindow
     {
-        private Menu ToolsMenu;
+        private Menu toolsMenu;
         public RepositoryWindow(Window mainWindow) : base(mainWindow)
         {
         }
-
-
-        public void getOptionsWindow()
-        {
-            ToolsMenu = MainWindow.Get<Menu>(SearchCriteria.ByText("Tools"));
-            ToolsMenu.SubMenu("Options").Click();
-
-
-        }
         public OptionsWindow SwithToOptionsWindow()
         {
-            var OptionsWindow = MainWindow.MdiChild(SearchCriteria.ByText("Options"));
-            OptionsWindow.Click();
-            return new OptionsWindow(OptionsWindow, MainWindow);
+            toolsMenu = MainWindow.Get<Menu>(SearchCriteria.ByText("Tools"));
+            toolsMenu.SubMenu("Options").Click();
+            var optionsWindow = MainWindow.MdiChild(SearchCriteria.ByText("Options"));
+            optionsWindow.Click();
+            return new OptionsWindow(optionsWindow, MainWindow);
         }
     }
 }
