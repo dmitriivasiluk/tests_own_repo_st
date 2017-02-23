@@ -1,3 +1,0 @@
-C:\Users\okornie\Pictures\123\UnitTestProject6\obj\Debug\Automation.csprojResolveAssemblyReference.cache
-C:\Users\okornie\Pictures\123\UnitTestProject6\obj\Debug\UnitTestProject6.dll
-C:\Users\okornie\Pictures\123\UnitTestProject6\obj\Debug\UnitTestProject6.pdb
