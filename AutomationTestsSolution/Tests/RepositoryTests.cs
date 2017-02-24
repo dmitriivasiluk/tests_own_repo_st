@@ -13,25 +13,20 @@ using NUnit.Framework;
 using TestStack.White.UIItems.WindowItems;
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows;
-
-
+using ScreenObjectsHelpers.Windows.Options;
 
 namespace AutomationTestsSolution.Tests
 {
     class RepositoryTests : BasicTest
     {
-        private Menu action;
-        private Button oKButton;
-        private Button updateCheckForUpdateButton;
-        private UIItem updatesTab;
      
        [Test]
         public void CheckForUpdatesTest()
         {
-            RepositoryWindow mainWindow = new RepositoryWindow(MainWindow);
-            OptionsWindow optionsWindows = mainWindow.SwithToOptionsWindow();
-            UpdatesWindow updatesWindow = optionsWindows.GetUpdatesWindow();
-            updatesWindow.ClickCheckForUpdateButton();
+            NewTabWindow mainWindow = new NewTabWindow(MainWindow);
+            OptionsWindow optionsWindows = mainWindow.SwitchToOptionsWindow();
+            UpdatesTab updatesTab = optionsWindows.SwitchUpdatesTab();
+            updatesTab.CheckForUpdate();
         }
 
     }
