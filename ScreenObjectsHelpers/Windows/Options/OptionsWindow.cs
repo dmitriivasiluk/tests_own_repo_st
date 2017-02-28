@@ -28,8 +28,8 @@ namespace ScreenObjectsHelpers.Windows.Options
 
         public UpdatesTab SwitchUpdatesTab()
         {
-            var updatesFromOptionTab = OptionsWindowContainer.Get<UIItem>(SearchCriteria.ByText("Updates"));
-            updatesFromOptionTab.Click();
+            var toolsOptionsUpdatesTab = OptionsWindowContainer.Get<UIItem>(SearchCriteria.ByText("Updates"));
+            toolsOptionsUpdatesTab.Click();
             return new UpdatesTab(MainWindow, OptionsWindowContainer, updatesFromOptionTab);
         }
  
