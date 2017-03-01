@@ -83,6 +83,9 @@
     <Compile Include="Helpers\ScreenshotsTaker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Windows\BasicWindow.cs" />
+    <Compile Include="Windows\MenuFolder\Tools.cs" />
+    <Compile Include="Windows\MenuFolder\FileMenu.cs" />
+    <Compile Include="Windows\MenuFolder\MenuBar.cs" />
     <Compile Include="Windows\NewTabWindow.cs" />
     <Compile Include="Windows\Options\OptionsWindow.cs" />
     <Compile Include="Windows\GeneralWindow.cs" />
