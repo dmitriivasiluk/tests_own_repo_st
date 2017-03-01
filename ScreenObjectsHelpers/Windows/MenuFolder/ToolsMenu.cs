@@ -10,13 +10,13 @@ using TestStack.White.UIItems.WindowItems;
 
 namespace ScreenObjectsHelpers.Windows.MenuFolder
 {
-    public class Tools : MenuBar
+    public class ToolsMenu : MenuBar
     {
         private const string launchSSHAgent = "Launch SSH Agent...";
         private const string createImportSSHKeys = "Create or Import SSH Keys";
         private const string options = "Options";
 
-        public Tools(Window mainWindow) : base(mainWindow)
+        public ToolsMenu(Window mainWindow) : base(mainWindow)
         {
         }
 
@@ -26,6 +26,17 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
             {
                 return MainWindow.Get<Menu>(SearchCriteria.ByText("Tools"));
             }
+        }
+
+        public void LaunchSSHAgent()
+        {
+            UIElementMenu.SubMenu(launchSSHAgent).Click();
+        }
+
+        public object CreateImportSSHKeys()
+        {
+            UIElementMenu.SubMenu(createImportSSHKeys).Click();
+            throw new NotImplementedException("No corresponding class");
         }
 
         public OptionsWindow OpenOptions()

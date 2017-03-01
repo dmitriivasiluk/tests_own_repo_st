@@ -26,8 +26,9 @@ namespace AutomationTestsSolution.Tests
         {
             NewTabWindow mainWindow = new NewTabWindow(MainWindow);
             mainWindow = mainWindow.OpenMenu<FileMenu>().OpenCloneNew();
-
-            OptionsWindow optionsWindows = mainWindow.OpenMenu<Tools>().OpenOptions();
+            mainWindow.OpenMenu<EditMenu>().ClickOperations(OperationsEdit.Paste);
+            
+            OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             UpdatesTab updatesTab = optionsWindows.SwitchUpdatesTab();
             updatesTab.CheckForUpdate();
         }

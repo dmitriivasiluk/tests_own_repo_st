@@ -40,10 +40,9 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
             throw new NotImplementedException("No corresponding class");
         }
 
-        public object ExitSourceTree()
+        public void ExitSourceTree()
         {
             UIElementMenu.SubMenu(exitSourceTree).Click();
-            throw new NotImplementedException("No corresponding class");
         }
 
 
