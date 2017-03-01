@@ -1,4 +1,5 @@
 ﻿using ScreenObjectsHelpers.Windows.Options;
+using ScreenObjectsHelpers.Windows.MenuFolder;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,26 +21,15 @@ namespace ScreenObjectsHelpers.Windows
      
         public GeneralWindow(Window mainWindow) : base(mainWindow)
         {
+            ValidateWindow();
         }
 
-        #region Elements Menu
-        private Menu ToolsMenu
-        {
-            get 
-            {
-                return MainWindow.Get<Menu>(SearchCriteria.ByText("Tools"));
-            }
-        }
-        #endregion
+        public abstract void ValidateWindow();
 
-        #region Methods
-        public OptionsWindow SwitchToOptionsWindow()
-        {
-            ToolsMenu.SubMenu("Options").Click();
-            var optionsWindow = MainWindow.MdiChild(SearchCriteria.ByText("Options"));
-            optionsWindow.Click();
-            return new OptionsWindow(MainWindow, optionsWindow);
+        public T OpenMenu<T> () where T : MenuBar
+        {            
+            return (T) Activator.CreateInstance(typeof(T), MainWindow);
         }
-        #endregion
+        
     }
 }
