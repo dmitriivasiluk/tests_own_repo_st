@@ -62,13 +62,13 @@ namespace ScreenObjectsHelpers.Windows.Options
                 this.ClickOnButton(OK);
             }
 
-        public bool isUseEmbeddedGitEnabled() {
-          return  isElementAvaliable(UseEmbededGitButton);
+        public bool IsUseEmbeddedGitEnabled() {
+          return  IsElementAvaliable(UseEmbededGitButton);
         }
 
-        public bool isUseSystemGitEnabled()
+        public bool IsUseSystemGitEnabled()
         {
-            return isElementAvaliable(SystemGitButton);
+            return IsElementAvaliable(SystemGitButton);
         }
 
         public String VersionText()
