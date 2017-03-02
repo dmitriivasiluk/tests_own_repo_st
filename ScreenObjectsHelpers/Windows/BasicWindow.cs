@@ -38,6 +38,11 @@ namespace ScreenObjectsHelpers.Windows
         {
             WaitWhileElementAvaliable(Button).Click();
         }
+
+        public bool isElementAvaliable(UIItem item)
+        {
+            return item.Visible;
+        }
         public  UIItem WaitWhileElementAvaliable(UIItem item)
         {
             var ifItemVisible = item.Visible;

@@ -9,10 +9,9 @@ using TestStack.White.UIItems.WindowItems;
 
 namespace ScreenObjectsHelpers.Windows.Options
 {
-  public  class GitTab : OptionsWindow
+  public class GitTab : OptionsWindow
     {
             private UIItem generalTabActions;
-
         public GitTab(Window mainWindow, UIItemContainer optionsWindow) : base(mainWindow, optionsWindow)
             {
             }

@@ -36,6 +36,7 @@ namespace AutomationTestsSolution.Tests
             OptionsWindow optionsWindows = mainWindow.SwitchToOptionsWindow();
             GitTab gitTab = optionsWindows.SwitchGitTab();
             gitTab.UseEmbeddedGit();
+            Assert.IsTrue(gitTab.isUseEmbeddedGitEnabled());
         }
     }
 
