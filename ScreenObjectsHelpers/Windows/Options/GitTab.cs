@@ -11,12 +11,11 @@ namespace ScreenObjectsHelpers.Windows.Options
 {
   public  class GitTab : OptionsWindow
     {
-            private Button oKButton;
             private UIItem generalTabActions;
 
         public GitTab(Window mainWindow, UIItemContainer optionsWindow) : base(mainWindow, optionsWindow)
-        {
-        }
+            {
+            }
 
         public GitTab(Window mainWindow, UIItemContainer optionsWindow, UIItem generalTab ) : base(mainWindow, optionsWindow)
             {
@@ -30,7 +29,7 @@ namespace ScreenObjectsHelpers.Windows.Options
             }
 
             #region UI Elements
-            public Button UseEmbededGit 
+            public Button UseEmbededGitButton 
             {
                 get
                 {
@@ -44,13 +43,25 @@ namespace ScreenObjectsHelpers.Windows.Options
                     return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("OK"));
                 }
             }
-            #endregion
 
-            public void UseEmbeddedGit()
+        private Button EmbeddedGitButton
+        {
+            get
             {
-                this.ClickOnButton(UseEmbededGit);
+                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("OK"));
+            }
+        }
+        #endregion
+
+        public void UseEmbeddedGit()
+            {
+                this.ClickOnButton(UseEmbededGitButton);
                 this.ClickOnButton(OK);
             }
+
+        public bool isUseEmbeddedGitEnabled() {
+          return  isElementAvaliable(UseEmbededGitButton);
+        }
         }
     }
 
