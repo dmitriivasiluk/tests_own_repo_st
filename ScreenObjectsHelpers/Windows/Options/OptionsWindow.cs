@@ -11,7 +11,7 @@ using TestStack.White.UIItems.WPFUIItems;
 
 namespace ScreenObjectsHelpers.Windows.Options
 {
-   public class OptionsWindow : BasicWindow
+   public class OptionsWindow : GeneralWindow
     {
    
         public OptionsWindow(Window mainWindow, UIItemContainer optionsWindow) : base(mainWindow)
@@ -30,7 +30,7 @@ namespace ScreenObjectsHelpers.Windows.Options
         {
             var toolsOptionsUpdatesTab = OptionsWindowContainer.Get<UIItem>(SearchCriteria.ByText("Updates"));
             toolsOptionsUpdatesTab.Click();
-            return new UpdatesTab(MainWindow, OptionsWindowContainer, updatesFromOptionTab);
+            return new UpdatesTab(MainWindow, OptionsWindowContainer, toolsOptionsUpdatesTab);
         }
  
     }

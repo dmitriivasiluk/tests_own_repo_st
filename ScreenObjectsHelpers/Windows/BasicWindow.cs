@@ -22,12 +22,10 @@ namespace ScreenObjectsHelpers.Windows
         public BasicWindow(Window mainWindow)
         {
             this.MainWindow = mainWindow;
-            ValidateWindow();
+            
         }
 
         public Window MainWindow { get; private set; }
-
-        public abstract void ValidateWindow();
 
         public void ClickOnButton(Button Button)
         {
