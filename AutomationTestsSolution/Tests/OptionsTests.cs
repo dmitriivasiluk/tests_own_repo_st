@@ -14,6 +14,7 @@ using TestStack.White.UIItems.WindowItems;
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows;
 using ScreenObjectsHelpers.Windows.Options;
+using ScreenObjectsHelpers.Windows.MenuFolder;
 
 namespace AutomationTestsSolution.Tests
 {
@@ -24,7 +25,10 @@ namespace AutomationTestsSolution.Tests
         public void CheckForUpdatesTest()
         {
             NewTabWindow mainWindow = new NewTabWindow(MainWindow);
-            OptionsWindow optionsWindows = mainWindow.SwitchToOptionsWindow();
+            mainWindow = mainWindow.OpenMenu<FileMenu>().OpenCloneNew();
+            mainWindow.OpenMenu<EditMenu>().ClickOperations(OperationsEdit.Paste);
+            
+            OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             UpdatesTab updatesTab = optionsWindows.SwitchUpdatesTab();
             updatesTab.CheckForUpdate();
         }
@@ -33,10 +37,13 @@ namespace AutomationTestsSolution.Tests
         public void UseEmbededGit()
         {
             NewTabWindow mainWindow = new NewTabWindow(MainWindow);
-            OptionsWindow optionsWindows = mainWindow.SwitchToOptionsWindow();
+            mainWindow = mainWindow.OpenMenu<FileMenu>().OpenCloneNew();
+            mainWindow.OpenMenu<EditMenu>().ClickOperations(OperationsEdit.Paste);
+            OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
+            UpdatesTab updatesTab = optionsWindows.SwitchUpdatesTab();
             GitTab gitTab = optionsWindows.SwitchGitTab();
             gitTab.UseEmbeddedGit();
-            Assert.IsTrue(gitTab.isUseEmbeddedGitEnabled());
+            Assert.IsFalse(gitTab.isUseEmbeddedGitEnabled());
         }
     }
 

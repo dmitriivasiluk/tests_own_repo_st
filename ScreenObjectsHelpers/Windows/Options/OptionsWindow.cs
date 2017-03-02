@@ -11,18 +11,15 @@ using TestStack.White.UIItems.WPFUIItems;
 
 namespace ScreenObjectsHelpers.Windows.Options
 {
-    public class OptionsWindow : BasicWindow
+   public class OptionsWindow : BasicWindow
+
     {
 
         public OptionsWindow(Window mainWindow, UIItemContainer optionsWindow) : base(mainWindow)
         {
             OptionsWindowContainer = optionsWindow;
         }
-        public override void ValidateWindow()
-        {
-            // Need verify opened tab in this method, need implementation! If validation is fail, throw exception!
-            Console.WriteLine("WAIT FOR OPENING _OPTION_ WINDOW");
-        }
+       
         #region UIElementss
         public UIItemContainer OptionsWindowContainer { get; }
         #endregion

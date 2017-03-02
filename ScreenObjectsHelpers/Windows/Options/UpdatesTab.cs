@@ -13,8 +13,7 @@ namespace ScreenObjectsHelpers.Windows.Options
 {
     public class UpdatesTab : OptionsWindow
     {
-        private Button updateCheckForUpdateButton;
-        private Button oKButton;
+
         private UIItem updatesFromOptionTab;
 
         public UpdatesTab(Window mainWindow, UIItemContainer optionsWindow, UIItem updateTab) : base(mainWindow, optionsWindow)
