@@ -11,9 +11,9 @@ using TestStack.White.UIItems.WPFUIItems;
 
 namespace ScreenObjectsHelpers.Windows.Options
 {
-   public class OptionsWindow : BasicWindow
+    public class OptionsWindow : BasicWindow
     {
-   
+
         public OptionsWindow(Window mainWindow, UIItemContainer optionsWindow) : base(mainWindow)
         {
             OptionsWindowContainer = optionsWindow;
@@ -23,15 +23,23 @@ namespace ScreenObjectsHelpers.Windows.Options
             // Need verify opened tab in this method, need implementation! If validation is fail, throw exception!
             Console.WriteLine("WAIT FOR OPENING _OPTION_ WINDOW");
         }
-
+        #region UIElementss
         public UIItemContainer OptionsWindowContainer { get; }
-
+        #endregion
+        #region Methods
         public UpdatesTab SwitchUpdatesTab()
         {
             var toolsOptionsUpdatesTab = OptionsWindowContainer.Get<UIItem>(SearchCriteria.ByText("Updates"));
             toolsOptionsUpdatesTab.Click();
-            return new UpdatesTab(MainWindow, OptionsWindowContainer, updatesFromOptionTab);
+            return new UpdatesTab(MainWindow, OptionsWindowContainer, toolsOptionsUpdatesTab);
         }
- 
+        public GitTab SwitchGitTab()
+        {
+            var toolsOptionsGitTab = OptionsWindowContainer.Get<UIItem>(SearchCriteria.ByText("Git"));
+            toolsOptionsGitTab.Click();
+            return new GitTab(MainWindow, OptionsWindowContainer, toolsOptionsGitTab);
+        }
+        #endregion
+
     }
 }

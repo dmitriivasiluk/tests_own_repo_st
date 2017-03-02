@@ -84,6 +84,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Windows\BasicWindow.cs" />
     <Compile Include="Windows\NewTabWindow.cs" />
+    <Compile Include="Windows\Options\GitTab.cs" />
     <Compile Include="Windows\Options\OptionsWindow.cs" />
     <Compile Include="Windows\GeneralWindow.cs" />
     <Compile Include="Windows\Options\UpdatesTab.cs" />

@@ -31,12 +31,21 @@ namespace ScreenObjectsHelpers.Windows
 
         public void ClickOnButton(Button Button)
         {
-            // WaitWhileElementAvaliable(Button).Click() uncomment it when implement WaitWhileElementAvaliable() method
             Button.Click();
         }
 
-        public void WaitWhileElementAvaliable() {
-            throw new NotImplementedException();
+        public void ClickOnButtonAfterElementVisible(Button Button)
+        {
+            WaitWhileElementAvaliable(Button).Click();
+        }
+        public  UIItem WaitWhileElementAvaliable(UIItem item)
+        {
+            var ifItemVisible = item.Visible;
+            if (!ifItemVisible)
+            {  
+                    ThreadWait(5);
+            }
+                return item;
         }
 
         protected void ThreadWait(int time)
@@ -52,7 +61,44 @@ namespace ScreenObjectsHelpers.Windows
             }
         }
 
+        public void ScrollHorizontalLeft(Window window)
+        {
+            var isWindowScrolable = window.ScrollBars.Horizontal.IsScrollable;
+            if (isWindowScrolable == true)
+            {
+                window.ScrollBars.Horizontal.ScrollLeftLarge();
+            }
+
+        }
+        public void ScrollHorizontalRigh(Window window)
+        {
+            var isWindowScrolable = window.ScrollBars.Horizontal.IsScrollable;
+            if (isWindowScrolable)
+            {
+                window.ScrollBars.Horizontal.ScrollRightLarge();
+            }
+
+        }
+        public void ScrollVerticalDown(Window window)
+        {
+            var isWindowScrolable = window.ScrollBars.Vertical.IsScrollable;
+            if (isWindowScrolable)
+            {
+                window.ScrollBars.Vertical.ScrollDown();
+            }
+        }
+        public void ScrollVerticalUp(Window window)
+        {
+            var isWindowScrolable = window.ScrollBars.Vertical.IsScrollable;
+            if (isWindowScrolable)
+            {
+                window.ScrollBars.Vertical.ScrollUp();
+            }
+
+        }
+
+
     }
 
-  }
+}
 

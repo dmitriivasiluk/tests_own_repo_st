@@ -17,7 +17,7 @@ using ScreenObjectsHelpers.Windows.Options;
 
 namespace AutomationTestsSolution.Tests
 {
-    class RepositoryTests : BasicTest
+    class OptionsTests : BasicTest
     {
      
        [Test]
@@ -28,7 +28,15 @@ namespace AutomationTestsSolution.Tests
             UpdatesTab updatesTab = optionsWindows.SwitchUpdatesTab();
             updatesTab.CheckForUpdate();
         }
+        [Test]
 
+        public void UseEmbededGit()
+        {
+            NewTabWindow mainWindow = new NewTabWindow(MainWindow);
+            OptionsWindow optionsWindows = mainWindow.SwitchToOptionsWindow();
+            GitTab gitTab = optionsWindows.SwitchGitTab();
+            gitTab.UseEmbeddedGit();
+        }
     }
 
     }
