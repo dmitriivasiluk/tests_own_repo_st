@@ -44,6 +44,8 @@ namespace AutomationTestsSolution.Tests
             GitTab gitTab = optionsWindows.SwitchGitTab();
             gitTab.UseEmbeddedGit();
             Assert.IsFalse(gitTab.isUseEmbeddedGitEnabled());
+            Assert.IsTrue(gitTab.isUseSystemGitEnabled());
+            Assert.That(gitTab.VersionText(), Is.StringContaining("2.11.0").IgnoreCase);
         }
     }
 

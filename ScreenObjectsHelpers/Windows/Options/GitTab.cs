@@ -21,11 +21,6 @@ namespace ScreenObjectsHelpers.Windows.Options
                 generalTabActions = generalTab;
             }
 
-            public override void ValidateWindow()
-            {
-                // Need verify opened tab in this method, need implementation! If validation is fail, throw exception!
-                Console.WriteLine("WAIT FOR OPENING TAB");
-            }
 
             #region UI Elements
             public Button UseEmbededGitButton 
@@ -47,11 +42,20 @@ namespace ScreenObjectsHelpers.Windows.Options
         {
             get
             {
-                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("OK"));
+                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use Embedded Git"));
             }
         }
-        #endregion
 
+        private Button SystemGitButton
+        {
+            get
+            {
+                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use Sustem Git"));
+            }
+        }
+
+        #endregion
+        #region Methods
         public void UseEmbeddedGit()
             {
                 this.ClickOnButton(UseEmbededGitButton);
@@ -61,7 +65,19 @@ namespace ScreenObjectsHelpers.Windows.Options
         public bool isUseEmbeddedGitEnabled() {
           return  isElementAvaliable(UseEmbededGitButton);
         }
+
+        public bool isUseSystemGitEnabled()
+        {
+            return isElementAvaliable(SystemGitButton);
         }
+
+        public String VersionText()
+        {
+                return OptionsWindowContainer.HelpText;
+        }
+
+        #endregion
     }
+}
 
 
