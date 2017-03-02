@@ -50,7 +50,7 @@ namespace ScreenObjectsHelpers.Windows.Options
         {
             get
             {
-                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use Sustem Git"));
+                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use System Git"));
             }
         }
 
