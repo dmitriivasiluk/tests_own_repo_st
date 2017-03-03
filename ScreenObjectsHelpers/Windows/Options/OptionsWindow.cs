@@ -11,34 +11,35 @@ using TestStack.White.UIItems.WPFUIItems;
 
 namespace ScreenObjectsHelpers.Windows.Options
 {
-   public class OptionsWindow : GeneralWindow
-
+    public abstract class OptionsWindow : GeneralWindow
     {
 
         public OptionsWindow(Window mainWindow, UIItemContainer optionsWindow) : base(mainWindow)
         {
             OptionsWindowContainer = optionsWindow;
+            ClickOnTab();
         }
-        public override void ValidateWindow()
+
+        #region UIElements
+        public abstract UIItem UIElementTab
         {
-            // Need verify opened tab in this method, need implementation! If validation is fail, throw exception!
-            Console.WriteLine("WAIT FOR OPENING _OPTION_ WINDOW");
+            get;
         }
-        #region UIElementss
-        public UIItemContainer OptionsWindowContainer { get; }
+        public UIItemContainer OptionsWindowContainer
+        {
+            get;
+        }
         #endregion
+
         #region Methods
-        public UpdatesTab SwitchUpdatesTab()
+        public T OpenTab<T>() where T : OptionsWindow
         {
-            var toolsOptionsUpdatesTab = OptionsWindowContainer.Get<UIItem>(SearchCriteria.ByText("Updates"));
-            toolsOptionsUpdatesTab.Click();
-            return new UpdatesTab(MainWindow, OptionsWindowContainer, toolsOptionsUpdatesTab);
+            return (T)Activator.CreateInstance(typeof(T), MainWindow, OptionsWindowContainer);
         }
-        public GitTab SwitchGitTab()
+
+        public virtual void ClickOnTab()
         {
-            var toolsOptionsGitTab = OptionsWindowContainer.Get<UIItem>(SearchCriteria.ByText("Git"));
-            toolsOptionsGitTab.Click();
-            return new GitTab(MainWindow, OptionsWindowContainer, toolsOptionsGitTab);
+            UIElementTab.Click();
         }
         #endregion
 

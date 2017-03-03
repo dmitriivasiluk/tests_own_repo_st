@@ -11,18 +11,26 @@ namespace ScreenObjectsHelpers.Windows.Options
 {
     public class GitTab : OptionsWindow
     {
-        private UIItem generalTabActions;
+
         public GitTab(Window mainWindow, UIItemContainer optionsWindow) : base(mainWindow, optionsWindow)
         {
         }
 
-        public GitTab(Window mainWindow, UIItemContainer optionsWindow, UIItem generalTab) : base(mainWindow, optionsWindow)
+        public override void ValidateWindow()
         {
-            generalTabActions = generalTab;
+            // Need verify opened tab in this method, need implementation! If validation is fail, throw exception!
+            Console.WriteLine("WAIT FOR OPENING TAB");
         }
 
 
         #region UI Elements
+        public override UIItem UIElementTab
+        {
+            get
+            {
+                return OptionsWindowContainer.Get<UIItem>(SearchCriteria.ByText("Git"));
+            }
+        }
         public Button UseEmbededGitButton
         {
             get
@@ -37,7 +45,6 @@ namespace ScreenObjectsHelpers.Windows.Options
                 return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("OK"));
             }
         }
-
         private Button EmbeddedGitButton
         {
             get
@@ -53,30 +60,31 @@ namespace ScreenObjectsHelpers.Windows.Options
                 return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use System Git"));
             }
         }
-
         #endregion
+
         #region Methods
         public void UseEmbeddedGit()
         {
-            this.ClickOnButton(UseEmbededGitButton);
-            this.ClickOnButton(OK);
+            if(UseEmbededGitButton.Enabled)
+            {
+                this.ClickOnButton(UseEmbededGitButton);
+            }
         }
 
         public bool IsUseEmbeddedGitEnabled()
         {
-            return IsElementAvaliable(UseEmbededGitButton);
+            return UseEmbededGitButton.Enabled;
         }
 
         public bool IsUseSystemGitEnabled()
         {
-            return IsElementAvaliable(SystemGitButton);
+            return SystemGitButton.Enabled;
         }
 
-        public String VersionText()
+        public string VersionText()
         {
             return OptionsWindowContainer.HelpText;
         }
-
         #endregion
     }
 }

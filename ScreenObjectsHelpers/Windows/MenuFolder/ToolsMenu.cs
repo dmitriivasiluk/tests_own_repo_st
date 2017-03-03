@@ -43,9 +43,9 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
         {
             UIElementMenu.SubMenu(options).Click();
             var optionsWindow = MainWindow.MdiChild(SearchCriteria.ByText(options));
-            return new OptionsWindow(MainWindow, optionsWindow);
+            return new GeneralTab(MainWindow, optionsWindow);
         }
 
-   
+
     }
 }

@@ -18,7 +18,7 @@ namespace ScreenObjectsHelpers.Windows
     /// </summary>
     public abstract class GeneralWindow : BasicWindow
     {
-     
+
         public GeneralWindow(Window mainWindow) : base(mainWindow)
         {
             ValidateWindow();
@@ -26,10 +26,10 @@ namespace ScreenObjectsHelpers.Windows
 
         public abstract void ValidateWindow();
 
-        public T OpenMenu<T> () where T : MenuBar
-        {            
-            return (T) Activator.CreateInstance(typeof(T), MainWindow);
+        public T OpenMenu<T>() where T : MenuBar
+        {
+            return (T)Activator.CreateInstance(typeof(T), MainWindow);
         }
-        
+
     }
 }
