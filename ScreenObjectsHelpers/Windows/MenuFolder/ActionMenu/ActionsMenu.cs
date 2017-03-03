@@ -16,13 +16,13 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
         {
         }
 
-        public override Menu UIElementMenu { get {  return MainWindow.Get<Menu>(SearchCriteria.ByText("Actions")); } }
+        public override Menu UIElementMenu { get { return MainWindow.Get<Menu>(SearchCriteria.ByText("Actions")); } }
 
         public ResolveConflict OpenResolveConflictMenu()
         {
             return new ResolveConflict(MainWindow);
         }
-        
+
     }
 
 }

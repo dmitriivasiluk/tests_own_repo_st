@@ -15,13 +15,13 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
         {
         }
 
-        public override Menu UIElementMenu { get {  return MainWindow.Get<Menu>(SearchCriteria.ByText("Edit")); } }
+        public override Menu UIElementMenu { get { return MainWindow.Get<Menu>(SearchCriteria.ByText("Edit")); } }
 
         public void ClickOperations(OperationsEdit operation)
         {
             UIElementMenu.SubMenu(operation.Value).Click();
         }
-        
+
     }
 
     public struct OperationsEdit
