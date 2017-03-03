@@ -11,6 +11,8 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
 {
     public class HelpMenu : MenuBar
     {
+		private const string About = "About SourceTree";
+		
         public HelpMenu(Window mainWindow) : base(mainWindow)
         {
         }
@@ -21,14 +23,19 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
         {
             UIElementMenu.SubMenu(operation.Value).Click();
         }
-        
+		
+		public AboutWindow OpenAbout()
+        {
+            UIElementMenu.SubMenu(About).Click();
+            var aboutWindow = MainWindow.MdiChild(SearchCriteria.ByText(About));
+            return new AboutWindow(MainWindow, aboutWindow);
+        }        
     }
 
     public struct OperationsHelp
     {
         private OperationsHelp(string value) { Value = value; }
-        public string Value { get; set; }
-        public static OperationsHelp About { get { return new OperationsHelp("About SourceTree"); } }
+        public string Value { get; set; }        
         public static OperationsHelp GetStarted { get { return new OperationsHelp("Get Started With SourceTree"); } }
         public static OperationsHelp SupportWebsite { get { return new OperationsHelp("SourceTree Support Website"); } }        
         public static OperationsHelp SourceTreeWebsite { get { return new OperationsHelp("SourceTree Website"); } }
