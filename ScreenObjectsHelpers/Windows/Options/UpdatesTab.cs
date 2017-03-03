@@ -14,11 +14,8 @@ namespace ScreenObjectsHelpers.Windows.Options
     public class UpdatesTab : OptionsWindow
     {
 
-        private UIItem updatesFromOptionTab;
-
-        public UpdatesTab(Window mainWindow, UIItemContainer optionsWindow, UIItem updateTab) : base(mainWindow, optionsWindow)
+        public UpdatesTab(Window mainWindow, UIItemContainer optionsWindow) : base(mainWindow, optionsWindow)
         {
-            updatesFromOptionTab = updateTab;
         }
 
         public override void ValidateWindow()
@@ -27,7 +24,14 @@ namespace ScreenObjectsHelpers.Windows.Options
             Console.WriteLine("WAIT FOR OPENING TAB");
         }
 
-        #region UI Elements
+        #region UIElements
+        public override UIItem UIElementTab
+        {
+            get
+            {
+                return OptionsWindowContainer.Get<UIItem>(SearchCriteria.ByText("Updates"));
+            }
+        }
         public Button CheckForUpdatesButton
         {
             get
@@ -49,5 +53,7 @@ namespace ScreenObjectsHelpers.Windows.Options
             this.ClickOnButton(CheckForUpdatesButton);
             this.ClickOnButton(OK);
         }
+
+
     }
 }

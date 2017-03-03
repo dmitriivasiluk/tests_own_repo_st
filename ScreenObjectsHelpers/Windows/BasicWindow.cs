@@ -22,7 +22,6 @@ namespace ScreenObjectsHelpers.Windows
         public BasicWindow(Window mainWindow)
         {
             this.MainWindow = mainWindow;
-            
         }
 
         public Window MainWindow { get; private set; }
@@ -41,7 +40,8 @@ namespace ScreenObjectsHelpers.Windows
         {
             return item.Visible;
         }
-        public  UIItem WaitWhileElementAvaliable(UIItem item)
+
+        public UIItem WaitWhileElementAvaliable(UIItem item)
         {
             var ifItemVisible = item.Visible;
             int secondPassed = 0;
@@ -61,6 +61,7 @@ namespace ScreenObjectsHelpers.Windows
                 }
                 return item;
             }
+        }
 
         protected void ThreadWait(int time)
         {

@@ -83,11 +83,14 @@
     <Compile Include="Helpers\ScreenshotsTaker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Windows\BasicWindow.cs" />
+    <Compile Include="Windows\MenuFolder\ActionMenu\ActionsMenu.cs" />
+    <Compile Include="Windows\MenuFolder\ActionMenu\ResolveConflict.cs" />
     <Compile Include="Windows\MenuFolder\EditMenu.cs" />
     <Compile Include="Windows\MenuFolder\ToolsMenu.cs" />
     <Compile Include="Windows\MenuFolder\FileMenu.cs" />
     <Compile Include="Windows\MenuFolder\MenuBar.cs" />
     <Compile Include="Windows\NewTabWindow.cs" />
+    <Compile Include="Windows\Options\GeneralTab.cs" />
     <Compile Include="Windows\Options\GitTab.cs" />
     <Compile Include="Windows\Options\OptionsWindow.cs" />
     <Compile Include="Windows\GeneralWindow.cs" />

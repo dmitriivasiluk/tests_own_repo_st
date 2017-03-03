@@ -26,26 +26,27 @@ namespace AutomationTestsSolution.Tests
         {
             NewTabWindow mainWindow = new NewTabWindow(MainWindow);
             mainWindow = mainWindow.OpenMenu<FileMenu>().OpenCloneNew();
-            mainWindow.OpenMenu<EditMenu>().ClickOperations(OperationsEdit.Paste);
+            //mainWindow.OpenMenu<EditMenu>().ClickOperations(OperationsEdit.Paste);
             
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
-            UpdatesTab updatesTab = optionsWindows.SwitchUpdatesTab();
+            UpdatesTab updatesTab = optionsWindows.OpenTab<UpdatesTab>();
             updatesTab.CheckForUpdate();
         }
-        [Test]
 
+        [Test]
         public void UseEmbededGit()
         {
             NewTabWindow mainWindow = new NewTabWindow(MainWindow);
             mainWindow = mainWindow.OpenMenu<FileMenu>().OpenCloneNew();
             mainWindow.OpenMenu<EditMenu>().ClickOperations(OperationsEdit.Paste);
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
-            UpdatesTab updatesTab = optionsWindows.SwitchUpdatesTab();
-            GitTab gitTab = optionsWindows.SwitchGitTab();
+
+            UpdatesTab updateTab = optionsWindows.OpenTab<UpdatesTab>();
+            GitTab gitTab = optionsWindows.OpenTab<GitTab>();
             gitTab.UseEmbeddedGit();
             Assert.IsFalse(gitTab.IsUseEmbeddedGitEnabled());
             Assert.IsTrue(gitTab.IsUseSystemGitEnabled());
-            Assert.That(gitTab.VersionText(), Is.StringContaining("2.11.0").IgnoreCase);
+            Assert.That(gitTab.VersionText(), Does.Contain("2.11.0").IgnoreCase);
         }
     }
 
