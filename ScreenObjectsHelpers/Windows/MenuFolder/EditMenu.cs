@@ -24,7 +24,7 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
         
     }
 
-    public class OperationsEdit
+    public struct OperationsEdit
     {
         private OperationsEdit(string value) { Value = value; }
         public string Value { get; set; }
