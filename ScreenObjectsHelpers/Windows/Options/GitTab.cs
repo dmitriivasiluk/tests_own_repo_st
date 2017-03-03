@@ -9,34 +9,34 @@ using TestStack.White.UIItems.WindowItems;
 
 namespace ScreenObjectsHelpers.Windows.Options
 {
-  public class GitTab : OptionsWindow
+    public class GitTab : OptionsWindow
     {
-            private UIItem generalTabActions;
+        private UIItem generalTabActions;
         public GitTab(Window mainWindow, UIItemContainer optionsWindow) : base(mainWindow, optionsWindow)
-            {
-            }
+        {
+        }
 
-        public GitTab(Window mainWindow, UIItemContainer optionsWindow, UIItem generalTab ) : base(mainWindow, optionsWindow)
-            {
-                generalTabActions = generalTab;
-            }
+        public GitTab(Window mainWindow, UIItemContainer optionsWindow, UIItem generalTab) : base(mainWindow, optionsWindow)
+        {
+            generalTabActions = generalTab;
+        }
 
 
-            #region UI Elements
-            public Button UseEmbededGitButton 
+        #region UI Elements
+        public Button UseEmbededGitButton
+        {
+            get
             {
-                get
-                {
-                    return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use Embedded Git"));
-                }
+                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use Embedded Git"));
             }
-            private Button OK
+        }
+        private Button OK
+        {
+            get
             {
-                get
-                {
-                    return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("OK"));
-                }
+                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("OK"));
             }
+        }
 
         private Button EmbeddedGitButton
         {
@@ -57,13 +57,14 @@ namespace ScreenObjectsHelpers.Windows.Options
         #endregion
         #region Methods
         public void UseEmbeddedGit()
-            {
-                this.ClickOnButton(UseEmbededGitButton);
-                this.ClickOnButton(OK);
-            }
+        {
+            this.ClickOnButton(UseEmbededGitButton);
+            this.ClickOnButton(OK);
+        }
 
-        public bool IsUseEmbeddedGitEnabled() {
-          return  IsElementAvaliable(UseEmbededGitButton);
+        public bool IsUseEmbeddedGitEnabled()
+        {
+            return IsElementAvaliable(UseEmbededGitButton);
         }
 
         public bool IsUseSystemGitEnabled()
@@ -73,7 +74,7 @@ namespace ScreenObjectsHelpers.Windows.Options
 
         public String VersionText()
         {
-                return OptionsWindowContainer.HelpText;
+            return OptionsWindowContainer.HelpText;
         }
 
         #endregion
