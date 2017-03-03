@@ -29,13 +29,38 @@ namespace ScreenObjectsHelpers.Windows
 
         public void ClickOnButton(Button Button)
         {
-            // WaitWhileElementAvaliable(Button).Click() uncomment it when implement WaitWhileElementAvaliable() method
             Button.Click();
         }
 
-        public void WaitWhileElementAvaliable() {
-            throw new NotImplementedException();
+        public void ClickOnButtonAfterElementVisible(Button Button)
+        {
+            WaitWhileElementAvaliable(Button).Click();
         }
+
+        public bool IsElementAvaliable(UIItem item)
+        {
+            return item.Visible;
+        }
+        public  UIItem WaitWhileElementAvaliable(UIItem item)
+        {
+            var ifItemVisible = item.Visible;
+            int secondPassed = 0;
+            while (true)
+            {
+                var isItemVisible = item.Visible;
+                if (secondPassed > 60)
+                {
+                    throw new TimeoutException($"Element {item.ToString()} is not Visible after {secondPassed} second");
+                }
+                if (!isItemVisible)
+                {
+                    int secondToWait = 5;
+                    secondPassed += secondToWait;
+                    ThreadWait(secondToWait);
+                    continue;
+                }
+                return item;
+            }
 
         protected void ThreadWait(int time)
         {
@@ -50,7 +75,44 @@ namespace ScreenObjectsHelpers.Windows
             }
         }
 
+        public void ScrollHorizontalLeft(Window window)
+        {
+            var isWindowScrolable = window.ScrollBars.Horizontal.IsScrollable;
+            if (isWindowScrolable == true)
+            {
+                window.ScrollBars.Horizontal.ScrollLeftLarge();
+            }
+
+        }
+        public void ScrollHorizontalRigh(Window window)
+        {
+            var isWindowScrolable = window.ScrollBars.Horizontal.IsScrollable;
+            if (isWindowScrolable)
+            {
+                window.ScrollBars.Horizontal.ScrollRightLarge();
+            }
+
+        }
+        public void ScrollVerticalDown(Window window)
+        {
+            var isWindowScrolable = window.ScrollBars.Vertical.IsScrollable;
+            if (isWindowScrolable)
+            {
+                window.ScrollBars.Vertical.ScrollDown();
+            }
+        }
+        public void ScrollVerticalUp(Window window)
+        {
+            var isWindowScrolable = window.ScrollBars.Vertical.IsScrollable;
+            if (isWindowScrolable)
+            {
+                window.ScrollBars.Vertical.ScrollUp();
+            }
+
+        }
+
+
     }
 
-  }
+}
 

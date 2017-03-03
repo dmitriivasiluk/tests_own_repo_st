@@ -68,7 +68,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\BasicTest.cs" />
-    <Compile Include="Tests\RepositoryTests.cs" />
+    <Compile Include="Tests\OptionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -18,7 +18,7 @@ using ScreenObjectsHelpers.Windows.MenuFolder;
 
 namespace AutomationTestsSolution.Tests
 {
-    class RepositoryTests : BasicTest
+    class OptionsTests : BasicTest
     {
      
        [Test]
@@ -32,7 +32,21 @@ namespace AutomationTestsSolution.Tests
             UpdatesTab updatesTab = optionsWindows.SwitchUpdatesTab();
             updatesTab.CheckForUpdate();
         }
+        [Test]
 
+        public void UseEmbededGit()
+        {
+            NewTabWindow mainWindow = new NewTabWindow(MainWindow);
+            mainWindow = mainWindow.OpenMenu<FileMenu>().OpenCloneNew();
+            mainWindow.OpenMenu<EditMenu>().ClickOperations(OperationsEdit.Paste);
+            OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
+            UpdatesTab updatesTab = optionsWindows.SwitchUpdatesTab();
+            GitTab gitTab = optionsWindows.SwitchGitTab();
+            gitTab.UseEmbeddedGit();
+            Assert.IsFalse(gitTab.IsUseEmbeddedGitEnabled());
+            Assert.IsTrue(gitTab.IsUseSystemGitEnabled());
+            Assert.That(gitTab.VersionText(), Is.StringContaining("2.11.0").IgnoreCase);
+        }
     }
 
     }
