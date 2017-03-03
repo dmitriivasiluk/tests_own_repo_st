@@ -44,12 +44,23 @@ namespace ScreenObjectsHelpers.Windows
         public  UIItem WaitWhileElementAvaliable(UIItem item)
         {
             var ifItemVisible = item.Visible;
-            if (!ifItemVisible)
-            {  
-                    ThreadWait(5);
-            }
+            int secondPassed = 0;
+            while (true)
+            {
+                var isItemVisible = item.Visible;
+                if (secondPassed > 60)
+                {
+                    throw new TimeoutException($"Element {item.ToString()} is not Visible after {secondPassed} second");
+                }
+                if (!isItemVisible)
+                {
+                    int secondToWait = 5;
+                    secondPassed += secondToWait;
+                    ThreadWait(secondToWait);
+                    continue;
+                }
                 return item;
-        }
+            }
 
         protected void ThreadWait(int time)
         {
