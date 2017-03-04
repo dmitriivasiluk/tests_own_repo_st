@@ -24,7 +24,7 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
             UIElementMenu.SubMenu(operation.Value).Click();
         }
 		
-		public AboutWindow OpenAbout()
+        public AboutWindow OpenAbout()
         {
             UIElementMenu.SubMenu(About).Click();
             var aboutWindow = MainWindow.MdiChild(SearchCriteria.ByText(About));
