@@ -30,5 +30,59 @@ namespace ScreenObjectsHelpers.Windows.Options
                 return OptionsWindowContainer.Get<UIItem>(SearchCriteria.ByText("Mercurial"));
             }
         }
+
+        public Button UseEmbededMercurialButton
+        {
+            get
+            {
+                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use Embedded Mercurial"));
+            }
+        }
+        private Button UseSystemMercurialButton
+        {
+            get
+            {
+                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use System Mercurial"));
+            }
+        }
+
+        private Button OK
+        {
+            get
+            {
+                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("OK"));
+            }
+        }
+
+        public void UseEmbeddedMercurial()
+        {
+            if (UseEmbededMercurialButton.Enabled)
+            {
+                this.ClickOnButton(UseEmbededMercurialButton);
+            }
+        }
+
+        public void UseSystemMercurial()
+        {
+            if (UseSystemMercurialButton.Enabled)
+            {
+                this.ClickOnButton(UseSystemMercurialButton);
+            }
+        }
+
+        public bool IsUseEmbeddedMercurialEnabled()
+        {
+            return UseEmbededMercurialButton.Enabled;
+        }
+
+        public bool IsUseSystemMercurialEnabled()
+        {
+            return UseSystemMercurialButton.Enabled;
+        }
+
+        public string VersionText()
+        {
+            return OptionsWindowContainer.HelpText;
+        }
     }
 }
