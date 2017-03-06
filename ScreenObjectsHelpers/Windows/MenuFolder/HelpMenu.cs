@@ -11,7 +11,7 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
 {
     public class HelpMenu : MenuBar
     {
-		private const string About = "About SourceTree";
+        private const string About = "About SourceTree";
 		
         public HelpMenu(Window mainWindow) : base(mainWindow)
         {
