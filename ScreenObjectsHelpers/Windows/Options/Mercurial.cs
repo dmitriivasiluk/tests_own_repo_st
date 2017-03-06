@@ -31,18 +31,27 @@ namespace ScreenObjectsHelpers.Windows.Options
             }
         }
 
-        public Button UseEmbededMercurialButton
+        public Button UseEmbeddedMercurialButton
         {
             get
             {
                 return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use Embedded Mercurial"));
             }
         }
+
         private Button UseSystemMercurialButton
         {
             get
             {
                 return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use System Mercurial"));
+            }
+        }
+
+        private Button UpdateEmbeddedMercurialButton
+        {
+            get
+            {
+                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Update Embedded Mercurial"));
             }
         }
 
@@ -56,9 +65,9 @@ namespace ScreenObjectsHelpers.Windows.Options
 
         public void UseEmbeddedMercurial()
         {
-            if (UseEmbededMercurialButton.Enabled)
+            if (UseEmbeddedMercurialButton.Enabled)
             {
-                this.ClickOnButton(UseEmbededMercurialButton);
+                this.ClickOnButton(UseEmbeddedMercurialButton);
             }
         }
 
@@ -70,14 +79,42 @@ namespace ScreenObjectsHelpers.Windows.Options
             }
         }
 
+        /*
+        public void UpdateEmbeddedMercurial()
+        {
+            if (UpdateEmbeddedMercurialButton.Enabled)
+            {
+                this.ClickOnButton(UpdateEmbeddedMercurialButton);
+            }
+        } */
+
+        public DownloadHgWindow UpdateEmbeddedMercurial()
+        {
+            if (UpdateEmbeddedMercurialButton.Enabled)
+            {
+                this.ClickOnButton(UpdateEmbeddedMercurialButton);                
+                var downloadHgWindow = MainWindow.MdiChild(SearchCriteria.ByText("Download Embedded HG"));
+                return new DownloadHgWindow(MainWindow, downloadHgWindow);
+            }
+            else
+            {
+                return null;
+            }            
+        }
+
         public bool IsUseEmbeddedMercurialEnabled()
         {
-            return UseEmbededMercurialButton.Enabled;
+            return UseEmbeddedMercurialButton.Enabled;
         }
 
         public bool IsUseSystemMercurialEnabled()
         {
             return UseSystemMercurialButton.Enabled;
+        }
+
+        public bool IsUpdateEmbeddedMercurialEnabled()
+        {
+            return UpdateEmbeddedMercurialButton.Enabled;
         }
 
         public string VersionText()

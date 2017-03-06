@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="Helpers\ScreenshotsTaker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Windows\DownloadHgWindow.cs" />
     <Compile Include="Windows\AboutWindow.cs" />
     <Compile Include="Windows\BasicWindow.cs" />
     <Compile Include="Windows\MenuFolder\ActionMenu\ActionsMenu.cs" />
