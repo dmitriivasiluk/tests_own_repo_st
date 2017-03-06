@@ -98,6 +98,7 @@ namespace ScreenObjectsHelpers.Windows.Options
             }
             else
             {
+                // TODO discuss how to process this case
                 return null;
             }            
         }
