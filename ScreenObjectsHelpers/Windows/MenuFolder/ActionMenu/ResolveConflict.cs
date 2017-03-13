@@ -19,13 +19,13 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder.ActionMenu
 
         public Menu UIElementSubMenu { get { return UIElementMenu.SubMenu("Resolve Conflicts"); } }
 
-        public UIItemContainer ClickOperations(ResolveConflictOperations operation)
+        public void ClickOperations(ResolveConflictOperations operation)
         {
             UIElementSubMenu.SubMenu(operation.Value).Click();
             UIItemContainer confirmDialog = MainWindow.MdiChild(SearchCriteria.ByText(operation.ConfirmDialogName));
-            return confirmDialog;
+            UIItemContainer OkButtonInConfirmation = MainWindow.MdiChild(SearchCriteria.ByText("OK"));
+            OkButtonInConfirmation.Click();
         }
-
     }
 
     public struct ResolveConflictOperations
