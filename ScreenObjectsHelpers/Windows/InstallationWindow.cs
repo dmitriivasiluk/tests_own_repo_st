@@ -75,9 +75,7 @@ namespace ScreenObjectsHelpers.Windows
                 {
                 }
                 return c.IsModal == false && found;
-            });
-            Button test = authorizationWindow.Get<Button>(SearchCriteria.ByText("Log in with Google"));
-            test.Click();
+            }); // Login window is opened without Name (title), so it is best way to find a window.
             return new AuthorizationWindow(MainWindow, authorizationWindow);
         }
 
