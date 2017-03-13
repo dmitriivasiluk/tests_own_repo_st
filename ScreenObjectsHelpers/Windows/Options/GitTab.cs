@@ -38,20 +38,14 @@ namespace ScreenObjectsHelpers.Windows.Options
                 return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use Embedded Git"));
             }
         }
-        private Button OK
+        public Button UpdateEmbededGit
         {
             get
             {
-                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("OK"));
+                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Update Embedded Git"));
             }
         }
-        private Button EmbeddedGitButton
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use Embedded Git"));
-            }
-        }
+
 
         private Button SystemGitButton
         {
@@ -60,6 +54,15 @@ namespace ScreenObjectsHelpers.Windows.Options
                 return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use System Git"));
             }
         }
+
+    private Button SystemGitButtonSystemGitButton
+        {
+            get
+            {
+                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use System Git"));
+            }
+        }
+
         #endregion
 
         #region Methods
@@ -69,6 +72,10 @@ namespace ScreenObjectsHelpers.Windows.Options
             {
                 this.ClickOnButton(UseEmbededGitButton);
             }
+        }
+        public void UseSystemGitButton()
+        {
+            this.ClickOnButton(SystemGitButtonSystemGitButton);
         }
 
         public bool IsUseEmbeddedGitEnabled()
@@ -84,6 +91,10 @@ namespace ScreenObjectsHelpers.Windows.Options
         public string VersionText()
         {
             return OptionsWindowContainer.HelpText;
+        }
+
+        public void UpdateEmbededGitVersion() {
+            this.ClickOnButton(UpdateEmbededGit);
         }
         #endregion
     }

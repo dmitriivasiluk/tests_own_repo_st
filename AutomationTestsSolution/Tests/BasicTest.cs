@@ -59,7 +59,7 @@ namespace AutomationTestsSolution.Tests
             var testAccountsJson = Path.Combine(testDataFolder, "accounts.json");
             SetFile(testAccountsJson, Path.Combine(dataFolder, "accounts.json"));
         }
-
+        
         private void SetFile(string sourceFile, string targetFile)
         {
             File.Copy(sourceFile, targetFile);
@@ -111,7 +111,7 @@ namespace AutomationTestsSolution.Tests
         {
             return Environment.ExpandEnvironmentVariables(@"%localappdata%\Atlassian\SourceTreeBeta");
         }
-       
+      
         private string FindSourceTreeUserConfig(string version)
         {
             var sourceTreeInstallParentDir =

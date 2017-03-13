@@ -39,19 +39,11 @@ namespace ScreenObjectsHelpers.Windows.Options
                 return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Check For Updates"));
             }
         }
-        private Button OK
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("OK"));
-            }
-        }
         #endregion
 
         public void CheckForUpdate()
         {
             this.ClickOnButton(CheckForUpdatesButton);
-            this.ClickOnButton(OK);
         }
 
 

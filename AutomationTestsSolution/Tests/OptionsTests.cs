@@ -31,6 +31,7 @@ namespace AutomationTestsSolution.Tests
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             UpdatesTab updatesTab = optionsWindows.OpenTab<UpdatesTab>();
             updatesTab.CheckForUpdate();
+            updatesTab.ClickOkButton();
         }
 
         [Test]
@@ -47,7 +48,40 @@ namespace AutomationTestsSolution.Tests
             Assert.IsFalse(gitTab.IsUseEmbeddedGitEnabled());
             Assert.IsTrue(gitTab.IsUseSystemGitEnabled());
             Assert.That(gitTab.VersionText(), Does.Contain("2.11.0").IgnoreCase);
+            gitTab.ClickOkButton();
         }
+        [Test]
+        public void UseSystemGit()
+        {
+            NewTabWindow mainWindow = new NewTabWindow(MainWindow);
+            mainWindow = mainWindow.OpenMenu<FileMenu>().OpenCloneNew();
+            mainWindow.OpenMenu<EditMenu>().ClickOperations(OperationsEdit.Paste);
+            OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
+
+            UpdatesTab updateTab = optionsWindows.OpenTab<UpdatesTab>();
+            GitTab gitTab = optionsWindows.OpenTab<GitTab>();
+            gitTab.UseSystemGitButton();
+            Assert.IsTrue(gitTab.IsUseEmbeddedGitEnabled());
+            Assert.IsFalse(gitTab.IsUseSystemGitEnabled());
+            Assert.That(gitTab.VersionText(), Does.Contain("2.11.0").IgnoreCase);
+            gitTab.ClickOkButton();
+        }
+
+
+        [Test]
+        public void UpdateEmbededGit()
+        {
+            NewTabWindow mainWindow = new NewTabWindow(MainWindow);
+            mainWindow = mainWindow.OpenMenu<FileMenu>().OpenCloneNew();
+            mainWindow.OpenMenu<EditMenu>().ClickOperations(OperationsEdit.Paste);
+            OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
+
+            UpdatesTab updateTab = optionsWindows.OpenTab<UpdatesTab>();
+            GitTab gitTab = optionsWindows.OpenTab<GitTab>();
+            gitTab.UpdateEmbededGitVersion();
+            gitTab.ClickOkButton();
+        }
+
     }
 
     }

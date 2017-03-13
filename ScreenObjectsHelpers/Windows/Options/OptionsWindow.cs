@@ -29,6 +29,14 @@ namespace ScreenObjectsHelpers.Windows.Options
         {
             get;
         }
+
+        private Button OK
+        {
+            get
+            {
+                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("OK"));
+            }
+        }
         #endregion
 
         #region Methods
@@ -40,6 +48,11 @@ namespace ScreenObjectsHelpers.Windows.Options
         public virtual void ClickOnTab()
         {
             UIElementTab.Click();
+        }
+
+        public void ClickOkButton()
+        {
+            this.OK.Click();
         }
         #endregion
 
