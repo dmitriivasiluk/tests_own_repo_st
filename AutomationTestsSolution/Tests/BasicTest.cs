@@ -33,7 +33,7 @@ namespace AutomationTestsSolution.Tests
         private readonly string sourceTreeTypeEnvVar = Environment.GetEnvironmentVariable("ST_UI_TEST_TYPE"); // "Beta", "Alpha" ....
 
         [SetUp]
-        public void SetUp()
+        public virtual void SetUp()
         {
             testDataFolder = Path.Combine(TestContext.CurrentContext.TestDirectory, @"../../TestData");
             var exeAndVersion = FindSourceTree();
@@ -140,7 +140,7 @@ namespace AutomationTestsSolution.Tests
             }
         }
 
-        private void RunSourceTree(string sourceTreeExe)
+        protected void RunSourceTree(string sourceTreeExe)
         {
             // run SourceTree
             ProcessStartInfo psi = new ProcessStartInfo(sourceTreeExe);
@@ -175,7 +175,7 @@ namespace AutomationTestsSolution.Tests
         }
 
         [TearDown]
-        public void TearDown()
+        public virtual void TearDown()
         {
             if (MainWindow != null)
             {
@@ -184,7 +184,7 @@ namespace AutomationTestsSolution.Tests
 
             if (!sourceTreeProcess.HasExited)
             {
-         //       sourceTreeProcess.CloseMainWindow();
+                sourceTreeProcess.CloseMainWindow();
                 sourceTreeProcess.Close();
             }
 
