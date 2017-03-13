@@ -24,10 +24,7 @@ namespace AutomationTestsSolution.Tests
        [Test]
         public void CheckForUpdatesTest()
         {
-            NewTabWindow mainWindow = new NewTabWindow(MainWindow);
-            mainWindow = mainWindow.OpenMenu<FileMenu>().OpenCloneNew();
-            //mainWindow.OpenMenu<EditMenu>().ClickOperations(OperationsEdit.Paste);
-            
+            NewTabWindow mainWindow = new NewTabWindow(MainWindow);         
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             UpdatesTab updatesTab = optionsWindows.OpenTab<UpdatesTab>();
             updatesTab.CheckForUpdate();
@@ -38,8 +35,6 @@ namespace AutomationTestsSolution.Tests
         public void UseEmbededGit()
         {
             NewTabWindow mainWindow = new NewTabWindow(MainWindow);
-            mainWindow = mainWindow.OpenMenu<FileMenu>().OpenCloneNew();
-            mainWindow.OpenMenu<EditMenu>().ClickOperations(OperationsEdit.Paste);
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
 
             UpdatesTab updateTab = optionsWindows.OpenTab<UpdatesTab>();
@@ -54,8 +49,6 @@ namespace AutomationTestsSolution.Tests
         public void UseSystemGit()
         {
             NewTabWindow mainWindow = new NewTabWindow(MainWindow);
-            mainWindow = mainWindow.OpenMenu<FileMenu>().OpenCloneNew();
-            mainWindow.OpenMenu<EditMenu>().ClickOperations(OperationsEdit.Paste);
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
 
             UpdatesTab updateTab = optionsWindows.OpenTab<UpdatesTab>();
@@ -72,8 +65,6 @@ namespace AutomationTestsSolution.Tests
         public void UpdateEmbededGit()
         {
             NewTabWindow mainWindow = new NewTabWindow(MainWindow);
-            mainWindow = mainWindow.OpenMenu<FileMenu>().OpenCloneNew();
-            mainWindow.OpenMenu<EditMenu>().ClickOperations(OperationsEdit.Paste);
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
 
             UpdatesTab updateTab = optionsWindows.OpenTab<UpdatesTab>();
