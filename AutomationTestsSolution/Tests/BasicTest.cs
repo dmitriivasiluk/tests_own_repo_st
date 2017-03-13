@@ -43,8 +43,8 @@ namespace AutomationTestsSolution.Tests
             
             sourceTreeDataPath = FindSourceTreeData();
 
-           SetUserConfig(sourceTreeUserConfigPath);
-           SetData(sourceTreeDataPath);
+            SetUserConfig(sourceTreeUserConfigPath);
+            SetData(sourceTreeDataPath);
 
             RunSourceTree(sourceTreeExePath);
 
