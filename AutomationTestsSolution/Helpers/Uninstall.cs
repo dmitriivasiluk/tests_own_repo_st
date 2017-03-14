@@ -43,15 +43,13 @@ namespace AutomationTestsSolution.Helpers
         }
 
         /// <summary>
-        /// This method remove all necessary folders owned to SourceTree. Also it find dynamic folders in 
+        /// This method remove all user config data folders to return SourceTree in configuration state. Also it find dynamic folders in 
         /// C:\Users\%USERNAME%\AppData\Local\Atlassian like "SourceTree.exe_Url_qsuikde1gcnj3eovksjtmq0msq50grno" and romove it.
         /// </summary>
-        public void RemoveFoldersSourceTree()
+        public void ResetToCleanInstallState()
         {
             // Static folders SourceTree
             List<string> pathsForSourceTree = new List<string>();
-            pathsForSourceTree.Add(Environment.ExpandEnvironmentVariables(@"C:\Users\%USERNAME%\AppData\Local\SourceTree"));
-            pathsForSourceTree.Add(Environment.ExpandEnvironmentVariables(@"C:\Users\%USERNAME%\AppData\Local\SourceTreeBeta"));
             pathsForSourceTree.Add(Environment.ExpandEnvironmentVariables(@"C:\Users\%USERNAME%\AppData\Local\SourceTree-Settings"));
             pathsForSourceTree.Add(Environment.ExpandEnvironmentVariables(@"C:\Users\%USERNAME%\AppData\Local\SquirrelTemp"));
 
@@ -67,6 +65,34 @@ namespace AutomationTestsSolution.Helpers
             }
 
             foreach (string pathToSourceTree in pathsForSourceTree)
+            {
+                try
+                {
+                    Directory.Delete(pathToSourceTree, true);
+                    Console.WriteLine($"Directory {pathToSourceTree} was removed!");
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    Console.WriteLine($"You don't have access to remove {pathToSourceTree}");
+                }
+                catch (DirectoryNotFoundException)
+                {
+                    Console.WriteLine($"Directory {pathToSourceTree} is not found.");
+                }
+            }
+        }
+
+        /// <summary>
+        /// This method remove all necessary folders owned to SourceTree for completely uninstall SourceTree from computer.
+        /// </summary>
+        public void RemoveFoldersSourceTree()
+        {
+            ResetToCleanInstallState();
+            List<string> pathsForSourceTree = new List<string>();
+            pathsForSourceTree.Add(Environment.ExpandEnvironmentVariables(@"C:\Users\%USERNAME%\AppData\Local\SourceTree"));
+            pathsForSourceTree.Add(Environment.ExpandEnvironmentVariables(@"C:\Users\%USERNAME%\AppData\Local\SourceTreeBeta"));
+
+                foreach (string pathToSourceTree in pathsForSourceTree)
             {
                 try
                 {

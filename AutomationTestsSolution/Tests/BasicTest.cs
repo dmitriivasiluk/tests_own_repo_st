@@ -153,7 +153,7 @@ namespace AutomationTestsSolution.Tests
             sourceTreeProcess.Start();
         }
 
-        private Tuple<string, string> FindSourceTree()
+        protected Tuple<string, string> FindSourceTree()
         {
             // Allowing Environment Variables to override defaults  lets us test against GA, Beta, Alpha with runtime changes etc.
             var sourceTreeType =  string.IsNullOrWhiteSpace(sourceTreeTypeEnvVar) ? string.Empty : sourceTreeTypeEnvVar;
