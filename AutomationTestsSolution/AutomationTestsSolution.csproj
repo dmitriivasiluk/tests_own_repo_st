@@ -88,7 +88,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\SourceTree_Setup\SourceTreeSetup-2.0.12-beta-001.exe" />
+    <Folder Include="Resources\SourceTree_Setup\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

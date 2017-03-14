@@ -40,7 +40,7 @@ namespace AutomationTestsSolution.Tests
                 uninstallSourceTree.CompletelyUninstallSourceTree(); 
             }
             DownloadActualBuildOfSourceTree();
-            var sourceTreeExePath = FindSourceTreeInstall();
+            var sourceTreeExePath = FindLastVersionOfSourceTreeInstall();
             RunSourceTree(sourceTreeExePath);
             AttachToSourceTreeInstallation();
         }
@@ -57,21 +57,34 @@ namespace AutomationTestsSolution.Tests
             }
         }
 
-        private void DownloadActualBuildOfSourceTree() {
-            using (WebClient wc = new WebClient())
+        private void DownloadActualBuildOfSourceTree(string actual_version="2.0.12-beta-001") {
+            string rootPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDi‌​rectory, "..\\..\\"));
+            string pathToInstallSourceTree = Path.Combine(rootPath, @"Resources\SourceTree_Setup");
+            string[] filePaths = Directory.GetFiles(pathToInstallSourceTree, "*.exe", SearchOption.TopDirectoryOnly);
+            foreach (string fileName in filePaths)
             {
-                string rootPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDi‌​rectory, "..\\..\\"));
-                string installFileInResources = Path.Combine(rootPath, @"Resources\SourceTree_Setup\install.exe");
-                wc.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.33 Safari/537.36");
-                wc.DownloadFile(@"https://downloads.atlassian.com/software/sourcetree/windows/beta/SourceTreeSetup-2.0.12-beta-001.exe", installFileInResources);
+                if (fileName.Contains(actual_version))
+                {
+                    return; // We have already downloaded this build of SourceTree
+                }
+            }
+            using (WebClient webClient = new WebClient())
+            {
+                string fileName = $"SourceTreeSetup-{actual_version}.exe";
+                string installFileInResources = Path.Combine(rootPath, @"Resources\SourceTree_Setup\" + fileName);
+                webClient.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.33 Safari/537.36");
+                string linkToInstallationFile = $"https://downloads.atlassian.com/software/sourcetree/windows/beta/{fileName}";
+                webClient.DownloadFile(linkToInstallationFile, installFileInResources);
             }
         }
 
-        private string FindSourceTreeInstall()
+        private string FindLastVersionOfSourceTreeInstall()
         {
             string rootPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDi‌​rectory, "..\\..\\"));
-            string pathToInstallSourceTree = Path.Combine(rootPath, @"Resources\SourceTree_Setup\install.exe");
-            return pathToInstallSourceTree;
+            string pathToInstallSourceTree = Path.Combine(rootPath, @"Resources\SourceTree_Setup");
+            string[] filePaths = Directory.GetFiles(pathToInstallSourceTree, "*.exe", SearchOption.TopDirectoryOnly);
+            string lastBuild = filePaths[filePaths.Length - 1]; // need implement catch exception in this case
+            return lastBuild;
         }
 
         [TearDown]
