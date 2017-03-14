@@ -6,6 +6,7 @@ packages/NUnit.ConsoleRunner.3.6.0/tools/nunit.engine.api.xml
 *.user
 *.sln.docstates
 *.tmp
+*.exe
 
 # Build results
 [Dd]ebug/

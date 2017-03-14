@@ -25,6 +25,7 @@ using System.Windows.Controls;
 using System.Collections;
 using Microsoft.Win32;
 using AutomationTestsSolution.Helpers;
+using System.Net;
 
 namespace AutomationTestsSolution.Tests
 {
@@ -33,11 +34,12 @@ namespace AutomationTestsSolution.Tests
         [SetUp]
         public override void SetUp()
         {
-            UninstallSourceTree uninstallSourceTree = new UninstallSourceTree();
+            Uninstall uninstallSourceTree = new Uninstall();
             if (uninstallSourceTree.isExist())
             {
-                uninstallSourceTree.DeleteSourceTree();
+                uninstallSourceTree.CompletelyUninstallSourceTree(); 
             }
+            DownloadActualBuildOfSourceTree();
             var sourceTreeExePath = FindSourceTreeInstall();
             RunSourceTree(sourceTreeExePath);
             AttachToSourceTreeInstallation();
@@ -55,10 +57,20 @@ namespace AutomationTestsSolution.Tests
             }
         }
 
+        private void DownloadActualBuildOfSourceTree() {
+            using (WebClient wc = new WebClient())
+            {
+                string rootPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDi‌​rectory, "..\\..\\"));
+                string installFileInResources = Path.Combine(rootPath, @"Resources\SourceTree_Setup\install.exe");
+                wc.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.33 Safari/537.36");
+                wc.DownloadFile(@"https://downloads.atlassian.com/software/sourcetree/windows/beta/SourceTreeSetup-2.0.12-beta-001.exe", installFileInResources);
+            }
+        }
+
         private string FindSourceTreeInstall()
         {
             string rootPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDi‌​rectory, "..\\..\\"));
-            string pathToInstallSourceTree = Path.Combine(rootPath, @"Resources\SourceTree_Setup\SourceTreeSetup-2.0.12-beta-001.exe");
+            string pathToInstallSourceTree = Path.Combine(rootPath, @"Resources\SourceTree_Setup\install.exe");
             return pathToInstallSourceTree;
         }
 

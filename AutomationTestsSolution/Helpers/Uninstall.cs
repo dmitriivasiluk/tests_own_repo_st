@@ -8,11 +8,11 @@ using Microsoft.Win32;
 
 namespace AutomationTestsSolution.Helpers
 {
-    public class UninstallSourceTree
+    public class Uninstall
     {
         private const string nameOfProgram = "SourceTree";
 
-        public void DeleteSourceTree()
+        public void CompletelyUninstallSourceTree()
         {
             string uninstallCommandSourceTree = GetUninstallCommandFor(nameOfProgram);
             if (uninstallCommandSourceTree != null && uninstallCommandSourceTree != "")
@@ -24,6 +24,14 @@ namespace AutomationTestsSolution.Helpers
             }
             RemoveFoldersSourceTree();
             Console.WriteLine("SourceTree was successfully removed from computer!");
+        }
+
+        public void ClearAccountSettings() {
+            string pathToAccontSetting = Environment.ExpandEnvironmentVariables(@"C:\Users\%USERNAME%\AppData\Local\SourceTree\accounts.json");
+            if (File.Exists(pathToAccontSetting))
+            {
+                File.Delete(pathToAccontSetting);
+            }
         }
 
         public static void ExecuteWindowsCommand(string commandForExecute)
