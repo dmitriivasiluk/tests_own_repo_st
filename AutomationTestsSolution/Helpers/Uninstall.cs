@@ -10,36 +10,43 @@ namespace AutomationTestsSolution.Helpers
 {
     public class Uninstall
     {
-        private const string nameOfProgram = "SourceTree";
+        private const string NameOfProgram = "SourceTree";
+        private const string AcoountJsonPath = @"%localappdata%\SourceTree\accounts.json";
+        private const string SourceTreeSettingsPath = @"%localappdata%\SourceTree-Settings";
+        private const string SquirrelTempPath = @"%localappdata%\SquirrelTemp";
+        private const string AtlassianPath = @"%localappdata%\Atlassian";
+        private const string SourceTreePath = @"%localappdata%\SourceTree";
+        private const string SourceTreeBetaPath = @"%localappdata%\SourceTreeBeta";
+        private const string RegistryKeyPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
 
         public void CompletelyUninstallSourceTree()
         {
-            string uninstallCommandSourceTree = GetUninstallCommandFor(nameOfProgram);
+            string uninstallCommandSourceTree = GetUninstallCommandFor(NameOfProgram);
             if (uninstallCommandSourceTree != null && uninstallCommandSourceTree != "")
             {
                 ExecuteWindowsCommand(uninstallCommandSourceTree);
                 // Give a time for removing SourceTree
-                Console.WriteLine("Waiting 5 seconds for complete uninstall...");
+                Debug.WriteLine("Waiting 5 seconds for complete uninstall...");
                 Thread.Sleep(5000);
             }
             RemoveFoldersSourceTree();
-            Console.WriteLine("SourceTree was successfully removed from computer!");
+            Debug.WriteLine("SourceTree was successfully removed from computer!");
         }
 
         public void ClearAccountSettings() {
-            string pathToAccontSetting = Environment.ExpandEnvironmentVariables(@"C:\Users\%USERNAME%\AppData\Local\SourceTree\accounts.json");
+            string pathToAccontSetting = Environment.ExpandEnvironmentVariables(AcoountJsonPath);
             if (File.Exists(pathToAccontSetting))
             {
                 File.Delete(pathToAccontSetting);
             }
         }
 
-        public static void ExecuteWindowsCommand(string commandForExecute)
+        public static void ExecuteWindowsCommand(string сommandForExecution)
         {
             string windowProgram = "cmd";
-            Console.WriteLine("Executing uninstall command in cmd.exe...");
-            Process.Start(windowProgram, "/C " + commandForExecute);
-            Console.WriteLine("Executing is finished!");
+            Debug.WriteLine("Executing uninstall command in cmd.exe...");
+            Process.Start(windowProgram, "/C " + сommandForExecution);
+            Debug.WriteLine("Executing is finished!");
         }
 
         /// <summary>
@@ -50,15 +57,15 @@ namespace AutomationTestsSolution.Helpers
         {
             // Static folders SourceTree
             List<string> pathsForSourceTree = new List<string>();
-            pathsForSourceTree.Add(Environment.ExpandEnvironmentVariables(@"C:\Users\%USERNAME%\AppData\Local\SourceTree-Settings"));
-            pathsForSourceTree.Add(Environment.ExpandEnvironmentVariables(@"C:\Users\%USERNAME%\AppData\Local\SquirrelTemp"));
+            pathsForSourceTree.Add(Environment.ExpandEnvironmentVariables(SourceTreeSettingsPath));
+            pathsForSourceTree.Add(Environment.ExpandEnvironmentVariables(SquirrelTempPath));
 
             // Need to find out dynamic name of folders which owned SourceTree in Atlassian folder
-            string pathAtlassian = Environment.ExpandEnvironmentVariables(@"C:\Users\%USERNAME%\AppData\Local\Atlassian");
+            string pathAtlassian = Environment.ExpandEnvironmentVariables(AtlassianPath);
             string[] fileArray = Directory.GetDirectories(pathAtlassian);
             for (int i = 0; i < fileArray.Length; i++)
             {
-                if (fileArray[i].Contains("SourceTree"))
+                if (fileArray[i].Contains(NameOfProgram))
                 {
                     pathsForSourceTree.Add(fileArray[i]);
                 }
@@ -69,15 +76,15 @@ namespace AutomationTestsSolution.Helpers
                 try
                 {
                     Directory.Delete(pathToSourceTree, true);
-                    Console.WriteLine($"Directory {pathToSourceTree} was removed!");
+                    Debug.WriteLine($"Directory {pathToSourceTree} was removed!");
                 }
                 catch (UnauthorizedAccessException)
                 {
-                    Console.WriteLine($"You don't have access to remove {pathToSourceTree}");
+                    Debug.WriteLine($"You don't have access to remove {pathToSourceTree}");
                 }
                 catch (DirectoryNotFoundException)
                 {
-                    Console.WriteLine($"Directory {pathToSourceTree} is not found.");
+                    Debug.WriteLine($"Directory {pathToSourceTree} is not found.");
                 }
             }
         }
@@ -89,23 +96,23 @@ namespace AutomationTestsSolution.Helpers
         {
             ResetToCleanInstallState();
             List<string> pathsForSourceTree = new List<string>();
-            pathsForSourceTree.Add(Environment.ExpandEnvironmentVariables(@"C:\Users\%USERNAME%\AppData\Local\SourceTree"));
-            pathsForSourceTree.Add(Environment.ExpandEnvironmentVariables(@"C:\Users\%USERNAME%\AppData\Local\SourceTreeBeta"));
+            pathsForSourceTree.Add(Environment.ExpandEnvironmentVariables(SourceTreePath));
+            pathsForSourceTree.Add(Environment.ExpandEnvironmentVariables(SourceTreeBetaPath));
 
                 foreach (string pathToSourceTree in pathsForSourceTree)
             {
                 try
                 {
                     Directory.Delete(pathToSourceTree, true);
-                    Console.WriteLine($"Directory {pathToSourceTree} was removed!");
+                    Debug.WriteLine($"Directory {pathToSourceTree} was removed!");
                 }
                 catch (UnauthorizedAccessException)
                 {
-                    Console.WriteLine($"You don't have access to remove {pathToSourceTree}");
+                    Debug.WriteLine($"You don't have access to remove {pathToSourceTree}");
                 }
                 catch (DirectoryNotFoundException)
                 {
-                    Console.WriteLine($"Directory {pathToSourceTree} is not found.");
+                    Debug.WriteLine($"Directory {pathToSourceTree} is not found.");
                 }
             }
         }
@@ -121,18 +128,17 @@ namespace AutomationTestsSolution.Helpers
         public static string GetUninstallCommandFor(string productDisplayName)
         {
             string uninstallCommand = "";
-            string registry_key = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
 
             List<RegistryKey> differentRegisteryFolder = new List<RegistryKey>();
-            differentRegisteryFolder.Add(Registry.LocalMachine.OpenSubKey(registry_key));
-            differentRegisteryFolder.Add(Registry.CurrentUser.OpenSubKey(registry_key));
+            differentRegisteryFolder.Add(Registry.LocalMachine.OpenSubKey(RegistryKeyPath));
+            differentRegisteryFolder.Add(Registry.CurrentUser.OpenSubKey(RegistryKeyPath));
 
             // loop for different registries
             foreach (RegistryKey openSubKeys in differentRegisteryFolder)
             {
                 using (RegistryKey key = openSubKeys)
                 {
-                    Console.WriteLine($"Start looking for {productDisplayName} in registry - {key.Name}");
+                    Debug.WriteLine($"Start looking for {productDisplayName} in registry - {key.Name}");
                     foreach (string subkey_name in key.GetSubKeyNames())
                     {
                         using (RegistryKey subkey = key.OpenSubKey(subkey_name))
@@ -144,25 +150,25 @@ namespace AutomationTestsSolution.Helpers
                                 if (QuiteUninstallCommand != null)
                                 {
                                     uninstallCommand = (string)QuiteUninstallCommand;
-                                    Console.WriteLine("Quite uninstall is present!");
-                                    Console.WriteLine($"Uninstall command is {uninstallCommand}");
+                                    Debug.WriteLine("Quite uninstall is present!");
+                                    Debug.WriteLine($"Uninstall command is {uninstallCommand}");
                                     return uninstallCommand;
                                 }
                                 uninstallCommand = (string)subkey.GetValue("UninstallString") + " /S"; //Additional key for silence Uninstall;
-                                Console.WriteLine($"Uninstall command is {uninstallCommand}");
+                                Debug.WriteLine($"Uninstall command is {uninstallCommand}");
                                 return uninstallCommand;
                             }
                         }
                     }
                 }
             }
-            Console.WriteLine($"Program {productDisplayName} is not found.");
+            Debug.WriteLine($"Program {productDisplayName} is not found.");
             return uninstallCommand;
         }
 
-        public bool isExist()
+        public bool IsExist()
         {
-            string uninstallCommandSourceTree = GetUninstallCommandFor(nameOfProgram);
+            string uninstallCommandSourceTree = GetUninstallCommandFor(NameOfProgram);
             if (uninstallCommandSourceTree != null && uninstallCommandSourceTree != "")
             {
                 return true;

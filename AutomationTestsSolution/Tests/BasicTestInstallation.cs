@@ -39,7 +39,7 @@ namespace AutomationTestsSolution.Tests
         public override void SetUp()
         {
             Uninstall uninstallSourceTree = new Uninstall();
-            if (uninstallSourceTree.isExist())
+            if (uninstallSourceTree.IsExist())
             {
                 uninstallSourceTree.ResetToCleanInstallState();
             }

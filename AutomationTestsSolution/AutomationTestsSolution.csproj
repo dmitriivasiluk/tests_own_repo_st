@@ -75,7 +75,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\BasicTest.cs" />
     <Compile Include="Tests\BasicTestInstallation.cs" />
-    <Compile Include="Tests\InstallationSuite.cs" />
+    <Compile Include="Tests\WelcomeWizardTests.cs" />
     <Compile Include="Tests\OptionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
