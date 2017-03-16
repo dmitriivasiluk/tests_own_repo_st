@@ -1,7 +1,6 @@
 ﻿
 using System.Drawing.Imaging;
 using System.Drawing;
-using System.Windows;
 using TestStack.White;
 using System;
 

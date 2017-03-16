@@ -1,16 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Diagnostics.PerformanceData;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using TestStack.White.Factory;
-using TestStack.White.UIItems;
-using TestStack.White.UIItems.Finders;
-using TestStack.White.UIItems.ListBoxItems;
-using TestStack.White.UIItems.MenuItems;
-using TestStack.White.UIItems.WindowStripControls;
-using TestStack.White.WindowsAPI;
 using TestStack.White;
 using NUnit.Framework;
 using TestStack.White.UIItems.WindowItems;
