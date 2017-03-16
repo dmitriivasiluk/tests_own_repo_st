@@ -24,6 +24,7 @@ namespace ScreenObjectsHelpers.Windows
             Console.WriteLine("WAIT FOR OPENING _Proxy Authentication_ WINDOW");
         }
 
+        #region UIElements
         public TextBox UsernameField
         {
             get
@@ -55,10 +56,13 @@ namespace ScreenObjectsHelpers.Windows
                 return proxyAuthenticationWindow.Get<Button>(SearchCriteria.ByAutomationId("LoginButton"));
             }
         }
+        #endregion
 
+        #region Methods
         public NetworkTab LoginClick() {
             Login.Click();
             return new NetworkTab(MainWindow, networkTab);
         }
+        #endregion
     }
 }

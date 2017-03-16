@@ -17,6 +17,7 @@ namespace ScreenObjectsHelpers.Windows.Options
             Console.WriteLine("WAIT FOR OPENING TAB");
         }
 
+        #region UIElements        
         public override UIItem UIElementTab
         {
             get
@@ -107,12 +108,15 @@ namespace ScreenObjectsHelpers.Windows.Options
                 return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Username and Password..."));
             }
         }
+        #endregion
 
+        #region Methods        
         public ProxyAuthenticationWindow OpenUsernameAndPassword()
         {
             UsernameAndPassword.Click();
             var proxyAuthenticationWindow = MainWindow.MdiChild(SearchCriteria.ByText("Authenticate"));
             return new ProxyAuthenticationWindow(MainWindow, OptionsWindowContainer, proxyAuthenticationWindow);
         }
+        #endregion
     }
 }

@@ -17,6 +17,7 @@ namespace ScreenObjectsHelpers.Windows.Options
             Console.WriteLine("WAIT FOR OPENING TAB");
         }
 
+        #region UIElements        
         public override UIItem UIElementTab
         {
             get
@@ -56,7 +57,9 @@ namespace ScreenObjectsHelpers.Windows.Options
                 return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("OK"));
             }
         }
+        #endregion
 
+        #region Methods        
         public void UseEmbeddedMercurial()
         {
             if (UseEmbeddedMercurialButton.Enabled)
@@ -71,7 +74,7 @@ namespace ScreenObjectsHelpers.Windows.Options
             {
                 this.ClickOnButton(UseSystemMercurialButton);
             }
-        }
+        }        
 
         /*
         public void UpdateEmbeddedMercurial()
@@ -95,7 +98,7 @@ namespace ScreenObjectsHelpers.Windows.Options
                 // TODO discuss how to process this case
                 return null;
             }            
-        }
+        }        
 
         public bool IsUseEmbeddedMercurialEnabled()
         {
@@ -116,5 +119,6 @@ namespace ScreenObjectsHelpers.Windows.Options
         {
             return OptionsWindowContainer.HelpText;
         }
+        #endregion
     }
 }

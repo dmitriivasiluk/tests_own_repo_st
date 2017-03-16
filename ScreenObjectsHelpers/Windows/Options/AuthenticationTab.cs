@@ -17,6 +17,7 @@ namespace ScreenObjectsHelpers.Windows.Options
             Console.WriteLine("WAIT FOR OPENING TAB");
         }
 
+        #region UIElements        
         public override UIItem UIElementTab
         {
             get
@@ -24,5 +25,6 @@ namespace ScreenObjectsHelpers.Windows.Options
                 return OptionsWindowContainer.Get<UIItem>(SearchCriteria.ByText("Authentication"));
             }
         }
+        #endregion
     }
 }

@@ -35,11 +35,11 @@ namespace ScreenObjectsHelpers.Windows.Options
         }
         #endregion
 
+        #region Methods        
         public void CheckForUpdate()
         {
             this.ClickOnButton(CheckForUpdatesButton);
         }
-
-
+        #endregion
     }
 }

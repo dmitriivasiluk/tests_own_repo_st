@@ -12,11 +12,12 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
 
         public override Menu UIElementMenu { get { return MainWindow.Get<Menu>(SearchCriteria.ByText("Edit")); } }
 
+        #region Methods        
         public void ClickOperations(OperationsEdit operation)
         {
             UIElementMenu.SubMenu(operation.Value).Click();
         }
-
+        #endregion
     }
 
     public struct OperationsEdit

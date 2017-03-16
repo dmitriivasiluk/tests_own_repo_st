@@ -16,6 +16,7 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
         {
         }
 
+        #region UIElements        
         public override Menu UIElementMenu
         {
             get
@@ -23,7 +24,9 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
                 return MainWindow.Get<Menu>(SearchCriteria.ByText("Tools"));
             }
         }
+        #endregion
 
+        #region Methods        
         public void LaunchSSHAgent()
         {
             UIElementMenu.SubMenu(launchSSHAgent).Click();
@@ -41,7 +44,6 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
             var optionsWindow = MainWindow.MdiChild(SearchCriteria.ByText(options));
             return new GeneralTab(MainWindow, optionsWindow);
         }
-
-
+        #endregion
     }
 }
