@@ -1,9 +1,5 @@
 ﻿using ScreenObjectsHelpers.Windows.Options;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.MenuItems;
 using TestStack.White.UIItems.WindowItems;
@@ -20,6 +16,7 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
         {
         }
 
+        #region UIElements        
         public override Menu UIElementMenu
         {
             get
@@ -27,7 +24,9 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
                 return MainWindow.Get<Menu>(SearchCriteria.ByText("Tools"));
             }
         }
+        #endregion
 
+        #region Methods        
         public void LaunchSSHAgent()
         {
             UIElementMenu.SubMenu(launchSSHAgent).Click();
@@ -45,7 +44,6 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
             var optionsWindow = MainWindow.MdiChild(SearchCriteria.ByText(options));
             return new GeneralTab(MainWindow, optionsWindow);
         }
-
-
+        #endregion
     }
 }

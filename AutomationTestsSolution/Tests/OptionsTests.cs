@@ -1,17 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using TestStack.White.Factory;
-using TestStack.White.UIItems;
-using TestStack.White.UIItems.Finders;
-using TestStack.White.UIItems.ListBoxItems;
-using TestStack.White.UIItems.MenuItems;
-using TestStack.White.UIItems.WindowStripControls;
-using TestStack.White.WindowsAPI;
-using TestStack.White;
-using NUnit.Framework;
-using TestStack.White.UIItems.WindowItems;
-using ScreenObjectsHelpers.Helpers;
+﻿using NUnit.Framework;
 using ScreenObjectsHelpers.Windows;
 using ScreenObjectsHelpers.Windows.Options;
 using ScreenObjectsHelpers.Windows.MenuFolder;
@@ -35,9 +22,7 @@ namespace AutomationTestsSolution.Tests
         public void UseEmbededGit()
         {
             NewTabWindow mainWindow = new NewTabWindow(MainWindow);
-            OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
-
-            UpdatesTab updateTab = optionsWindows.OpenTab<UpdatesTab>();
+            OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();            
             GitTab gitTab = optionsWindows.OpenTab<GitTab>();
             gitTab.UseEmbeddedGit();
             Assert.IsFalse(gitTab.IsUseEmbeddedGitEnabled());
@@ -50,8 +35,6 @@ namespace AutomationTestsSolution.Tests
         {
             NewTabWindow mainWindow = new NewTabWindow(MainWindow);
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
-
-            UpdatesTab updateTab = optionsWindows.OpenTab<UpdatesTab>();
             GitTab gitTab = optionsWindows.OpenTab<GitTab>();
             gitTab.UseSystemGitButton();
             Assert.IsTrue(gitTab.IsUseEmbeddedGitEnabled());
@@ -66,8 +49,6 @@ namespace AutomationTestsSolution.Tests
         {
             NewTabWindow mainWindow = new NewTabWindow(MainWindow);
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
-
-            UpdatesTab updateTab = optionsWindows.OpenTab<UpdatesTab>();
             GitTab gitTab = optionsWindows.OpenTab<GitTab>();
             gitTab.UpdateEmbededGitVersion();
             gitTab.ClickOkButton();

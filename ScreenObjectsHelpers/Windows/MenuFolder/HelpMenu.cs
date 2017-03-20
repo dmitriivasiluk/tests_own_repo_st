@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TestStack.White.UIItems.Finders;
+﻿using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.MenuItems;
 using TestStack.White.UIItems.WindowItems;
 
@@ -19,6 +14,7 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
 
         public override Menu UIElementMenu { get {  return MainWindow.Get<Menu>(SearchCriteria.ByText("Help")); } }
 
+        #region Methods        
         public void ClickOperations(OperationsHelp operation)
         {
             UIElementMenu.SubMenu(operation.Value).Click();
@@ -29,7 +25,8 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
             UIElementMenu.SubMenu(About).Click();
             var aboutWindow = MainWindow.MdiChild(SearchCriteria.ByText(About));
             return new AboutWindow(MainWindow, aboutWindow);
-        }        
+        }
+        #endregion        
     }
 
     public struct OperationsHelp

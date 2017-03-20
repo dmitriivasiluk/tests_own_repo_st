@@ -1,11 +1,5 @@
-﻿using System;
-using TestStack.White.UIItems;
-using TestStack.White.UIItems.Finders;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using ScreenObjectsHelpers.Windows;
-using System.Windows.Automation;
-
-
 
 namespace AutomationTestsSolution.Tests
 {

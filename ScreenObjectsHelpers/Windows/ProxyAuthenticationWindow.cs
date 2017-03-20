@@ -1,12 +1,7 @@
 ﻿using ScreenObjectsHelpers.Windows.Options;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
-using TestStack.White.UIItems.MenuItems;
 using TestStack.White.UIItems.WindowItems;
 
 namespace ScreenObjectsHelpers.Windows
@@ -29,6 +24,7 @@ namespace ScreenObjectsHelpers.Windows
             Console.WriteLine("WAIT FOR OPENING _Proxy Authentication_ WINDOW");
         }
 
+        #region UIElements
         public TextBox UsernameField
         {
             get
@@ -60,10 +56,13 @@ namespace ScreenObjectsHelpers.Windows
                 return proxyAuthenticationWindow.Get<Button>(SearchCriteria.ByAutomationId("LoginButton"));
             }
         }
+        #endregion
 
+        #region Methods
         public NetworkTab LoginClick() {
             Login.Click();
             return new NetworkTab(MainWindow, networkTab);
         }
+        #endregion
     }
 }
