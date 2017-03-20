@@ -179,6 +179,11 @@ namespace AutomationTestsSolution.Tests
         {
             if (MainWindow != null)
             {
+                var allChildWindow = MainWindow.ModalWindows();
+                foreach (var window in allChildWindow)
+                {
+                    window.Close();
+                }
                 MainWindow.Close();
             }
 

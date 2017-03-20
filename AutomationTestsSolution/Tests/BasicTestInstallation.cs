@@ -26,6 +26,7 @@ using System.Collections;
 using Microsoft.Win32;
 using AutomationTestsSolution.Helpers;
 using System.Net;
+using Debug = System.Diagnostics.Debug;
 
 namespace AutomationTestsSolution.Tests
 {
@@ -55,7 +56,20 @@ namespace AutomationTestsSolution.Tests
             int testCount = 0;
             while (MainWindow == null && testCount < 30)
             {
-                MainWindow = Desktop.Instance.Windows().FirstOrDefault(x => x.Name == "Welcome"); 
+                try
+                {
+                    MainWindow = Desktop.Instance.Windows().FirstOrDefault(x => x.Name == "Welcome");
+                }
+                catch (ElementNotAvailableException e)
+                {
+                    Debug.WriteLine(e);
+                    MainWindow = null;
+                }
+                catch (NullReferenceException e)
+                {
+                    Debug.WriteLine(e);
+                    MainWindow = null;
+                }
                 Thread.Sleep(1000);
                 testCount++;
             }
@@ -66,14 +80,17 @@ namespace AutomationTestsSolution.Tests
         {
             if (MainWindow != null)
             {
+                var allChildWindow = MainWindow.ModalWindows(); 
+                foreach (Window window in allChildWindow)
+                {
+                    window.Close();
+                }
                 MainWindow.Close();
             }
 
-            if (!sourceTreeProcess.HasExited)
-            {
-                sourceTreeProcess.CloseMainWindow();
-                sourceTreeProcess.Close();
-            }
+            if (sourceTreeProcess.HasExited) return;
+            sourceTreeProcess.CloseMainWindow();
+            sourceTreeProcess.Close();
         }
 
     }
