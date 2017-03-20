@@ -1,11 +1,7 @@
-﻿using System;
 using System.Threading;
-using TestStack.White.UIItems;
-using TestStack.White.UIItems.Finders;
 using NUnit.Framework;
 using ScreenObjectsHelpers.Windows;
-using System.Windows.Automation;
-using static ScreenObjectsHelpers.Windows.InstallationWindow;
+
 
 namespace AutomationTestsSolution.Tests
 {
