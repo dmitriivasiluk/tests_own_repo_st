@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.MenuItems;
+using TestStack.White.UIItems.TableItems;
 using TestStack.White.UIItems.WindowItems;
 
 namespace ScreenObjectsHelpers.Windows
@@ -26,9 +27,17 @@ namespace ScreenObjectsHelpers.Windows
 
         public Window MainWindow { get; private set; }
 
-        public void ClickOnButton(Button Button)
+        public void ClickOnElement(UIItem element)
         {
-            Button.Click();
+            WaitWhileElementAvaliable(element);
+            if (element.Enabled)
+            {
+                element.Click();
+            }
+            else
+            {
+                throw new TimeoutException("Element is not enabled, can not perform action on element.");
+            }
         }
 
         public void ClickOnButtonAfterElementVisible(Button Button)
@@ -36,41 +45,52 @@ namespace ScreenObjectsHelpers.Windows
             WaitWhileElementAvaliable(Button).Click();
         }
 
+        public UIItemContainer WaitMdiChildAppears(SearchCriteria searchCriteria, int secondsForWait)
+        {
+            int secondsPass = 0;
+            UIItemContainer container = MainWindow.MdiChild(searchCriteria);
+            while (container == null)
+            {
+                ThreadWait(1000);
+                secondsPass++;
+                container = MainWindow.MdiChild(searchCriteria);
+                if (secondsPass > secondsForWait)
+                {
+                    throw new TimeoutException();
+                }
+            }
+            return container;
+        }
+
         public bool IsElementAvaliable(UIItem item)
         {
             return item.Visible;
         }
 
-        public UIItem WaitWhileElementAvaliable(UIItem item)
+        public UIItem WaitWhileElementAvaliable(UIItem item, int maximumTimeToWait = 60)
         {
-            var ifItemVisible = item.Visible;
             int secondPassed = 0;
+            const int secondToWaitEachLoop = 5;
             while (true)
             {
                 var isItemVisible = item.Visible;
-                if (secondPassed > 60)
+                if (secondPassed > maximumTimeToWait)
                 {
                     throw new TimeoutException($"Element {item.ToString()} is not Visible after {secondPassed} second");
                 }
-                if (!isItemVisible)
-                {
-                    int secondToWait = 5;
-                    secondPassed += secondToWait;
-                    ThreadWait(secondToWait);
-                    continue;
-                }
-                return item;
+                if (isItemVisible) return item;
+                secondPassed += secondToWaitEachLoop;
+                ThreadWait(secondToWaitEachLoop * 5000); // convert in milliseconds 
             }
         }
 
-        protected void ThreadWait(int time)
+        protected void ThreadWait(int timeInMilliseconds)
         {
             try
             {
-                //1000 milliseconds is on  e second.
-                Thread.Sleep(time);
+                Thread.Sleep(timeInMilliseconds); 
             }
-            catch (ThreadInterruptedException ex)
+            catch (ThreadInterruptedException)
             {
                 Thread.CurrentThread.Interrupt();
             }
@@ -79,12 +99,12 @@ namespace ScreenObjectsHelpers.Windows
         public void ScrollHorizontalLeft(Window window)
         {
             var isWindowScrolable = window.ScrollBars.Horizontal.IsScrollable;
-            if (isWindowScrolable == true)
+            if (isWindowScrolable)
             {
                 window.ScrollBars.Horizontal.ScrollLeftLarge();
             }
-
         }
+
         public void ScrollHorizontalRigh(Window window)
         {
             var isWindowScrolable = window.ScrollBars.Horizontal.IsScrollable;
@@ -92,8 +112,8 @@ namespace ScreenObjectsHelpers.Windows
             {
                 window.ScrollBars.Horizontal.ScrollRightLarge();
             }
-
         }
+
         public void ScrollVerticalDown(Window window)
         {
             var isWindowScrolable = window.ScrollBars.Vertical.IsScrollable;
@@ -102,6 +122,7 @@ namespace ScreenObjectsHelpers.Windows
                 window.ScrollBars.Vertical.ScrollDown();
             }
         }
+
         public void ScrollVerticalUp(Window window)
         {
             var isWindowScrolable = window.ScrollBars.Vertical.IsScrollable;
@@ -109,7 +130,6 @@ namespace ScreenObjectsHelpers.Windows
             {
                 window.ScrollBars.Vertical.ScrollUp();
             }
-
         }
 
 

@@ -11,6 +11,8 @@ using TestStack.White.UIItems.MenuItems;
 using TestStack.White.UIItems.WindowItems;
 using TestStack.White;
 using System.Threading;
+using System.Windows.Automation;
+using TestStack.White.UIItems.ListBoxItems;
 
 namespace ScreenObjectsHelpers.Windows
 {
@@ -29,43 +31,37 @@ namespace ScreenObjectsHelpers.Windows
         }
 
         #region UIElements
-        public Button ContinueButton
-        {
-            get
-            {
-                return MainWindow.Get<Button>(SearchCriteria.ByText("Continue"));
-            }
-        }
-
-        public CheckBox LicenceAgreementCheckbox
-        {
-            get
-            {
-                return MainWindow.Get<CheckBox>(SearchCriteria.ByText("I agree to the "));
-            }
-        }
-
-        public Button UseExistingAccount
-        {
-            get
-            {
-                return MainWindow.Get<Button>(SearchCriteria.ByText("Use an existing account"));
-            }
-        }
+        public Button ContinueButton => MainWindow.Get<Button>(SearchCriteria.ByText("Continue"));
+        public Button UseExistingAccount => MainWindow.Get<Button>(SearchCriteria.ByText("Use an existing account"));
+        public Button SkipSetupButton => MainWindow.Get<Button>(SearchCriteria.ByText("Skip Setup"));
+        public CheckBox LicenceAgreementCheckbox => MainWindow.Get<CheckBox>(SearchCriteria.ByText("I agree to the "));
+        public CheckBox ConfigureAutomaticLineEndingCheckBox => MainWindow.Get<CheckBox>(SearchCriteria.ByText("Configure automatic line ending handling by default (recommended)"));
+        public Label RegistrationCompleteText => MainWindow.Get<Label>(SearchCriteria.ByText("Registration Complete!"));
+        public Label EmailLoggedAs => MainWindow.Get<Label>(SearchCriteria.ByText("")); 
+        public Label DownloadingVersionControlLabel => (Label) MainWindow.Get(SearchCriteria.ByText("Downloading version control systems..."), TimeSpan.FromSeconds(10));
+        public Label ToolInstallCompletedLabel => MainWindow.Get<Label>(SearchCriteria.ByText("Tool installation completed."));
+        public ListItem GitHubImageButton => MainWindow.Get<ListBox>(SearchCriteria.ByControlType(ControlType.List)).Item("GitHub");
+        public ListItem BitbucketImageButton => MainWindow.Get<ListBox>(SearchCriteria.ByControlType(ControlType.List)).Item("Bitbucket");
+        public ListItem BitbucketServerImageButton => MainWindow.Get<ListBox>(SearchCriteria.ByControlType(ControlType.List)).Item("Bitbucket Server");
+        public ComboBox AuthentificationComboBox => MainWindow.Get<ComboBox>(SearchCriteria.ByControlType(ControlType.ComboBox));
+        public TextBox UsernameField => MainWindow.Get<TextBox>(SearchCriteria.ByClassName("TextBox").AndIndex(1));
+        public TextBox PasswordField => MainWindow.Get<TextBox>(SearchCriteria.ByAutomationId("Password"));
+        public TextBox HostUrlField => MainWindow.Get<TextBox>(SearchCriteria.ByClassName("TextBox").AndIndex(0));
+        public ProgressBar InstallTollsProgressBar => MainWindow.Get<ProgressBar>(SearchCriteria.ByControlType(ControlType.ProgressBar));
         #endregion
 
         #region Methods
         public void ClickContinueButton()
         {
-            ClickOnButton(ContinueButton);
+            ClickOnElement(ContinueButton);
         }
 
         public AuthorizationWindow ClickUseExistingAccount()
         {
-            ClickOnButton(UseExistingAccount);
+            ClickOnElement(UseExistingAccount);
             Window authorizationWindow = Desktop.Instance.Windows().FirstOrDefault(c =>
             {
-                bool found = false;
+                var found = false;
                 try
                 {
                     var item = c.Get<Button>(SearchCriteria.ByText("Log in with Google"));
@@ -73,10 +69,87 @@ namespace ScreenObjectsHelpers.Windows
                 }
                 catch (Exception)
                 {
+                    // ignored
                 }
                 return c.IsModal == false && found;
             }); // Login window is opened without Name (title), so it is best way to find a window.
             return new AuthorizationWindow(MainWindow, authorizationWindow);
+        }
+
+        public void FillBasicAuthenticationGithub(string userName, string password)
+        {
+            GitHubImageButton.Click();
+            AuthentificationComboBox.Select("Basic");
+            UsernameField.Text = userName;
+            PasswordField.Text = password;
+        }
+
+        public string DownloadingVersionText()
+        {
+            return DownloadingVersionControlLabel.Text;
+        }
+
+        public string ToolInstallCompleteText()
+        {
+            return ToolInstallCompletedLabel.Text;
+        }
+
+        public void CheckConfigureAutomaticLineEncodingCheckbox()
+        {
+            if (!ConfigureAutomaticLineEndingCheckBox.Checked)
+            {
+                ConfigureAutomaticLineEndingCheckBox.Click();
+            }
+        }
+
+        public void WaitCompleteInstallToolsProgressBar()
+        {
+            var currentProcent = InstallTollsProgressBar.Value;
+            var secondPass = 0;
+            while (currentProcent < InstallTollsProgressBar.Maximum)
+            {
+                ThreadWait(1000);
+                secondPass++;
+                currentProcent = InstallTollsProgressBar.Value;
+                if (secondPass > 180) // pass 3 minutes
+                {
+                    throw new TimeoutException();
+                }
+            }
+        }
+
+        public void UncheckConfigureAutomaticLineEncodingCheckbox()
+        {
+            if (ConfigureAutomaticLineEndingCheckBox.Checked)
+            {
+                ConfigureAutomaticLineEndingCheckBox.Click();
+            }
+        }
+
+        public void FillAuthenticationBitBucketServer(string hostURL, string userName, string password)
+        {
+            BitbucketServerImageButton.Click();
+            HostUrlField.Text = hostURL;
+            UsernameField.Text = userName;
+            PasswordField.Text = password;
+        }
+
+        public void FillBasicAuthenticationBitbucket(string userName, string password)
+        {
+            BitbucketImageButton.Click();
+            AuthentificationComboBox.Select("Basic");
+            UsernameField.Text = userName;
+            PasswordField.Text = password;
+        }
+
+        public string LoggedAsEmail()
+        {
+            return EmailLoggedAs.Text;
+        }
+
+        public string CompleteText()
+        {
+            return RegistrationCompleteText.Text;
         }
 
         public bool IsContinueButtonActive() {
@@ -99,9 +172,46 @@ namespace ScreenObjectsHelpers.Windows
                 LicenceAgreementCheckbox.Click();
             }
         }
-
         #endregion
 
+        public ErrorDialogWindow SwitchToErrorDialogWindow()
+        {
+            SearchCriteria searchCriteria = SearchCriteria.ByAutomationId("window");
+            var errorDialog = this.WaitMdiChildAppears(searchCriteria, 10);
+            return new ErrorDialogWindow(MainWindow, errorDialog);
+        }
+       
+    }
 
+    public class ErrorDialogWindow
+    {
+        private readonly UIItemContainer errorWindow;
+        private readonly Window mainWindow;
+
+        public ErrorDialogWindow(Window mainWindow, UIItemContainer errorWindow)
+        {
+            this.mainWindow = mainWindow;
+            this.errorWindow = errorWindow;
+        }
+
+        public Label TitleOfMessageError => errorWindow.Get<Label>(SearchCriteria.ByText("Bad credentials"));
+        public Label TitleOfWindowLabel => errorWindow.Get<Label>(SearchCriteria.ByText("Login failed"));
+        public Button CancelButton => errorWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
+
+        public string GetTitleOfMessageError()
+        {
+            return TitleOfMessageError.Text;
+        }
+
+        public Window ClickCancelButton()
+        {
+            CancelButton.Click();
+            return mainWindow;
+        }
+
+        public string GetTitle()
+        {
+            return TitleOfWindowLabel.Text;
+        }
     }
 }

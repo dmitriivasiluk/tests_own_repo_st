@@ -43,7 +43,7 @@ namespace ScreenObjectsHelpers.Windows.Options
 
         public void CheckForUpdate()
         {
-            this.ClickOnButton(CheckForUpdatesButton);
+            this.ClickOnElement(CheckForUpdatesButton);
         }
 
 
