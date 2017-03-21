@@ -21,12 +21,12 @@ namespace ScreenObjectsHelpers.Windows
 
         public Window MainWindow { get; private set; }
 
-        public void ClickOnElement(UIItem element)
+        public void ClickOnButton(Button button)
         {
-            WaitWhileElementAvaliable(element);
-            if (element.Enabled)
+            WaitWhileElementAvaliable(button);
+            if (button.Enabled)
             {
-                element.Click();
+                button.Click();
             }
             else
             {

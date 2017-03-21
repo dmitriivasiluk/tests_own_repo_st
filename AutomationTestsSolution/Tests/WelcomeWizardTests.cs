@@ -206,7 +206,7 @@ namespace AutomationTestsSolution.Tests
 
             installWindow.ClickContinueButton();
 
-            installWindow.GitHubImageButton.Click();
+            installWindow.ChooseGitHubAccount();
 
             installWindow.ClickContinueButton();
 
@@ -234,7 +234,7 @@ namespace AutomationTestsSolution.Tests
 
             installWindow.ClickContinueButton();
 
-            installWindow.BitbucketImageButton.Click();
+            installWindow.ChooseBitBucketAccount();
 
             installWindow.ClickContinueButton();
 

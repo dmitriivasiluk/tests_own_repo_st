@@ -64,7 +64,7 @@ namespace ScreenObjectsHelpers.Windows.Options
         {
             if (UseEmbeddedMercurialButton.Enabled)
             {
-                this.ClickOnElement(UseEmbeddedMercurialButton);
+                this.ClickOnButton(UseEmbeddedMercurialButton);
             }
         }
 
@@ -72,7 +72,7 @@ namespace ScreenObjectsHelpers.Windows.Options
         {
             if (UseSystemMercurialButton.Enabled)
             {
-                this.ClickOnElement(UseSystemMercurialButton);
+                this.ClickOnButton(UseSystemMercurialButton);
             }
         }        
 
@@ -89,7 +89,7 @@ namespace ScreenObjectsHelpers.Windows.Options
         {
             if (UpdateEmbeddedMercurialButton.Enabled)
             {
-                this.ClickOnElement(UpdateEmbeddedMercurialButton);                
+                this.ClickOnButton(UpdateEmbeddedMercurialButton);                
                 var downloadHgWindow = MainWindow.MdiChild(SearchCriteria.ByText("Download Embedded HG"));
                 return new DownloadHgWindow(MainWindow, downloadHgWindow);
             }

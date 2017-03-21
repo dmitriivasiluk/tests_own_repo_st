@@ -66,12 +66,12 @@ namespace ScreenObjectsHelpers.Windows.Options
         {
             if(UseEmbededGitButton.Enabled)
             {
-                this.ClickOnElement(UseEmbededGitButton);
+                this.ClickOnButton(UseEmbededGitButton);
             }
         }
         public void UseSystemGitButton()
         {
-            this.ClickOnElement(SystemGitButtonSystemGitButton);
+            this.ClickOnButton(SystemGitButtonSystemGitButton);
         }
 
         public bool IsUseEmbeddedGitEnabled()
@@ -90,7 +90,7 @@ namespace ScreenObjectsHelpers.Windows.Options
         }
 
         public void UpdateEmbededGitVersion() {
-            this.ClickOnElement(UpdateEmbededGit);
+            this.ClickOnButton(UpdateEmbededGit);
         }
         #endregion
     }
