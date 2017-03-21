@@ -86,6 +86,14 @@ namespace AutomationTestsSolution.Helpers
                 {
                     Debug.WriteLine($"Directory {pathToSourceTree} is not found.");
                 }
+                catch (InvalidOperationException)
+                {
+                    Debug.WriteLine($"InvalidOperationException when trying to delete - {pathToSourceTree}.");
+                }
+                catch (IOException)
+                {
+                    Debug.WriteLine($"IOException - {pathToSourceTree}.");
+                }
             }
         }
 
