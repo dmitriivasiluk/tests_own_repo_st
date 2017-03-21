@@ -53,12 +53,12 @@ namespace ScreenObjectsHelpers.Windows
         #region Methods
         public void ClickContinueButton()
         {
-            ClickOnElement(ContinueButton);
+            ClickOnButton(ContinueButton);
         }
 
         public AuthorizationWindow ClickUseExistingAccount()
         {
-            ClickOnElement(UseExistingAccount);
+            ClickOnButton(UseExistingAccount);
             Window authorizationWindow = Desktop.Instance.Windows().FirstOrDefault(c =>
             {
                 var found = false;
@@ -78,7 +78,23 @@ namespace ScreenObjectsHelpers.Windows
 
         public void FillBasicAuthenticationGithub(string userName, string password)
         {
-            GitHubImageButton.Click();
+            ChooseGitHubAccount();
+            AuthentificationComboBox.Select("Basic");
+            UsernameField.Text = userName;
+            PasswordField.Text = password;
+        }
+
+        public void FillAuthenticationBitBucketServer(string hostURL, string userName, string password)
+        {
+            ChooseBitBucketServerAccount();
+            HostUrlField.Text = hostURL;
+            UsernameField.Text = userName;
+            PasswordField.Text = password;
+        }
+
+        public void FillBasicAuthenticationBitbucket(string userName, string password)
+        {
+            ChooseBitBucketAccount();
             AuthentificationComboBox.Select("Basic");
             UsernameField.Text = userName;
             PasswordField.Text = password;
@@ -126,22 +142,6 @@ namespace ScreenObjectsHelpers.Windows
             }
         }
 
-        public void FillAuthenticationBitBucketServer(string hostURL, string userName, string password)
-        {
-            BitbucketServerImageButton.Click();
-            HostUrlField.Text = hostURL;
-            UsernameField.Text = userName;
-            PasswordField.Text = password;
-        }
-
-        public void FillBasicAuthenticationBitbucket(string userName, string password)
-        {
-            BitbucketImageButton.Click();
-            AuthentificationComboBox.Select("Basic");
-            UsernameField.Text = userName;
-            PasswordField.Text = password;
-        }
-
         public string LoggedAsEmail()
         {
             return EmailLoggedAs.Text;
@@ -172,7 +172,21 @@ namespace ScreenObjectsHelpers.Windows
                 LicenceAgreementCheckbox.Click();
             }
         }
-        #endregion
+
+        public void ChooseGitHubAccount()
+        {
+            ClickOnButton(GitHubImageButton);
+        }
+
+        public void ChooseBitBucketAccount()
+        {
+            ClickOnButton(BitbucketImageButton);
+        }
+
+        public void ChooseBitBucketServerAccount()
+        {
+            ClickOnButton(BitbucketServerImageButton);
+        }
 
         public ErrorDialogWindow SwitchToErrorDialogWindow()
         {
@@ -180,7 +194,7 @@ namespace ScreenObjectsHelpers.Windows
             var errorDialog = this.WaitMdiChildAppears(searchCriteria, 10);
             return new ErrorDialogWindow(MainWindow, errorDialog);
         }
-       
+        #endregion
     }
 
     public class ErrorDialogWindow
