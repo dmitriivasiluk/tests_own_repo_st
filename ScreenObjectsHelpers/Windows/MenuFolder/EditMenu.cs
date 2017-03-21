@@ -24,11 +24,11 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
     {
         private OperationsEdit(string value) { Value = value; }
         public string Value { get; set; }
-        public static OperationsEdit Undo { get { return new OperationsEdit("Undo"); } }
-        public static OperationsEdit Redo { get { return new OperationsEdit("Redo"); } }
-        public static OperationsEdit Cut { get { return new OperationsEdit("Cut"); } }
-        public static OperationsEdit Copy { get { return new OperationsEdit("Copy"); } }
-        public static OperationsEdit Paste { get { return new OperationsEdit("Paste"); } }
-        public static OperationsEdit SelectAll { get { return new OperationsEdit("Select All"); } }
+        public static OperationsEdit Undo => new OperationsEdit("Undo"); 
+        public static OperationsEdit Redo => new OperationsEdit("Redo"); 
+        public static OperationsEdit Cut => new OperationsEdit("Cut"); 
+        public static OperationsEdit Copy => new OperationsEdit("Copy");
+        public static OperationsEdit Paste => new OperationsEdit("Paste"); 
+        public static OperationsEdit SelectAll => new OperationsEdit("Select All"); 
     }
 }
