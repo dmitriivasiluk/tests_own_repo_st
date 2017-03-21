@@ -7,7 +7,7 @@ namespace AutomationTestsSolution.Tests
 {
     class WelcomeWizardTests : BasicTestInstallation
     {
-        [TestCase, Order(1)]
+        [TestCase]
         public void ContinueButtonIsNotActiveTest()
         {
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
@@ -17,7 +17,7 @@ namespace AutomationTestsSolution.Tests
             Assert.IsFalse(isContinueButtonActive);
         }
 
-        [TestCase("testdesktopapplication@20minute.email", "123SourceTree"), Order(2)]
+        [TestCase("testdesktopapplication@20minute.email", "123SourceTree")]
         public void ValidRegistrationTest(string loginEmail, string password)
         {
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
@@ -35,7 +35,7 @@ namespace AutomationTestsSolution.Tests
             Assert.IsTrue(isContinueButtonActive);
         }
 
-        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "githubfaketesting", "123GitHubFake"), Order(3)]
+        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "githubfaketesting", "123GitHubFake")]
         public void ConnectGitHubAccountTest(
             string atlassianLoginEmail, 
             string atlassianPassword, 
@@ -57,7 +57,7 @@ namespace AutomationTestsSolution.Tests
             Assert.AreEqual(actualTitleOfNextStep, "Downloading version control systems..."); 
         }
 
-        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "bitbucketfaketest", "123BitBucketFake"), Order(3)]
+        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "bitbucketfaketest", "123BitBucketFake")]
         public void ConnectBitbucketAccountTest (
             string atlassianLoginEmail,
             string atlassianPassword,
@@ -82,11 +82,11 @@ namespace AutomationTestsSolution.Tests
             Assert.AreEqual(actualTitleOfNextStep, "Downloading version control systems...");
         }
 
-        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "http://HostURL.com", "username", "password"), Order(3)]
+        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "http://HostURL.com", "username", "password")]
         public void ConnectBitbucketServerAccountTest(
             string atlassianLoginEmail,
             string atlassianPassword,
-            string HostURL,
+            string hostUrl,
             string bitBucketLogin,
             string bitbucketPassword)
         {
@@ -100,14 +100,14 @@ namespace AutomationTestsSolution.Tests
             installWindow.ClickContinueButton();
 
             // Don't have any HostURL to BitbucketServer for check this functionality.
-            installWindow.FillAuthenticationBitBucketServer(HostURL, bitBucketLogin, bitbucketPassword);
+            installWindow.FillAuthenticationBitBucketServer(hostUrl, bitBucketLogin, bitbucketPassword);
 
             //string actualTitleOfNextStep = installWindow.DownloadingVersionText();
             // This is ensure that authorization was successful, because we are located on next step "Install tools"
             //Assert.AreEqual(actualTitleOfNextStep, "Downloading version control systems...");
         }
 
-        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "incorrectLogin", "incorrectPassword"), Order(4)]
+        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "incorrectLogin", "incorrectPassword")]
         public void ConnectGitHubIncorrectCredentialsNegativeTest(
             string atlassianLoginEmail,
             string atlassianPassword,
@@ -134,7 +134,7 @@ namespace AutomationTestsSolution.Tests
             Assert.IsFalse(actualIsContinueButtonActive);
         }
 
-        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "incorrectLogin", "IncorrectPassword"), Order(4)]
+        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "incorrectLogin", "IncorrectPassword")]
         public void ConnectBitbucketIncorrectCredentialsNegativeTest(
             string atlassianLoginEmail,
             string atlassianPassword,
@@ -161,7 +161,7 @@ namespace AutomationTestsSolution.Tests
             Assert.IsFalse(actualIsContinueButtonActive);
         }
 
-        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "http://IncorrectHost.com", "test", "test"), Order(4)]
+        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "http://IncorrectHost.com", "test", "test")]
         public void ConnectBitbucketServerIncorrectCredentialsNegativeTest(
             string atlassianLoginEmail,
             string atlassianPassword,
@@ -192,7 +192,7 @@ namespace AutomationTestsSolution.Tests
         /// <summary>
         /// Verify that you have permission to access SourceTreeForWindows by atlassian to GitHub account.
         /// </summary>
-        [TestCase("testdesktopapplication@20minute.email", "123SourceTree"), Order(5)]
+        [TestCase("testdesktopapplication@20minute.email", "123SourceTree")]
         public void ConnectGitHubViaOAuthTest (
             string atlassianLoginEmail,
             string atlassianPassword)
@@ -220,7 +220,7 @@ namespace AutomationTestsSolution.Tests
         /// <summary>
         /// Verify that you have permission to access SourceTreeForWindows by atlassian to ИшеИгслуе account.
         /// </summary>
-        [TestCase("testdesktopapplication@20minute.email", "123SourceTree"), Order(5)]
+        [TestCase("testdesktopapplication@20minute.email", "123SourceTree")]
         public void ConnectBitbucketViaOAuthTest(
             string atlassianLoginEmail,
             string atlassianPassword)
