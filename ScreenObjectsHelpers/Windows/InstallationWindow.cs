@@ -1,16 +1,9 @@
-﻿using ScreenObjectsHelpers.Windows.Options;
-using ScreenObjectsHelpers.Windows.MenuFolder;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
-using TestStack.White.UIItems.MenuItems;
 using TestStack.White.UIItems.WindowItems;
 using TestStack.White;
-using System.Threading;
 using System.Windows.Automation;
 using TestStack.White.UIItems.ListBoxItems;
 
@@ -43,7 +36,7 @@ namespace ScreenObjectsHelpers.Windows
         public ListItem GitHubImageButton => MainWindow.Get<ListBox>(SearchCriteria.ByControlType(ControlType.List)).Item("GitHub");
         public ListItem BitbucketImageButton => MainWindow.Get<ListBox>(SearchCriteria.ByControlType(ControlType.List)).Item("Bitbucket");
         public ListItem BitbucketServerImageButton => MainWindow.Get<ListBox>(SearchCriteria.ByControlType(ControlType.List)).Item("Bitbucket Server");
-        public ComboBox AuthentificationComboBox => MainWindow.Get<ComboBox>(SearchCriteria.ByControlType(ControlType.ComboBox));
+        public ComboBox AuthenticationComboBox => MainWindow.Get<ComboBox>(SearchCriteria.ByControlType(ControlType.ComboBox));
         public TextBox UsernameField => MainWindow.Get<TextBox>(SearchCriteria.ByClassName("TextBox").AndIndex(1));
         public TextBox PasswordField => MainWindow.Get<TextBox>(SearchCriteria.ByAutomationId("Password"));
         public TextBox HostUrlField => MainWindow.Get<TextBox>(SearchCriteria.ByClassName("TextBox").AndIndex(0));
@@ -79,7 +72,7 @@ namespace ScreenObjectsHelpers.Windows
         public void FillBasicAuthenticationGithub(string userName, string password)
         {
             ChooseGitHubAccount();
-            AuthentificationComboBox.Select("Basic");
+            AuthenticationComboBox.Select("Basic");
             UsernameField.Text = userName;
             PasswordField.Text = password;
         }
@@ -95,7 +88,7 @@ namespace ScreenObjectsHelpers.Windows
         public void FillBasicAuthenticationBitbucket(string userName, string password)
         {
             ChooseBitBucketAccount();
-            AuthentificationComboBox.Select("Basic");
+            AuthenticationComboBox.Select("Basic");
             UsernameField.Text = userName;
             PasswordField.Text = password;
         }
@@ -175,17 +168,17 @@ namespace ScreenObjectsHelpers.Windows
 
         public void ChooseGitHubAccount()
         {
-            ClickOnButton(GitHubImageButton);
+            GitHubImageButton.Click();
         }
 
         public void ChooseBitBucketAccount()
         {
-            ClickOnButton(BitbucketImageButton);
+            BitbucketImageButton.Click();
         }
 
         public void ChooseBitBucketServerAccount()
         {
-            ClickOnButton(BitbucketServerImageButton);
+            BitbucketServerImageButton.Click();
         }
 
         public ErrorDialogWindow SwitchToErrorDialogWindow()
