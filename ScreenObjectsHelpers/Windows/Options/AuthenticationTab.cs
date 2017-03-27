@@ -6,7 +6,7 @@ using TestStack.White.UIItems.WindowItems;
 namespace ScreenObjectsHelpers.Windows.Options
 {
     public class AuthenticationTab : OptionsWindow
-    {
+    {        
         public AuthenticationTab(Window mainWindow, UIItemContainer optionsWindow) : base(mainWindow, optionsWindow)
         {
         }
@@ -18,13 +18,7 @@ namespace ScreenObjectsHelpers.Windows.Options
         }
 
         #region UIElements        
-        public override UIItem UIElementTab
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<UIItem>(SearchCriteria.ByText("Authentication"));
-            }
-        }
+        public override UIItem UIElementTab => OptionsWindowContainer.Get<UIItem>(SearchCriteria.ByText("Authentication"));            
         #endregion
     }
 }

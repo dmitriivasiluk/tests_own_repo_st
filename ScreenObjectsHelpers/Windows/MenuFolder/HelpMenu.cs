@@ -33,11 +33,11 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
     {
         private OperationsHelp(string value) { Value = value; }
         public string Value { get; set; }        
-        public static OperationsHelp GetStarted { get { return new OperationsHelp("Get Started With SourceTree"); } }
-        public static OperationsHelp SupportWebsite { get { return new OperationsHelp("SourceTree Support Website"); } }        
-        public static OperationsHelp SourceTreeWebsite { get { return new OperationsHelp("SourceTree Website"); } }
-        public static OperationsHelp ReleaseNotes { get { return new OperationsHelp("Release Notes"); } }
-        public static OperationsHelp GetGitRight { get { return new OperationsHelp("Get Git Right"); } }
+        public static OperationsHelp GetStarted => new OperationsHelp("Get Started With SourceTree"); 
+        public static OperationsHelp SupportWebsite => new OperationsHelp("SourceTree Support Website");        
+        public static OperationsHelp SourceTreeWebsite => new OperationsHelp("SourceTree Website"); 
+        public static OperationsHelp ReleaseNotes => new OperationsHelp("Release Notes"); 
+        public static OperationsHelp GetGitRight => new OperationsHelp("Get Git Right"); 
         
     }
 }

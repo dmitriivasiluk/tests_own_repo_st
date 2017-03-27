@@ -17,13 +17,7 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
         }
 
         #region UIElements        
-        public override Menu UIElementMenu
-        {
-            get
-            {
-                return MainWindow.Get<Menu>(SearchCriteria.ByText("Tools"));
-            }
-        }
+        public override Menu UIElementMenu => MainWindow.Get<Menu>(SearchCriteria.ByText("Tools"));
         #endregion
 
         #region Methods        

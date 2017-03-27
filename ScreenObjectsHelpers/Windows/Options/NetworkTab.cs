@@ -7,8 +7,10 @@ namespace ScreenObjectsHelpers.Windows.Options
 {
     public class NetworkTab : OptionsWindow
     {
+        private readonly UIItemContainer networkTab;
         public NetworkTab(Window mainWindow, UIItemContainer optionsWindow) : base(mainWindow, optionsWindow)
         {
+            networkTab = optionsWindow;
         }
 
         public override void ValidateWindow()
@@ -18,102 +20,36 @@ namespace ScreenObjectsHelpers.Windows.Options
         }
 
         #region UIElements        
-        public override UIItem UIElementTab
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<UIItem>(SearchCriteria.ByText("Network"));
-            }
-        }
+        public override UIItem UIElementTab => OptionsWindowContainer.Get<UIItem>(SearchCriteria.ByText("Network"));
 
-        public RadioButton UseDefaultProxy
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<RadioButton>(SearchCriteria.ByText("Use default operating system settings"));
-            }
-        }
+        public RadioButton UseDefaultProxyRadioButton => networkTab.Get<RadioButton>(SearchCriteria.ByText("Use default operating system settings"));            
 
-        public RadioButton UseCustomProxy
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<RadioButton>(SearchCriteria.ByText("Use custom proxy settings"));
-            }
-        }
+        public RadioButton UseCustomProxyRadioButton => networkTab.Get<RadioButton>(SearchCriteria.ByText("Use custom proxy settings"));
 
         // Automation IDs required
         /*
-        public TextBox ServerField
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<TextBox>(SearchCriteria.ByAutomationId(""));
-            }
-        }
+        public TextBox ServerTextBox => networkTab.Get<TextBox>(SearchCriteria.ByAutomationId(""));            
 
-        public TextBox PortField
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<TextBox>(SearchCriteria.ByAutomationId(""));
-            }
-        }
+        public TextBox PortTextBox => networkTab.Get<TextBox>(SearchCriteria.ByAutomationId(""));            
         */
 
-        public CheckBox ProxyRequiresPassword
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<CheckBox>(SearchCriteria.ByText("Proxy server requires username and password"));
-            }
-        }
+        public CheckBox ProxyRequiresPasswordCheckBox => networkTab.Get<CheckBox>(SearchCriteria.ByText("Proxy server requires username and password"));            
 
-        public CheckBox AddProxyConfiguration
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<CheckBox>(SearchCriteria.ByText("Add proxy server configuration to Git / Mercurial"));
-            }
-        }
+        public CheckBox AddProxyConfigurationCheckBox => networkTab.Get<CheckBox>(SearchCriteria.ByText("Add proxy server configuration to Git / Mercurial"));            
 
-        public CheckBox EnableSsl
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<CheckBox>(SearchCriteria.ByText("Enable SSL3"));
-            }
-        }
+        public CheckBox EnableSslCheckBox => networkTab.Get<CheckBox>(SearchCriteria.ByText("Enable SSL3"));            
 
-        public CheckBox EnableTls11
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<CheckBox>(SearchCriteria.ByText("Enable TLS 1.1"));
-            }
-        }
+        public CheckBox EnableTls11CheckBox => networkTab.Get<CheckBox>(SearchCriteria.ByText("Enable TLS 1.1"));            
 
-        public CheckBox EnableTls12
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<CheckBox>(SearchCriteria.ByText("Enable TLS 1.2"));
-            }
-        }
+        public CheckBox EnableTls12CheckBox => networkTab.Get<CheckBox>(SearchCriteria.ByText("Enable TLS 1.2"));            
 
-        public Button UsernameAndPassword
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Username and Password..."));
-            }
-        }
+        public Button UsernameAndPasswordButton => networkTab.Get<Button>(SearchCriteria.ByText("Username and Password..."));            
         #endregion
 
         #region Methods        
         public ProxyAuthenticationWindow OpenUsernameAndPassword()
         {
-            UsernameAndPassword.Click();
+            ClickOnButton(UsernameAndPasswordButton);
             var proxyAuthenticationWindow = MainWindow.MdiChild(SearchCriteria.ByText("Authenticate"));
             return new ProxyAuthenticationWindow(MainWindow, OptionsWindowContainer, proxyAuthenticationWindow);
         }

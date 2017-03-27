@@ -25,11 +25,11 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
     {
         private OperationsView(string value) { Value = value; }
         public string Value { get; set; }
-        public static OperationsView Refresh { get { return new OperationsView("Refresh"); } }
-        public static OperationsView NextTab { get { return new OperationsView("Next Tab"); } }
-        public static OperationsView PreviuosTab { get { return new OperationsView("Previuos Tab"); } }
-        public static OperationsView FileStatusView { get { return new OperationsView("File Status View"); } }
-        public static OperationsView LogView { get { return new OperationsView("Log View"); } }
-        public static OperationsView SearchView { get { return new OperationsView("Search View"); } }
+        public static OperationsView Refresh => new OperationsView("Refresh"); 
+        public static OperationsView NextTab => new OperationsView("Next Tab"); 
+        public static OperationsView PreviuosTab => new OperationsView("Previuos Tab"); 
+        public static OperationsView FileStatusView => new OperationsView("File Status View"); 
+        public static OperationsView LogView => new OperationsView("Log View"); 
+        public static OperationsView SearchView => new OperationsView("Search View"); 
     }
 }
