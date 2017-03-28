@@ -2,6 +2,7 @@
 using ScreenObjectsHelpers.Windows;
 using ScreenObjectsHelpers.Windows.MenuFolder;
 using ScreenObjectsHelpers.Windows.Options;
+
 namespace AutomationTestsSolution.Tests
 {
     class HelpMenuTests : BasicTest
@@ -18,9 +19,7 @@ namespace AutomationTestsSolution.Tests
             string appVersion = aboutWindow.GetAppVersion();
             Assert.AreEqual(aboutWindowHeader, "About SourceTree");
             Assert.AreEqual(copyrightCaption, "Copyright Atlassian 2012-2017. All Rights Reserved.");
-            Assert.AreEqual(appVersion, "2.0.14.1");
+            Assert.AreEqual(appVersion, "Version 2.0.14.1");
         }
     }
 }
-
-

@@ -1,4 +1,5 @@
-﻿using TestStack.White.UIItems.Finders;
+﻿using System.Windows.Automation;
+using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.MenuItems;
 using TestStack.White.UIItems.WindowItems;
 
@@ -23,7 +24,8 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
         public AboutWindow OpenAbout()
         {
             UIElementMenu.SubMenu(About).Click();
-            var aboutWindow = MainWindow.MdiChild(SearchCriteria.ByText(About));
+            var aboutWindow = MainWindow.ModalWindow(SearchCriteria.ByText("About"));
+            
             return new AboutWindow(MainWindow, aboutWindow);
         }
         #endregion        
