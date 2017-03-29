@@ -197,7 +197,7 @@ namespace ScreenObjectsHelpers.Windows
         public NewTabWindow SkipSetup()
         {
             ClickOnButton(SkipSetupButton);
-            Window mainWindow = Utills.FindNewWindow("SourceTree");
+            Window mainWindow = Utils.FindNewWindow("SourceTree");
             return new NewTabWindow(mainWindow);
         }
 
@@ -211,7 +211,7 @@ namespace ScreenObjectsHelpers.Windows
             {
                 // Empty, expect that Configuration window is closed (the latest step in configuration, clone) and SourceTree is opened 
             }
-            Window sourceTreeWindow = Utills.FindNewWindow("SourceTree");
+            Window sourceTreeWindow = Utils.FindNewWindow("SourceTree");
             return new NewTabWindow(sourceTreeWindow);
         }
 

@@ -36,7 +36,7 @@ namespace AutomationTestsSolution.Tests
         {
             MainWindow = null;
             int testCount = 0;
-            MainWindow = Utills.FindNewWindow("Welcome");
+            MainWindow = Utils.FindNewWindow("Welcome");
         }
 
         [TearDown]

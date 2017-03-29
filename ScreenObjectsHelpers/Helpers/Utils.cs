@@ -10,7 +10,7 @@ using TestStack.White.UIItems.WindowItems;
 
 namespace ScreenObjectsHelpers.Helpers
 {
-    public class Utills
+    public class Utils
     {
 
         public static Window FindNewWindow(string nameOfWindow)
