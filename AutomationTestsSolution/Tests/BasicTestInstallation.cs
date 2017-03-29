@@ -6,6 +6,7 @@ using System.Threading;
 using AutomationTestsSolution.Helpers;
 using System.Net;
 using System.Windows.Automation;
+using ScreenObjectsHelpers.Helpers;
 using TestStack.White.UIItems.WindowItems;
 using Debug = System.Diagnostics.Debug;
 
@@ -35,25 +36,7 @@ namespace AutomationTestsSolution.Tests
         {
             MainWindow = null;
             int testCount = 0;
-            while (MainWindow == null && testCount < 30)
-            {
-                try
-                {
-                    MainWindow = Desktop.Instance.Windows().FirstOrDefault(x => x.Name == "Welcome");
-                }
-                catch (ElementNotAvailableException e)
-                {
-                    Debug.WriteLine(e);
-                    MainWindow = null;
-                }
-                catch (NullReferenceException e)
-                {
-                    Debug.WriteLine(e);
-                    MainWindow = null;
-                }
-                Thread.Sleep(1000);
-                testCount++;
-            }
+            MainWindow = Utills.FindNewWindow("Welcome");
         }
 
         [TearDown]

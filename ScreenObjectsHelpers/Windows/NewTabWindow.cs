@@ -19,5 +19,10 @@ namespace ScreenObjectsHelpers.Windows
             // If validation is fail, throw exception!
             Console.WriteLine("WAIT FOR OPENING TAB");
         }
+
+        public string GetTitle()
+        {
+            return MainWindow.Title;
+        }
     }
 }

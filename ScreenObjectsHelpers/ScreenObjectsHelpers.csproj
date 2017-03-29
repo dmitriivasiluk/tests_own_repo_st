@@ -83,6 +83,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Helpers\ScreenshotsTaker.cs" />
+    <Compile Include="Helpers\Utills.cs" />
+    <Compile Include="Helpers\WindowsFilesHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Windows\AuthorizationWindow.cs" />
     <Compile Include="Windows\DownloadHgWindow.cs" />
