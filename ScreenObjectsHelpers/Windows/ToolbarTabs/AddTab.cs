@@ -16,6 +16,6 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         {
         }
 
-        public override UIItem UIElementTab => MainWindow.Get<UIItem>(SearchCriteria.ByText("Add"));
+        public override UIItem ToolbarTabButton => MainWindow.Get<UIItem>(SearchCriteria.ByText("Add"));
     }
 }

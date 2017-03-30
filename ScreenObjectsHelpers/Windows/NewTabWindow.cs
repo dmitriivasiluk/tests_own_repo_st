@@ -13,10 +13,10 @@ namespace ScreenObjectsHelpers.Windows
         private UIItemContainer newTab;
         public NewTabWindow(Window mainWindow) : base(mainWindow)
         {
-            OpenNewTab();
+            OpenToolbarTab();
         }
 
-        public abstract UIItem UIElementTab
+        public abstract UIItem ToolbarTabButton
         {
             get;
         }
@@ -33,16 +33,13 @@ namespace ScreenObjectsHelpers.Windows
             return (T)Activator.CreateInstance(typeof(T), MainWindow);
         }
 
-        public virtual void OpenNewTab()
-        {            
-            try
+        public virtual void OpenToolbarTab()
+        {
+            if (ToolbarTabButton == null)
             {
-                UIElementTab.Click();
+                ClickOnButton(NewTabButton);
             }
-            catch
-            {
-                NewTabButton.Click(); 
-            }
+            ToolbarTabButton.Click();
         }
     }
 }

@@ -16,6 +16,6 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         {
         }
 
-        public override UIItem UIElementTab => MainWindow.Get<UIItem>(SearchCriteria.ByText("Remote"));
+        public override UIItem ToolbarTabButton => MainWindow.Get<UIItem>(SearchCriteria.ByText("Remote"));
     }
 }

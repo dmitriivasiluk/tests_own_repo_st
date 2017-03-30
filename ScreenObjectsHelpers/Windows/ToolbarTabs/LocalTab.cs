@@ -1,4 +1,5 @@
 ﻿using System;
+using TestStack.White;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.WindowItems;
@@ -11,7 +12,20 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         {
         }
 
-        public override UIItem UIElementTab => MainWindow.Get<UIItem>(SearchCriteria.ByText("Local"));
+        public override UIItem ToolbarTabButton
+        {            
+            get
+            {
+                try
+                {
+                    return MainWindow.Get<UIItem>(SearchCriteria.ByText("Local"));
+                }
+                catch (AutomationException)
+                {                    
+                    return null;
+                }                
+            }            
+        }
 
 
         public override void ValidateWindow()
