@@ -111,3 +111,6 @@ $RECYCLE.BIN/
 
 # Visual Studio temp something
 .vs/
+
+# Fake Logs
+AutomationTestsSolution/.fake/
