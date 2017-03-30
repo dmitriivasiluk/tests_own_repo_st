@@ -1,5 +1,6 @@
 ﻿using ScreenObjectsHelpers.Windows.Options;
 using System;
+using System.Windows.Automation;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.WindowItems;
@@ -26,7 +27,7 @@ namespace ScreenObjectsHelpers.Windows
 
         #region UIItems
         public TextBox MenuCaption => customActionsWindow.Get<TextBox>(SearchCriteria.ByAutomationId("CaptionBox"));
-        public CheckBox OpenInASeparateWindow 
+        public CheckBox OpenInASeparateWindow
         {
             get
             {
@@ -40,8 +41,9 @@ namespace ScreenObjectsHelpers.Windows
                 return customActionsWindow.Get<CheckBox>(SearchCriteria.ByText("Show Full Output"));
             }
         }
-        public TextBox ScriptToRun => customActionsWindow.Get<TextBox>(SearchCriteria.ByAutomationId(""/*required automation ID*/));
-        public TextBox Parameters => customActionsWindow.Get<TextBox>(SearchCriteria.ByAutomationId(""/*required automation ID*/));
+        public TextBox ScriptToRun => customActionsWindow.Get<TextBox>(SearchCriteria.ByClassName("TextBox").AndIndex(1));
+        public TextBox Parameters => customActionsWindow.Get<TextBox>(SearchCriteria.ByClassName("TextBox").AndIndex(2));
+        
         public Button OkButton => customActionsWindow.Get<Button>(SearchCriteria.ByText("OK"));
         public Button CancelButton => customActionsWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
         #endregion
@@ -51,10 +53,13 @@ namespace ScreenObjectsHelpers.Windows
         {
             MenuCaption.Text = menuCaption;
         }
-
         public void SetScriptToRun(string scriptToRun)
         {
-            SetScriptToRun.Text = scriptToRun;
+            ScriptToRun.Text = scriptToRun;
+        }
+        public void SetParameters(string parameters)
+        {
+            Parameters.Text = parameters;
         }
 
         public CustomActionsTab ClickOnOKButton()
