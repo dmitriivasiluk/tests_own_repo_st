@@ -61,10 +61,10 @@ namespace ScreenObjectsHelpers.Windows.Options
         #endregion        
 
         #region ComboBoxes
-        public ComboBox SshClient => generalTab.Get<ComboBox>(SearchCriteria.ByAutomationId(""));
-        public ComboBox Language => generalTab.Get<ComboBox>(SearchCriteria.ByAutomationId(""));
-        public ComboBox DefaultTextEncoding => generalTab.Get<ComboBox>(SearchCriteria.ByAutomationId(""));
-        public ComboBox SpellCheckLanguage => generalTab.Get<ComboBox>(SearchCriteria.ByAutomationId(""));
+        public ComboBox SshClientComboBox => generalTab.Get<ComboBox>(SearchCriteria.ByAutomationId(""));
+        public ComboBox LanguageComboBox => generalTab.Get<ComboBox>(SearchCriteria.ByAutomationId(""));
+        public ComboBox DefaultTextEncodingComboBox => generalTab.Get<ComboBox>(SearchCriteria.ByAutomationId(""));
+        public ComboBox SpellCheckLanguageComboBox => generalTab.Get<ComboBox>(SearchCriteria.ByAutomationId(""));
         #endregion
         */
 

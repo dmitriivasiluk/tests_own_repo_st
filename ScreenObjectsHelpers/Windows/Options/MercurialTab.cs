@@ -18,45 +18,16 @@ namespace ScreenObjectsHelpers.Windows.Options
         }
 
         #region UIElements        
-        public override UIItem UIElementTab
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<UIItem>(SearchCriteria.ByText("Mercurial"));
-            }
-        }
-
-        public Button UseEmbeddedMercurialButton
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use Embedded Mercurial"));
-            }
-        }
-
-        private Button UseSystemMercurialButton
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use System Mercurial"));
-            }
-        }
-
-        private Button UpdateEmbeddedMercurialButton
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Update Embedded Mercurial"));
-            }
-        }
-
-        private Button OK
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("OK"));
-            }
-        }
+        public override UIItem UIElementTab => OptionsWindowContainer.Get<UIItem>(SearchCriteria.ByText("Mercurial"));
+            
+        public Button UseEmbeddedMercurialButton => OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use Embedded Mercurial"));
+            
+        private Button UseSystemMercurialButton => OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use System Mercurial"));
+            
+        private Button UpdateEmbeddedMercurialButton => OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Update Embedded Mercurial"));
+            
+        private Button OkButton => OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("OK"));
+            
         #endregion
 
         #region Methods        
