@@ -183,14 +183,9 @@ namespace AutomationTestsSolution.Tests
                 sourceTreeProcess.Close();
             }
 
-
             RestoreUserConfig(sourceTreeUserConfigPath);
             RestoreData(sourceTreeDataPath);
         }
 
-        public void ifSourceTreeOpened()
-        {
-
-        }
     }
 }

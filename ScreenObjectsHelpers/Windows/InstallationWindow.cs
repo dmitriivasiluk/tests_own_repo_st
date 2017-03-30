@@ -280,22 +280,22 @@ namespace ScreenObjectsHelpers.Windows
 
     public class BrowseDestinationPath
     {
-        private readonly UIItemContainer browsePath;
-        private readonly InstallationWindow installWindow;
+        private readonly UIItemContainer _browsePath;
+        private readonly InstallationWindow _installWindow;
 
         public BrowseDestinationPath(InstallationWindow installWindow, UIItemContainer browsePath)
         {
-            this.installWindow = installWindow;
-            this.browsePath = browsePath;
+            this._installWindow = installWindow;
+            this._browsePath = browsePath;
         }
 
-        public TextBox FolderEditField => browsePath.Get<TextBox>(SearchCriteria.ByAutomationId("1152"));
-        public Button SelectFolder => browsePath.Get<Button>(SearchCriteria.ByAutomationId("1"));
+        public TextBox FolderEditField => _browsePath.Get<TextBox>(SearchCriteria.ByAutomationId("1152"));
+        public Button SelectFolder => _browsePath.Get<Button>(SearchCriteria.ByAutomationId("1"));
 
         public InstallationWindow ClickSelectFolder()
         {
             SelectFolder.Click();
-            return installWindow;
+            return _installWindow;
         }
 
         public void ChooseDestinationFolder(string path)
@@ -307,29 +307,29 @@ namespace ScreenObjectsHelpers.Windows
 
     public class IgnoreFileDialogWindow
     {
-        private readonly UIItemContainer dialogWindow;
-        private readonly InstallationWindow installWindow;
+        private readonly UIItemContainer _dialogWindow;
+        private readonly InstallationWindow _installWindow;
 
         public IgnoreFileDialogWindow(InstallationWindow installWindow, UIItemContainer dialogWindow)
         {
-            this.installWindow = installWindow;
-            this.dialogWindow = dialogWindow;
+            this._installWindow = installWindow;
+            this._dialogWindow = dialogWindow;
         }
 
-        public Label TitleOfWindowLabel => dialogWindow.Get<Label>(SearchCriteria.ByText("Login failed"));
-        public Button YesButton => dialogWindow.Get<Button>(SearchCriteria.ByText("_Yes"));
-        public Button NoButton => dialogWindow.Get<Button>(SearchCriteria.ByText("No"));
+        public Label TitleOfWindowLabel => _dialogWindow.Get<Label>(SearchCriteria.ByText("Login failed"));
+        public Button YesButton => _dialogWindow.Get<Button>(SearchCriteria.ByText("_Yes"));
+        public Button NoButton => _dialogWindow.Get<Button>(SearchCriteria.ByText("No"));
 
         public InstallationWindow ClickYesButton()
         {
             YesButton.Click();
-            return installWindow;
+            return _installWindow;
         }
 
         public InstallationWindow ClickCancelButton()
         {
             NoButton.Click();
-            return installWindow;
+            return _installWindow;
         }
 
         public string GetTitle()
@@ -340,18 +340,18 @@ namespace ScreenObjectsHelpers.Windows
 
     public class ErrorDialogWindow
     {
-        private readonly UIItemContainer errorWindow;
-        private readonly InstallationWindow installationWindow;
+        private readonly UIItemContainer _errorWindow;
+        private readonly InstallationWindow _installationWindow;
 
         public ErrorDialogWindow(InstallationWindow installationWindow, UIItemContainer errorWindow)
         {
-            this.installationWindow = installationWindow;
-            this.errorWindow = errorWindow;
+            this._installationWindow = installationWindow;
+            this._errorWindow = errorWindow;
         }
 
-        public Label TitleOfMessageError => errorWindow.Get<Label>(SearchCriteria.ByText("Bad credentials"));
-        public Label TitleOfWindowLabel => errorWindow.Get<Label>(SearchCriteria.ByText("Login failed"));
-        public Button CancelButton => errorWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
+        public Label TitleOfMessageError => _errorWindow.Get<Label>(SearchCriteria.ByText("Bad credentials"));
+        public Label TitleOfWindowLabel => _errorWindow.Get<Label>(SearchCriteria.ByText("Login failed"));
+        public Button CancelButton => _errorWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
 
         public string GetTitleOfMessageError()
         {
@@ -361,7 +361,7 @@ namespace ScreenObjectsHelpers.Windows
         public InstallationWindow ClickCancelButton()
         {
             CancelButton.Click();
-            return installationWindow;
+            return _installationWindow;
         }
 
         public string GetTitle()
