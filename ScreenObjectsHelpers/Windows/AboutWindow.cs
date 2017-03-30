@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScreenObjectsHelpers.Windows.ToolbarTabs;
+using System;
 using System.Windows.Automation;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
@@ -33,7 +34,7 @@ namespace ScreenObjectsHelpers.Windows
         {
             get
             {
-                var controlElement = AboutWindowContainer.GetElement(SearchCriteria.ByText("Version 2.0.14.1").AndControlType(ControlType.Text));
+                var controlElement = AboutWindowContainer.GetElement(SearchCriteria.ByText("Version 2.0.15.1").AndControlType(ControlType.Text));
                 return controlElement != null ? new TextBox(controlElement, AboutWindowContainer.ActionListener) : null;
             }
         }
@@ -62,10 +63,10 @@ namespace ScreenObjectsHelpers.Windows
         {
             return CopyrightCaption.Name;
         }
-        public NewTabWindow CloseAboutWindowButtonClick()
+        public LocalTab CloseAboutWindowButtonClick()
         {
             CloseAboutWindowButton.Click();
-            return new NewTabWindow(MainWindow);
+            return new LocalTab(MainWindow);
         }
         #endregion
     }
