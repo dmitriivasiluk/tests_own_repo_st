@@ -21,16 +21,27 @@ namespace ScreenObjectsHelpers.Windows.Options
         public override UIItem UIElementTab => OptionsWindowContainer.Get<UIItem>(SearchCriteria.ByText("Mercurial"));
             
         public Button UseEmbeddedMercurialButton => OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use Embedded Mercurial"));
-            
-        private Button UseSystemMercurialButton => OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use System Mercurial"));
-            
-        private Button UpdateEmbeddedMercurialButton => OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Update Embedded Mercurial"));
-            
-        private Button OkButton => OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("OK"));
-            
+
+        public Button UseSystemMercurialButton => OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use System Mercurial"));
+
+        public Button UpdateEmbeddedMercurialButton => OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Update Embedded Mercurial"));
+
+        public Button OkButton => OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("OK"));
+
+        public Button EnableMercurialSupportButton => OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Enable Mercurial Support"));
+
         #endregion
 
-        #region Methods        
+        #region Methods
+        public Boolean IsMercurialInstalled()
+        {
+            if (EnableMercurialSupportButton.Enabled)
+            {
+                return false;
+            }
+            return true;
+        }
+
         public void UseEmbeddedMercurial()
         {
             if (UseEmbeddedMercurialButton.Enabled)
