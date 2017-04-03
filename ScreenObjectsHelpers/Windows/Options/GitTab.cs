@@ -20,51 +20,22 @@ namespace ScreenObjectsHelpers.Windows.Options
 
 
         #region UI Elements
-        public override UIItem UIElementTab
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<UIItem>(SearchCriteria.ByText("Git"));
-            }
-        }
-        public Button UseEmbededGitButton
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use Embedded Git"));
-            }
-        }
-        public Button UpdateEmbededGit
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Update Embedded Git"));
-            }
-        }
+        public override UIItem UIElementTab => OptionsWindowContainer.Get<UIItem>(SearchCriteria.ByText("Git"));
 
+        public Button UseEmbededGitButton => OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use Embedded Git"));
 
-        private Button SystemGitButton
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use System Git"));
-            }
-        }
+        public Button UpdateEmbededGitButton => OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Update Embedded Git"));
 
-    private Button SystemGitButtonSystemGitButton
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use System Git"));
-            }
-        }
+        private Button SystemGitButton => OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use System Git"));
+
+        private Button SystemGitButtonSystemGitButton => OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Use System Git"));            
 
         #endregion
 
         #region Methods
         public void UseEmbeddedGit()
         {
-            if(UseEmbededGitButton.Enabled)
+            if (UseEmbededGitButton.Enabled)
             {
                 this.ClickOnButton(UseEmbededGitButton);
             }
@@ -89,8 +60,9 @@ namespace ScreenObjectsHelpers.Windows.Options
             return OptionsWindowContainer.HelpText;
         }
 
-        public void UpdateEmbededGitVersion() {
-            this.ClickOnButton(UpdateEmbededGit);
+        public void UpdateEmbededGitVersion()
+        {
+            this.ClickOnButton(UpdateEmbededGitButton);
         }
         #endregion
     }

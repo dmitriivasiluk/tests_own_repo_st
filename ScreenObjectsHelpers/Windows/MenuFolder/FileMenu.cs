@@ -2,6 +2,7 @@
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.MenuItems;
 using TestStack.White.UIItems.WindowItems;
+using ScreenObjectsHelpers.Windows.ToolbarTabs;
 
 namespace ScreenObjectsHelpers.Windows.MenuFolder
 {
@@ -23,10 +24,10 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
             }
         }
 
-        public NewTabWindow OpenCloneNew()
+        public CloneTab OpenCloneNew()
         {
             UIElementMenu.SubMenu(cloneNew).Click();
-            NewTabWindow newTab = new NewTabWindow(MainWindow);
+            CloneTab newTab = new CloneTab(MainWindow);
             return newTab;
         }
 
@@ -40,7 +41,5 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
         {
             UIElementMenu.SubMenu(exitSourceTree).Click();
         }
-
-
     }
 }
