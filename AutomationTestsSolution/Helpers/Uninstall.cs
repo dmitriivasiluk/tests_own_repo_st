@@ -22,7 +22,7 @@ namespace AutomationTestsSolution.Helpers
         public void CompletelyUninstallSourceTree()
         {
             string uninstallCommandSourceTree = GetUninstallCommandFor(NameOfProgram);
-            if (uninstallCommandSourceTree != null && uninstallCommandSourceTree != "")
+            if (!string.IsNullOrEmpty(uninstallCommandSourceTree))
             {
                 ExecuteWindowsCommand(uninstallCommandSourceTree);
                 // Give a time for removing SourceTree
@@ -33,7 +33,8 @@ namespace AutomationTestsSolution.Helpers
             Debug.WriteLine("SourceTree was successfully removed from computer!");
         }
 
-        public void ClearAccountSettings() {
+        public void ClearAccountSettings()
+        {
             string pathToAccontSetting = Environment.ExpandEnvironmentVariables(AcoountJsonPath);
             if (File.Exists(pathToAccontSetting))
             {
@@ -107,7 +108,7 @@ namespace AutomationTestsSolution.Helpers
             pathsForSourceTree.Add(Environment.ExpandEnvironmentVariables(SourceTreePath));
             pathsForSourceTree.Add(Environment.ExpandEnvironmentVariables(SourceTreeBetaPath));
 
-                foreach (string pathToSourceTree in pathsForSourceTree)
+            foreach (string pathToSourceTree in pathsForSourceTree)
             {
                 try
                 {
@@ -177,7 +178,7 @@ namespace AutomationTestsSolution.Helpers
         public bool IsExist()
         {
             string uninstallCommandSourceTree = GetUninstallCommandFor(NameOfProgram);
-            if (uninstallCommandSourceTree != null && uninstallCommandSourceTree != "")
+            if (!string.IsNullOrEmpty(uninstallCommandSourceTree))
             {
                 return true;
             }

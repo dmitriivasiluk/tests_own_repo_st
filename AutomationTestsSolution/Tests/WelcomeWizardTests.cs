@@ -25,14 +25,14 @@ namespace AutomationTestsSolution.Tests
         }
 
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree")]
-        public void ValidRegistrationTest(string loginEmailToAttlassian, string passwordToAttlassian)
+        public void ValidRegistrationTest(string loginEmailToAtlassian, string passwordToAtlassian)
         {
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
-            AuthorizationWindow authorization = installWindow.ClickUseExistingAccount();
+            AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
 
-            installWindow = authorization.SignIn(loginEmailToAttlassian, passwordToAttlassian);
+            installWindow = authentication.SignIn(loginEmailToAtlassian, passwordToAtlassian);
 
             bool isContinueButtonActive = installWindow.IsContinueButtonActive();
             string ActualtextRegistrationComplete = installWindow.CompleteText();
@@ -52,15 +52,15 @@ namespace AutomationTestsSolution.Tests
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
-            AuthorizationWindow authorization = installWindow.ClickUseExistingAccount();
+            AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
 
-            installWindow = authorization.SignIn(atlassianLoginEmail, atlassianPassword);
+            installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
             installWindow.ClickContinueButton();
             installWindow.FillBasicAuthenticationGithub(gitHubLogin, gitHubPassword);
             installWindow.ClickContinueButton();
 
             string actualTitleOfNextStep = installWindow.DownloadingVersionText();
-            // This is ensure that authorization was successful, because we are located on next step "Install tools"
+            // This is ensure that authentication was successful, because we are located on next step "Install tools"
             Assert.AreEqual(actualTitleOfNextStep, "Downloading version control systems..."); 
         }
 
@@ -74,9 +74,9 @@ namespace AutomationTestsSolution.Tests
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
-            AuthorizationWindow authorization = installWindow.ClickUseExistingAccount();
+            AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
 
-            installWindow = authorization.SignIn(atlassianLoginEmail, atlassianPassword);
+            installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
 
             installWindow.ClickContinueButton();
 
@@ -85,7 +85,7 @@ namespace AutomationTestsSolution.Tests
             installWindow.ClickContinueButton();
 
             string actualTitleOfNextStep = installWindow.DownloadingVersionText();
-            // This is ensure that authorization was successful, because we are located on next step "Install tools"
+            // This is ensure that authentication was successful, because we are located on next step "Install tools"
             Assert.AreEqual(actualTitleOfNextStep, "Downloading version control systems...");
         }
 
@@ -100,9 +100,9 @@ namespace AutomationTestsSolution.Tests
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
-            AuthorizationWindow authorization = installWindow.ClickUseExistingAccount();
+            AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
 
-            installWindow = authorization.SignIn(atlassianLoginEmail, atlassianPassword);
+            installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
 
             installWindow.ClickContinueButton();
 
@@ -110,7 +110,7 @@ namespace AutomationTestsSolution.Tests
             installWindow.FillAuthenticationBitBucketServer(hostUrl, bitBucketLogin, bitbucketPassword);
 
             //string actualTitleOfNextStep = installWindow.DownloadingVersionText();
-            // This is ensure that authorization was successful, because we are located on next step "Install tools"
+            // This is ensure that authentication was successful, because we are located on next step "Install tools"
             //Assert.AreEqual(actualTitleOfNextStep, "Downloading version control systems...");
         }
 
@@ -124,9 +124,9 @@ namespace AutomationTestsSolution.Tests
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
-            AuthorizationWindow authorization = installWindow.ClickUseExistingAccount();
+            AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
 
-            installWindow = authorization.SignIn(atlassianLoginEmail, atlassianPassword);
+            installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
 
             installWindow.ClickContinueButton();
 
@@ -151,9 +151,9 @@ namespace AutomationTestsSolution.Tests
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
-            AuthorizationWindow authorization = installWindow.ClickUseExistingAccount();
+            AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
 
-            installWindow = authorization.SignIn(atlassianLoginEmail, atlassianPassword);
+            installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
 
             installWindow.ClickContinueButton();
 
@@ -179,9 +179,9 @@ namespace AutomationTestsSolution.Tests
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
-            AuthorizationWindow authorization = installWindow.ClickUseExistingAccount();
+            AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
 
-            installWindow = authorization.SignIn(atlassianLoginEmail, atlassianPassword);
+            installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
 
             installWindow.ClickContinueButton();
 
@@ -208,9 +208,9 @@ namespace AutomationTestsSolution.Tests
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
-            AuthorizationWindow authorization = installWindow.ClickUseExistingAccount();
+            AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
 
-            installWindow = authorization.SignIn(atlassianLoginEmail, atlassianPassword);
+            installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
 
             installWindow.ClickContinueButton();
 
@@ -221,7 +221,7 @@ namespace AutomationTestsSolution.Tests
             Thread.Sleep(5000); // Wait connection via OAuth
 
             string actualTitleOfNextStep = installWindow.DownloadingVersionText();
-            // This is ensure that authorization was successful, because we are located on next step "Install tools"
+            // This is ensure that authentication was successful, because we are located on next step "Install tools"
             Assert.AreEqual(actualTitleOfNextStep, "Downloading version control systems...");
         }
 
@@ -236,9 +236,9 @@ namespace AutomationTestsSolution.Tests
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
-            AuthorizationWindow authorization = installWindow.ClickUseExistingAccount();
+            AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
 
-            installWindow = authorization.SignIn(atlassianLoginEmail, atlassianPassword);
+            installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
 
             installWindow.ClickContinueButton();
 
@@ -249,7 +249,7 @@ namespace AutomationTestsSolution.Tests
             Thread.Sleep(5000); // Wait connection via OAuth
 
             string actualTitleOfNextStep = installWindow.DownloadingVersionText();
-            // This is ensure that authorization was successful, because we are located on next step "Install tools"
+            // This is ensure that authentication was successful, because we are located on next step "Install tools"
             Assert.AreEqual(actualTitleOfNextStep, "Downloading version control systems...");
         }
 
@@ -262,9 +262,9 @@ namespace AutomationTestsSolution.Tests
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
-            AuthorizationWindow authorization = installWindow.ClickUseExistingAccount();
+            AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
 
-            installWindow = authorization.SignIn(atlassianLoginEmail, atlassianPassword);
+            installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
 
             installWindow.ClickContinueButton();
 
@@ -286,9 +286,9 @@ namespace AutomationTestsSolution.Tests
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
-            AuthorizationWindow authorization = installWindow.ClickUseExistingAccount();
+            AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
             
-            installWindow = authorization.SignIn(atlassianLoginEmail, atlassianPassword);
+            installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
 
             installWindow.ClickContinueButton();
 
@@ -310,7 +310,7 @@ namespace AutomationTestsSolution.Tests
         }
 
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "githubfaketesting", "123GitHubFake", "github-public", @"Documents\CloneBasicGitHub")]
-        public void CloneGitHubRepositoryUsingBasicAuthorizationTest(
+        public void CloneGitHubRepositoryUsingBasicAuthTest(
             string atlassianLoginEmail,
             string atlassianPassword,
             string gitHubLogin,
@@ -325,9 +325,9 @@ namespace AutomationTestsSolution.Tests
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
-            AuthorizationWindow authorization = installWindow.ClickUseExistingAccount();
+            AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
 
-            installWindow = authorization.SignIn(atlassianLoginEmail, atlassianPassword);
+            installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
 
             installWindow.ClickContinueButton();
 
@@ -345,13 +345,13 @@ namespace AutomationTestsSolution.Tests
 
             installWindow.ClickContinueButton();
 
-            bool actialIsRepositoryCloned = WindowsFilesHelper.IsGitRepositoryByPath(pathToNewFolder);
+            bool actualIsRepositoryCloned = WindowsFilesHelper.IsGitRepositoryByPath(pathToNewFolder);
 
-            Assert.IsTrue(actialIsRepositoryCloned);
+            Assert.IsTrue(actualIsRepositoryCloned);
         }
 
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "bitbucketfaketest", "123BitBucketFake", "bitbucket-public", @"Documents\CloneBasicBitBucket")]
-        public void CloneBitBucketRepositoryUsingBasicAuthorizationTest(
+        public void CloneBitBucketRepositoryUsingBasicAuthTest(
             string atlassianLoginEmail,
             string atlassianPassword,
             string bitbucketLogin,
@@ -366,9 +366,9 @@ namespace AutomationTestsSolution.Tests
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
-            AuthorizationWindow authorization = installWindow.ClickUseExistingAccount();
+            AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
 
-            installWindow = authorization.SignIn(atlassianLoginEmail, atlassianPassword);
+            installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
 
             installWindow.ClickContinueButton();
 
@@ -396,7 +396,7 @@ namespace AutomationTestsSolution.Tests
         /// Verify that you have permission to access SourceTreeForWindows by atlassian to GitHub account.
         /// </summary>
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "github-public", @"Documents\CloneOAuthGitHub")]
-        public void CloneGitHubRepositoryUsingOAuthAuthorizationTest(
+        public void CloneGitHubRepositoryUsingOAuthTest(
             string atlassianLoginEmail,
             string atlassianPassword,
             string nameOfRepo,
@@ -409,9 +409,9 @@ namespace AutomationTestsSolution.Tests
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
-            AuthorizationWindow authorization = installWindow.ClickUseExistingAccount();
+            AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
 
-            installWindow = authorization.SignIn(atlassianLoginEmail, atlassianPassword);
+            installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
 
             installWindow.ClickContinueButton();
 
@@ -439,7 +439,7 @@ namespace AutomationTestsSolution.Tests
         /// Verify that you have permission to access SourceTreeForWindows by atlassian to BitBucket account.
         /// </summary>
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "bitbucket-public", @"%USERPROFILE%\Documents\CloneOAuthBitBucket")]
-        public void CloneBitBucketRepositoryUsingOAuthAuthorizationTest(
+        public void CloneBitBucketRepositoryUsingOAuthTest(
             string atlassianLoginEmail,
             string atlassianPassword,
             string nameOfRepo,
@@ -453,9 +453,9 @@ namespace AutomationTestsSolution.Tests
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
-            AuthorizationWindow authorization = installWindow.ClickUseExistingAccount();
+            AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
 
-            installWindow = authorization.SignIn(atlassianLoginEmail, atlassianPassword);
+            installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
 
             installWindow.ClickContinueButton();
 
@@ -480,7 +480,7 @@ namespace AutomationTestsSolution.Tests
         }
 
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "https://Server.com.ua", "incorrectLogin", "incorrectPassword", "bitbucket-public", @"Documents\CloneBasicBitBucketServer")]
-        public void CloneBitBucketServerRepositoryUsingBasicAuthorizationTest(
+        public void CloneBitBucketServerRepositoryUsingBasicAuthTest(
             string atlassianLoginEmail,
             string atlassianPassword,
             string urlServer,
@@ -496,9 +496,9 @@ namespace AutomationTestsSolution.Tests
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
-            AuthorizationWindow authorization = installWindow.ClickUseExistingAccount();
+            AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
 
-            installWindow = authorization.SignIn(atlassianLoginEmail, atlassianPassword);
+            installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
 
             installWindow.ClickContinueButton();
 
@@ -535,9 +535,9 @@ namespace AutomationTestsSolution.Tests
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
-            AuthorizationWindow authorization = installWindow.ClickUseExistingAccount();
+            AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
 
-            installWindow = authorization.SignIn(atlassianLoginEmail, atlassianPassword);
+            installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
 
             installWindow.ClickContinueButton();
 
@@ -576,9 +576,9 @@ namespace AutomationTestsSolution.Tests
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
-            AuthorizationWindow authorization = installWindow.ClickUseExistingAccount();
+            AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
 
-            installWindow = authorization.SignIn(atlassianLoginEmail, atlassianPassword);
+            installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
 
             installWindow.ClickContinueButton();
 

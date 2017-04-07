@@ -55,10 +55,10 @@ namespace ScreenObjectsHelpers.Windows
             ClickOnButton(ContinueButton);
         }
 
-        public AuthorizationWindow ClickUseExistingAccount()
+        public AuthenticationWindow ClickUseExistingAccount()
         {
             ClickOnButton(UseExistingAccount);
-            Window authorizationWindow = Desktop.Instance.Windows().FirstOrDefault(c =>
+            Window authenticationWindow = Desktop.Instance.Windows().FirstOrDefault(c =>
             {
                 var found = false;
                 try
@@ -72,7 +72,7 @@ namespace ScreenObjectsHelpers.Windows
                 }
                 return c.IsModal == false && found;
             }); // Login window is opened without Name (title), so it is best way to find a window.
-            return new AuthorizationWindow(MainWindow, authorizationWindow);
+            return new AuthenticationWindow(MainWindow, authenticationWindow);
         }
 
         public void FillBasicAuthenticationGithub(string userName, string password)

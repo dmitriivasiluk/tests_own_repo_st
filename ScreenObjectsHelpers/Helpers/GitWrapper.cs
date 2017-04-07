@@ -16,7 +16,7 @@ namespace ScreenObjectsHelpers.Helpers
         public string Email { get; set; }
         private readonly Repository _gitRepository;
         private bool _disposed;
-        private Dictionary<string, UsernamePasswordCredentials> _remoteUrlCredentialses = new Dictionary<string, UsernamePasswordCredentials>();
+        private Dictionary<string, UsernamePasswordCredentials> _remoteUrlCredentials = new Dictionary<string, UsernamePasswordCredentials>();
 
         public GitWrapper(string pathToRepository, string usernameCommiter, string email)
         {
@@ -46,8 +46,8 @@ namespace ScreenObjectsHelpers.Helpers
         public void AddRemote(string remoteUrl, string username, string password, string name = "origin")
         {
             _gitRepository.Network.Remotes.Update(name, r => { r.Url = remoteUrl; });
-            var userCredo = new UsernamePasswordCredentials { Username = username, Password = password };
-            _remoteUrlCredentialses.Add(name, userCredo);
+            var userCreds = new UsernamePasswordCredentials { Username = username, Password = password };
+            _remoteUrlCredentials.Add(name, userCreds);
         }
 
         public void StageChanges()
@@ -85,7 +85,7 @@ namespace ScreenObjectsHelpers.Helpers
                 Branch localBranch = _gitRepository.Head;
                 _gitRepository.Branches.Update(localBranch, b => b.Remote = remote.Name, b => b.UpstreamBranch = localBranch.CanonicalName);
                 var options = new PushOptions();
-                options.CredentialsProvider = (url, user, cred) => _remoteUrlCredentialses[remoteName];
+                options.CredentialsProvider = (url, user, cred) => _remoteUrlCredentials[remoteName];
                 _gitRepository.Network.Push(_gitRepository.Branches[branchName], options);
  
             }
@@ -95,22 +95,13 @@ namespace ScreenObjectsHelpers.Helpers
             }
         }
 
-
-        public void Dispose()
-        {
-            if (_disposed) return;
-            _disposed = true;
-            _gitRepository.Dispose();
-        }
-
-
         public void PullChanges(string remoteName = "origin")
         {
             PullOptions options = new PullOptions();
             options.FetchOptions = new FetchOptions();
-            options.FetchOptions.CredentialsProvider = (url, user, cred) => _remoteUrlCredentialses[remoteName];
+            options.FetchOptions.CredentialsProvider = (url, user, cred) => _remoteUrlCredentials[remoteName];
             Commands.Pull(_gitRepository, new Signature(Username, Email, new DateTimeOffset(DateTime.Now)), options);
-            
+
         }
 
         public void AddFileWithRandomText()
@@ -120,5 +111,13 @@ namespace ScreenObjectsHelpers.Helpers
             File.WriteAllText(Path.Combine(_gitRepository.Info.WorkingDirectory, fileName), content);
             Commands.Stage(_gitRepository, fileName);
         }
+
+        public void Dispose()
+        {
+            if (_disposed) return;
+            _disposed = true;
+            _gitRepository.Dispose();
+        }
+
     }
 }
