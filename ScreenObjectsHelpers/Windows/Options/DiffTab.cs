@@ -18,13 +18,8 @@ namespace ScreenObjectsHelpers.Windows.Options
         }
 
         #region UIElements
-        public override UIItem UIElementTab
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<UIItem>(SearchCriteria.ByText("Diff"));
-            }
-        }
+        public override UIItem UIElementTab => OptionsWindowContainer.Get<UIItem>(SearchCriteria.ByText("Diff"));
+            
         #endregion
     }
 }

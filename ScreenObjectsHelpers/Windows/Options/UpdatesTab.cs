@@ -19,20 +19,10 @@ namespace ScreenObjectsHelpers.Windows.Options
         }
 
         #region UIElements
-        public override UIItem UIElementTab
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<UIItem>(SearchCriteria.ByText("Updates"));
-            }
-        }
-        public Button CheckForUpdatesButton
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Check For Updates"));
-            }
-        }
+        public override UIItem UIElementTab => OptionsWindowContainer.Get<UIItem>(SearchCriteria.ByText("Updates"));
+            
+        public Button CheckForUpdatesButton => OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("Check For Updates"));
+            
         #endregion
 
         #region Methods        

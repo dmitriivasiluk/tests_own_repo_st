@@ -11,7 +11,7 @@ namespace ScreenObjectsHelpers.Windows
         private UIItemContainer proxyAuthenticationWindow;
         private UIItemContainer networkTab;
 
-        public ProxyAuthenticationWindow(Window mainWindow, UIItemContainer networkTab, UIItemContainer proxyAuthenticationWindow) 
+        public ProxyAuthenticationWindow(Window mainWindow, UIItemContainer networkTab, UIItemContainer proxyAuthenticationWindow)
             : base(mainWindow)
         {
             this.proxyAuthenticationWindow = proxyAuthenticationWindow;
@@ -25,42 +25,27 @@ namespace ScreenObjectsHelpers.Windows
         }
 
         #region UIElements
-        public TextBox UsernameField
-        {
-            get
-            {
-                return proxyAuthenticationWindow.Get<TextBox>(SearchCriteria.ByAutomationId("Username"));
-            }
-        }
+        public TextBox UsernameTextBox => proxyAuthenticationWindow.Get<TextBox>(SearchCriteria.ByAutomationId("Username"));
 
-        public TextBox PasswordField
-        {
-            get
-            {
-                return proxyAuthenticationWindow.Get<TextBox>(SearchCriteria.ByAutomationId("Password"));
-            }
-        }
+        public TextBox PasswordTextBox => proxyAuthenticationWindow.Get<TextBox>(SearchCriteria.ByAutomationId("Password"));
 
-        public CheckBox RememberPassword
-        {
-            get
-            {
-                return proxyAuthenticationWindow.Get<CheckBox>(SearchCriteria.ByAutomationId("RememberPassword"));
-            }
-        }
+        public CheckBox RememberPasswordCheckBox => proxyAuthenticationWindow.Get<CheckBox>(SearchCriteria.ByAutomationId("RememberPassword"));
 
-        public Button Login
-        {
-            get
-            {
-                return proxyAuthenticationWindow.Get<Button>(SearchCriteria.ByAutomationId("LoginButton"));
-            }
-        }
+        public Button LoginButton => proxyAuthenticationWindow.Get<Button>(SearchCriteria.ByAutomationId("LoginButton"));
+
+        public Button CancelButton => proxyAuthenticationWindow.Get<Button>(SearchCriteria.ByAutomationId("CancelButton"));
         #endregion
 
         #region Methods
-        public NetworkTab LoginClick() {
-            Login.Click();
+        public NetworkTab LoginClick()
+        {
+            LoginButton.Click();
+            return new NetworkTab(MainWindow, networkTab);
+        }
+
+        public NetworkTab CancelClick()
+        {
+            CancelButton.Click();
             return new NetworkTab(MainWindow, networkTab);
         }
         #endregion

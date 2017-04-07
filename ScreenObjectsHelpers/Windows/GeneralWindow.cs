@@ -1,7 +1,8 @@
-﻿using ScreenObjectsHelpers.Windows.MenuFolder;
-using System;
+﻿using System;
+using TestStack.White.UIItems;
+using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.WindowItems;
-
+using ScreenObjectsHelpers.Windows.MenuFolder;
 
 namespace ScreenObjectsHelpers.Windows
 {
@@ -22,6 +23,7 @@ namespace ScreenObjectsHelpers.Windows
         {
             return (T)Activator.CreateInstance(typeof(T), MainWindow);
         }
+        public Button NewTabButton => MainWindow.Get<Button>(SearchCriteria.ByAutomationId("DefaultAddButton"));
 
     }
 }

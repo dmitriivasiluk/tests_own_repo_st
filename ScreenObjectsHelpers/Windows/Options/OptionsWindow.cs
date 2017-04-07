@@ -11,7 +11,7 @@ namespace ScreenObjectsHelpers.Windows.Options
         public OptionsWindow(Window mainWindow, UIItemContainer optionsWindow) : base(mainWindow)
         {
             OptionsWindowContainer = optionsWindow;
-            ClickOnTab();
+            SwitchTab();
         }
 
         #region UIElements
@@ -25,13 +25,8 @@ namespace ScreenObjectsHelpers.Windows.Options
             get;
         }
 
-        private Button OK
-        {
-            get
-            {
-                return OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("OK"));
-            }
-        }
+        private Button OkButton => OptionsWindowContainer.Get<Button>(SearchCriteria.ByText("OK"));
+            
         #endregion
 
         #region Methods
@@ -40,16 +35,15 @@ namespace ScreenObjectsHelpers.Windows.Options
             return (T)Activator.CreateInstance(typeof(T), MainWindow, OptionsWindowContainer);
         }
 
-        public virtual void ClickOnTab()
+        public virtual void SwitchTab()
         {
             UIElementTab.Click();
         }
 
         public void ClickOkButton()
         {
-            this.OK.Click();
+            this.OkButton.Click();
         }
         #endregion
-
     }
 }
