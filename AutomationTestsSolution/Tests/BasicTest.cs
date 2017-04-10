@@ -74,7 +74,7 @@ namespace AutomationTestsSolution.Tests
             }
         }
 
-        private void RestoreFile(string fileName)
+        protected void RestoreFile(string fileName)
         {
             if (File.Exists(fileName))
             {
@@ -99,7 +99,8 @@ namespace AutomationTestsSolution.Tests
 
         private string FindSourceTreeData()
         {
-            return Environment.ExpandEnvironmentVariables(@"%localappdata%\Atlassian\SourceTreeBeta");
+            //return Environment.ExpandEnvironmentVariables(@"%localappdata%\Atlassian\SourceTreeBeta");
+            return Environment.ExpandEnvironmentVariables(@"%localappdata%\Atlassian\SourceTree");
         }
       
         private string FindSourceTreeUserConfig(string version)
@@ -149,8 +150,8 @@ namespace AutomationTestsSolution.Tests
             var sourceTreeType =  string.IsNullOrWhiteSpace(sourceTreeTypeEnvVar) ? string.Empty : sourceTreeTypeEnvVar;
 
             var sourceTreeInstallParentDir =
-                Environment.ExpandEnvironmentVariables(@"%localappdata%\SourceTreeBeta" + sourceTreeType);
-
+                //Environment.ExpandEnvironmentVariables(@"%localappdata%\SourceTreeBeta" + sourceTreeType);
+                Environment.ExpandEnvironmentVariables(@"%localappdata%\SourceTree" + sourceTreeType);
             // TODO find SourceTree
             // assumption that it is a squirrel install.
             string[] sourceTreeAppDirs = Directory.GetDirectories(sourceTreeInstallParentDir, "app-*",
