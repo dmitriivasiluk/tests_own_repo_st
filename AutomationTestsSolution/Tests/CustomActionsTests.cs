@@ -2,6 +2,7 @@
 using ScreenObjectsHelpers.Windows;
 using ScreenObjectsHelpers.Windows.Options;
 using ScreenObjectsHelpers.Windows.MenuFolder;
+using ScreenObjectsHelpers.Windows.ToolbarTabs;
 using System.IO;
 using System;
 
@@ -23,7 +24,7 @@ namespace AutomationTestsSolution.Tests
         public void AddCustomAction()
         {
             const string testData = "test1";
-            NewTabWindow mainWindow = new NewTabWindow(MainWindow);
+            LocalTab mainWindow = new LocalTab(MainWindow);
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             CustomActionsTab customActionsTab = optionsWindows.OpenTab<CustomActionsTab>();
 
@@ -43,7 +44,7 @@ namespace AutomationTestsSolution.Tests
         {
             const string newMenuCaption = "editedCustomAction";
 
-            NewTabWindow mainWindow = new NewTabWindow(MainWindow);
+            LocalTab mainWindow = new LocalTab(MainWindow);
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             CustomActionsTab customActionsTab = optionsWindows.OpenTab<CustomActionsTab>();
 
@@ -64,7 +65,7 @@ namespace AutomationTestsSolution.Tests
         {
             const string customActionToBeDeleted = "customActionToBeEdited";
 
-            NewTabWindow mainWindow = new NewTabWindow(MainWindow);
+            LocalTab mainWindow = new LocalTab(MainWindow);
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             CustomActionsTab customActionsTab = optionsWindows.OpenTab<CustomActionsTab>();
 

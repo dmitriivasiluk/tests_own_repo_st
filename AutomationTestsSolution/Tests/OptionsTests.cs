@@ -44,7 +44,6 @@ namespace AutomationTestsSolution.Tests
             gitTab.ClickOkButton();
         }
 
-
         [Test]
         public void UpdateEmbededGit()
         {
