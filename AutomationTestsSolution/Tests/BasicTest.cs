@@ -29,12 +29,12 @@ namespace AutomationTestsSolution.Tests
             var exeAndVersion = FindSourceTree();
             sourceTreeExePath = exeAndVersion.Item1;
             sourceTreeVersion = exeAndVersion.Item2;
-            sourceTreeUserConfigPath = FindSourceTreeUserConfig(sourceTreeVersion);
+            //sourceTreeUserConfigPath = FindSourceTreeUserConfig(sourceTreeVersion);
             
             sourceTreeDataPath = FindSourceTreeData();
 
             SetUserConfig(sourceTreeUserConfigPath);
-            SetData(sourceTreeDataPath);
+            //SetData(sourceTreeDataPath);
 
             RunSourceTree(sourceTreeExePath);
 
