@@ -34,7 +34,6 @@ namespace ScreenObjectsHelpers.Windows.Options
         public Button DeleteCustomActionButton => customActionsTab.Get<Button>(SearchCriteria.ByText("Delete"));
         public ListView AllCustomActions => customActionsTab.Get<ListView>(SearchCriteria.ByClassName("ListView"));
         public ListViewRow FirstCustomAction => customActionsTab.Get<ListViewRow>(SearchCriteria.ByClassName("ListViewItem"));
-
         #endregion
 
         #region Methods 
