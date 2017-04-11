@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows;
 using ScreenObjectsHelpers.Windows.Options;
 using ScreenObjectsHelpers.Windows.MenuFolder;
@@ -23,54 +24,49 @@ namespace AutomationTestsSolution.Tests
         [Test]
         public void AddCustomAction()
         {
-            const string testData = "test1";
             LocalTab mainWindow = new LocalTab(MainWindow);
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             CustomActionsTab customActionsTab = optionsWindows.OpenTab<CustomActionsTab>();
 
-            var isMenuCaptionExistsBeforeTest = customActionsTab.IsMenuCaptionExists(testData);
+            var isMenuCaptionExistsBeforeTest = customActionsTab.IsMenuCaptionExists(ConstantsList.addCustomActionName);
             var editCustomActionWindow = customActionsTab.ClickAddCustomActionButton();
 
-            editCustomActionWindow.SetMenuCaption(testData);
-            editCustomActionWindow.SetScriptToRun(testData);
+            editCustomActionWindow.SetMenuCaption(ConstantsList.addCustomActionName);
+            editCustomActionWindow.SetScriptToRun(ConstantsList.addCustomActionName);
             editCustomActionWindow.ClickOnOKButton();
 
             Assert.IsFalse(isMenuCaptionExistsBeforeTest);
-            Assert.IsTrue(customActionsTab.IsMenuCaptionExists(testData));
+            Assert.IsTrue(customActionsTab.IsMenuCaptionExists(ConstantsList.addCustomActionName));
         }
 
         [Test]
         public void EditCustomAction()
         {
-            const string newMenuCaption = "editedCustomAction";
-
             LocalTab mainWindow = new LocalTab(MainWindow);
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             CustomActionsTab customActionsTab = optionsWindows.OpenTab<CustomActionsTab>();
 
             var isEditCustomActionButtonEnabled = customActionsTab.IsEditCustomActionButtonEnabled();
-            var isMenuCaptionExistsBeforeTest = customActionsTab.IsMenuCaptionExists(newMenuCaption);
+            var isMenuCaptionExistsBeforeTest = customActionsTab.IsMenuCaptionExists(ConstantsList.editedCustomActionName);
             var editCustomActionWindow = customActionsTab.ClickEditCustomActionButton();
 
-            editCustomActionWindow.SetMenuCaption(newMenuCaption);
+            editCustomActionWindow.SetMenuCaption(ConstantsList.editedCustomActionName);
             editCustomActionWindow.ClickOnOKButton();
 
             Assert.IsFalse(isEditCustomActionButtonEnabled);
             Assert.IsFalse(isMenuCaptionExistsBeforeTest);
-            Assert.IsTrue(customActionsTab.IsMenuCaptionExists(newMenuCaption));
+            Assert.IsTrue(customActionsTab.IsMenuCaptionExists(ConstantsList.editedCustomActionName));
         }
 
         [Test]
         public void DeleteCustomAction()
         {
-            const string customActionToBeDeleted = "customActionToBeEdited";
-
             LocalTab mainWindow = new LocalTab(MainWindow);
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             CustomActionsTab customActionsTab = optionsWindows.OpenTab<CustomActionsTab>();
 
             var isDeleteCustomActionButtonEnabled = customActionsTab.IsDeleteCustomActionButtonEnabled();
-            var isMenuCaptionExistsBeforeTest = customActionsTab.IsMenuCaptionExists(customActionToBeDeleted);
+            var isMenuCaptionExistsBeforeTest = customActionsTab.IsMenuCaptionExists(ConstantsList.customActionToBeDeleted);
 
             customActionsTab.ClickDeleteCustomActionButton();
 
@@ -78,7 +74,7 @@ namespace AutomationTestsSolution.Tests
 
             confirmDeletionWindow.ClickOkButton();
 
-            var isMenuCaptionExistsAfterTest = customActionsTab.IsMenuCaptionExists(customActionToBeDeleted);
+            var isMenuCaptionExistsAfterTest = customActionsTab.IsMenuCaptionExists(ConstantsList.customActionToBeDeleted);
 
             Assert.IsFalse(isDeleteCustomActionButtonEnabled);
             Assert.IsTrue(isMenuCaptionExistsBeforeTest);
