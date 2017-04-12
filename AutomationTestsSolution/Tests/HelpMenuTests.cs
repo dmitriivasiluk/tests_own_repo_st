@@ -11,7 +11,7 @@ namespace AutomationTestsSolution.Tests
     {
 
         [Test]
-        public void AboutWindowPresenceTest()
+        public void AboutWindowTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
             AboutWindow aboutWindow = mainWindow.OpenMenu<HelpMenu>().OpenAbout();

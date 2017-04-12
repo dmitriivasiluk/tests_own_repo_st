@@ -33,7 +33,7 @@ namespace AutomationTestsSolution.Tests
 
             editCustomActionWindow.SetMenuCaption(ConstantsList.addCustomActionName);
             editCustomActionWindow.SetScriptToRun(ConstantsList.addCustomActionName);
-            editCustomActionWindow.ClickOnOKButton();
+            editCustomActionWindow.ClickOKButton();
 
             Assert.IsFalse(isMenuCaptionExistsBeforeTest);
             Assert.IsTrue(customActionsTab.IsMenuCaptionExists(ConstantsList.addCustomActionName));
@@ -51,7 +51,7 @@ namespace AutomationTestsSolution.Tests
             var editCustomActionWindow = customActionsTab.ClickEditCustomActionButton();
 
             editCustomActionWindow.SetMenuCaption(ConstantsList.editedCustomActionName);
-            editCustomActionWindow.ClickOnOKButton();
+            editCustomActionWindow.ClickOKButton();
 
             Assert.IsFalse(isEditCustomActionButtonEnabled);
             Assert.IsFalse(isMenuCaptionExistsBeforeTest);

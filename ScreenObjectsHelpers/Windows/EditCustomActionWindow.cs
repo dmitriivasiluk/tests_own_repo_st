@@ -27,20 +27,8 @@ namespace ScreenObjectsHelpers.Windows
 
         #region UIItems
         public TextBox MenuCaption => customActionsWindow.Get<TextBox>(SearchCriteria.ByAutomationId("CaptionBox"));
-        public CheckBox OpenInASeparateWindow
-        {
-            get
-            {
-                return customActionsWindow.Get<CheckBox>(SearchCriteria.ByText("Open in a separate window"));
-            }
-        }
-        public CheckBox ShowFullOutput
-        {
-            get
-            {
-                return customActionsWindow.Get<CheckBox>(SearchCriteria.ByText("Show Full Output"));
-            }
-        }
+        public CheckBox OpenInASeparateWindow => customActionsWindow.Get<CheckBox>(SearchCriteria.ByText("Open in a separate window"));
+        public CheckBox ShowFullOutput => customActionsWindow.Get<CheckBox>(SearchCriteria.ByText("Show Full Output"));
         public TextBox ScriptToRun => customActionsWindow.Get<TextBox>(SearchCriteria.ByClassName("TextBox").AndIndex(1));
         public TextBox Parameters => customActionsWindow.Get<TextBox>(SearchCriteria.ByClassName("TextBox").AndIndex(2));
         
@@ -62,7 +50,7 @@ namespace ScreenObjectsHelpers.Windows
             Parameters.Text = parameters;
         }
 
-        public CustomActionsTab ClickOnOKButton()
+        public CustomActionsTab ClickOKButton()
         {
             OkButton.Click();
             return new CustomActionsTab(MainWindow, customActionsTab);
