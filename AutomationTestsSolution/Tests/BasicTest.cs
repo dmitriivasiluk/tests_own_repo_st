@@ -138,6 +138,9 @@ namespace AutomationTestsSolution.Tests
             psi.RedirectStandardOutput = true;
             psi.RedirectStandardError = true;
             psi.UseShellExecute = false;
+            var path = Environment.ExpandEnvironmentVariables(@"%localappdata%\EmptyDirectoryForAutomation");
+            Directory.CreateDirectory(path);
+            psi.WorkingDirectory = path;
             sourceTreeProcess = new Process();
             sourceTreeProcess.StartInfo = psi;
 
