@@ -44,7 +44,7 @@ namespace ScreenObjectsHelpers.Windows.Options
         public CheckBox HelpImproveSendDataUsageCheckBox => generalTab.Get<CheckBox>(SearchCriteria.ByText("Help improve SourceTree by sending data about your usage"));
         #endregion
 
-        // Automation IDs required
+        // AutomationID_required
         /*
         #region TextBoxes
         public TextBox FullNameTextBox => generalTab.Get<TextBox>(SearchCriteria.ByAutomationId(""));

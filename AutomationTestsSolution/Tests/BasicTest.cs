@@ -118,8 +118,8 @@ namespace AutomationTestsSolution.Tests
             var folder = userConfigDirectories.Last(d => !d.Contains("vshost"));
             return Path.Combine(folder, "user.config");
         }
-       
-        private void AttachToSourceTree()
+
+        protected void AttachToSourceTree()
         {
             MainWindow = null;
             int testCount = 0;

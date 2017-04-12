@@ -26,7 +26,7 @@ namespace ScreenObjectsHelpers.Windows.Options
 
         public RadioButton UseCustomProxyRadioButton => networkTab.Get<RadioButton>(SearchCriteria.ByText("Use custom proxy settings"));
 
-        // Automation IDs required
+        // AutomationID_required
         /*
         public TextBox ServerTextBox => networkTab.Get<TextBox>(SearchCriteria.ByAutomationId(""));            
 

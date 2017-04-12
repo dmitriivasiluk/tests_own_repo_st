@@ -126,7 +126,21 @@ namespace ScreenObjectsHelpers.Windows
             }
         }
 
+        public void CheckCheckbox(CheckBox checkbox)
+        {
+            if (!checkbox.Checked)
+            {
+                checkbox.Toggle();
+            }
+        }
 
+        public void UncheckCheckbox(CheckBox checkbox)
+        {
+            if (checkbox.Checked)
+            {
+                checkbox.Toggle();
+            }
+        }
     }
 
 }
