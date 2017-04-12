@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows;
 using ScreenObjectsHelpers.Windows.MenuFolder;
 using ScreenObjectsHelpers.Windows.Options;
@@ -10,7 +11,7 @@ namespace AutomationTestsSolution.Tests
     {
 
         [Test]
-        public void AboutWindowPresenceTest()
+        public void AboutWindowTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
             AboutWindow aboutWindow = mainWindow.OpenMenu<HelpMenu>().OpenAbout();
@@ -18,9 +19,9 @@ namespace AutomationTestsSolution.Tests
             string aboutWindowHeader = aboutWindow.GetHeader();
             string copyrightCaption = aboutWindow.GetCopyrightCaption();
             string appVersion = aboutWindow.GetAppVersion();
-            Assert.AreEqual(aboutWindowHeader, "About SourceTree");
-            Assert.AreEqual(copyrightCaption, "Copyright Atlassian 2012-2017. All Rights Reserved.");
-            Assert.AreEqual(appVersion, "Version 2.0.15.1");
+            Assert.AreEqual(aboutWindowHeader, ConstantsList.aboutWindowHeader);
+            Assert.AreEqual(copyrightCaption, ConstantsList.copyrightCaption);
+            Assert.AreEqual(appVersion, ConstantsList.appVersion);
         }
     }
 }
