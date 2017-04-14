@@ -83,6 +83,7 @@
     <Compile Include="Tests\BasicTestInstallation.cs" />
     <Compile Include="Tests\HelpMenuTests.cs" />
     <Compile Include="Tests\CustomActionsTests.cs" />
+    <Compile Include="Tests\ToolbarTabsCloneTests.cs" />
     <Compile Include="Tests\WelcomeWizardTests.cs" />
     <Compile Include="Tests\OptionsTests.cs" />
   </ItemGroup>
