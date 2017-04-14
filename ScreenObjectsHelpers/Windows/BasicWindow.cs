@@ -1,5 +1,5 @@
-﻿using System;
-using System.Threading;
+﻿using ScreenObjectsHelpers.Helpers;
+using System;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.WindowItems;
@@ -45,7 +45,7 @@ namespace ScreenObjectsHelpers.Windows
             UIItemContainer container = MainWindow.MdiChild(searchCriteria);
             while (container == null)
             {
-                ThreadWait(1000);
+                Utils.ThreadWait(1000);
                 secondsPass++;
                 container = MainWindow.MdiChild(searchCriteria);
                 if (secondsPass > secondsForWait)
@@ -74,19 +74,7 @@ namespace ScreenObjectsHelpers.Windows
                 }
                 if (isItemVisible) return item;
                 secondPassed += secondToWaitEachLoop;
-                ThreadWait(secondToWaitEachLoop * 5000); // convert in milliseconds 
-            }
-        }
-
-        protected void ThreadWait(int timeInMilliseconds)
-        {
-            try
-            {
-                Thread.Sleep(timeInMilliseconds); 
-            }
-            catch (ThreadInterruptedException)
-            {
-                Thread.CurrentThread.Interrupt();
+                Utils.ThreadWait(secondToWaitEachLoop * 5000); // convert in milliseconds 
             }
         }
 

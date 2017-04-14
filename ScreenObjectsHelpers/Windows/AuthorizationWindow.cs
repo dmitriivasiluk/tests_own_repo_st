@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScreenObjectsHelpers.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,15 +41,15 @@ namespace ScreenObjectsHelpers.Windows
         {
             // It is workaround method, because I can't catch TextEdit fields from authorization window. Need time to resolve this issue
             // Need to reimplement in future. 
-            ThreadWait(1000);
+            Utils.ThreadWait(1000);
             Keyboard.Instance.Enter(loginEmail);
             ClickOnButton(NextButton);
-            ThreadWait(1000);
+            Utils.ThreadWait(1000);
             Keyboard.Instance.Enter(password);
             ClickOnButton(NextButton);
-            ThreadWait(1000);
+            Utils.ThreadWait(1000);
             Keyboard.Instance.PressSpecialKey(SpecialKeys.RETURN);
-            ThreadWait(8000);
+            Utils.ThreadWait(8000);
             return new InstallationWindow(MainWindow);
         }
         #endregion

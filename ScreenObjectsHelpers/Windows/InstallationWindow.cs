@@ -6,6 +6,7 @@ using TestStack.White.UIItems.WindowItems;
 using TestStack.White;
 using System.Windows.Automation;
 using TestStack.White.UIItems.ListBoxItems;
+using ScreenObjectsHelpers.Helpers;
 
 namespace ScreenObjectsHelpers.Windows
 {
@@ -117,7 +118,7 @@ namespace ScreenObjectsHelpers.Windows
             var secondPass = 0;
             while (currentProcent < InstallTollsProgressBar.Maximum)
             {
-                ThreadWait(1000);
+                Utils.ThreadWait(1000);
                 secondPass++;
                 currentProcent = InstallTollsProgressBar.Value;
                 if (secondPass > 180) // pass 3 minutes

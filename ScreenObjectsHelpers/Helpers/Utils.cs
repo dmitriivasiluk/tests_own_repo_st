@@ -26,17 +26,26 @@ namespace ScreenObjectsHelpers.Helpers
 
         public static void RemoveFile(string path)
         {
-            if (File.Exists(path))
+            try
             {
                 File.Delete(path);
             }
+            catch (IOException e)
+            {
+                Console.WriteLine(e.Message);                
+            }
+
         }
 
         public static void RemoveDirectory(string path)
         {
-            if (Directory.Exists(path))
+            try
             {
                 Directory.Delete(path, true);
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
     }
