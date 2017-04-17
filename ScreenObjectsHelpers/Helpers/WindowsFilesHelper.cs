@@ -11,7 +11,7 @@ namespace ScreenObjectsHelpers.Helpers
     {
         public static void CreateFolderByPath(string path)
         {
-            DirectoryInfo di = Directory.CreateDirectory(path);
+            Directory.CreateDirectory(path);
         }
 
         public static void RemoveFolderRecursivelyByPath(string path)
@@ -30,8 +30,8 @@ namespace ScreenObjectsHelpers.Helpers
         public static bool IsGitRepositoryByPath(string path)
         {
             const string defaultGitFolder = ".git";
-            string pathToDefaultGitFolderInRepository = path + "\\" + defaultGitFolder;
-            return Directory.Exists(pathToDefaultGitFolderInRepository);
+            string pathToNewFolder = Path.Combine(path, defaultGitFolder);
+            return Directory.Exists(pathToNewFolder);
         }
     }
 }
