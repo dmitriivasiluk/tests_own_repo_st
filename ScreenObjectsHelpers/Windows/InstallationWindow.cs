@@ -195,14 +195,27 @@ namespace ScreenObjectsHelpers.Windows
             return new ErrorDialogWindow(this, errorDialog);
         }
 
-        public LocalTab SkipSetup()
+        public SSHKey SkipSetup()
         {
             ClickOnButton(SkipSetupButton);
-            Window mainWindow = Utils.FindNewWindow("SourceTree");
-            return new LocalTab(mainWindow);
+            Window sshkeyWindow = Desktop.Instance.Windows().FirstOrDefault(c =>
+            {
+                var found = false;
+                try
+                {
+                    var item = c.Get<Button>(SearchCriteria.ByText("Yes"));
+                    found = true;
+                }
+                catch (Exception)
+                {
+                    // ignored
+                }
+                return c.IsModal == false && found;
+            }); // Login window is opened without Name (title), so it is best way to find a window.
+            return new SSHKey(sshkeyWindow);
         }
 
-        public LocalTab ClickContinueAtTheLatestStepButton()
+        public SSHKey ClickContinueAtTheLatestStepButton()
         {
             try
             {
@@ -212,8 +225,21 @@ namespace ScreenObjectsHelpers.Windows
             {
                 // Empty, expect that Configuration window is closed (the latest step in configuration, clone) and SourceTree is opened 
             }
-            Window sourceTreeWindow = Utils.FindNewWindow("SourceTree");
-            return new LocalTab(sourceTreeWindow);
+            Window sshkeyWindow = Desktop.Instance.Windows().FirstOrDefault(c =>
+            {
+                var found = false;
+                try
+                {
+                    var item = c.Get<Button>(SearchCriteria.ByText("Yes"));
+                    found = true;
+                }
+                catch (Exception)
+                {
+                    // ignored
+                }
+                return c.IsModal == false && found;
+            }); // Login window is opened without Name (title), so it is best way to find a window.
+            return new SSHKey(sshkeyWindow);
         }
 
         public IgnoreFileDialogWindow GetInstallGlobalIgnoreFileDialogWindow()
@@ -277,6 +303,25 @@ namespace ScreenObjectsHelpers.Windows
             return RepoListView.Items.Count > 0 ? RepoListView.Items[0] : ""; // should we throw some Exception here or can we return just nothing, empty string?
         }
         #endregion
+    }
+
+    public class SSHKey
+    {
+        private Window sshkeyWindow;
+
+        public SSHKey(Window sshkeyWindow)
+        {
+            this.sshkeyWindow = sshkeyWindow;
+        }
+
+        public Button YesButton => sshkeyWindow.Get<Button>(SearchCriteria.ByText("Yes"));
+
+        public LocalTab clickNoButton()
+        {
+            YesButton.Click();
+            Window sourceTreeWindow = Utils.FindNewWindow("SourceTree");
+            return new LocalTab(sourceTreeWindow);
+        }
     }
 
     public class BrowseDestinationPath

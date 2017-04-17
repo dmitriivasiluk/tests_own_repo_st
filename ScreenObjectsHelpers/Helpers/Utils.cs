@@ -16,16 +16,14 @@ namespace ScreenObjectsHelpers.Helpers
     public class Utils
     {
 
-        public static Window FindNewWindow(string nameOfWindow)
+        public static Window FindNewWindow(string nameOfWindow, int testCount = 30)
         {
             Window window = Desktop.Instance.Windows().FirstOrDefault(x => x.Name == nameOfWindow);
-            int testCount = 0;
             while (window == null && testCount < 30)
             {
                 try
                 {
                     window = Desktop.Instance.Windows().FirstOrDefault(x => x.Name == nameOfWindow);
-
                 }
                 catch (ElementNotAvailableException e)
                 {

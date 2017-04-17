@@ -35,7 +35,7 @@ namespace AutomationTestsSolution.Tests
         private void AttachToSourceTreeInstallation()
         {
             MainWindow = null;
-            int testCount = 0;
+            Utils.ThreadWait(8000); // time for unzip some packages before configuration
             MainWindow = Utils.FindNewWindow("Welcome");
         }
 

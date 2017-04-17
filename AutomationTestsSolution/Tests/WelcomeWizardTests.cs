@@ -6,11 +6,20 @@ using System.Threading;
 using NUnit.Framework;
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows;
-
+using ScreenObjectsHelpers.Windows.ToolbarTabs;
 
 namespace AutomationTestsSolution.Tests
 {
-    // Verify that Mercurial and Git are installed on computer before run tests. Also check OAuth access to GitHub and BitBucket accounts.
+    /// <summary>
+    /// REQUIRMENTS TO RUN THIS TESTS:
+    /// 1. Git is installed on computer
+    /// 2. Mercurial is installed on computer
+    /// 3. OAuth access to GitHub using credentials from tests
+    /// 4. OAuth access to BitBucket using credentials from tests
+    /// 5. Browser's autocomplete pop-up is disabled (Save password using IE in Authorization window to Atlassian)
+    /// 6. Putty agent doesn't have any ssh keys
+    /// 7. There are global ignore files (Git/Mercurial) on computers
+    /// </summary>
     class WelcomeWizardTests : BasicTestInstallation
     {
        
@@ -268,7 +277,8 @@ namespace AutomationTestsSolution.Tests
 
             installWindow.ClickContinueButton();
 
-            NewTabWindow mainWindow = installWindow.SkipSetup();
+            SSHKey sshWindow = installWindow.SkipSetup();
+            LocalTab mainWindow = sshWindow.clickNoButton();
 
             string actualTitle = mainWindow.GetTitle();
 
@@ -596,8 +606,9 @@ namespace AutomationTestsSolution.Tests
 
             installWindow.ClickContinueButton();
 
-            NewTabWindow mainWindow = installWindow.ClickContinueAtTheLatestStepButton();
-
+            SSHKey key = installWindow.ClickContinueAtTheLatestStepButton();
+            LocalTab mainWindow = key.clickNoButton();
+            
             string actualTitle = mainWindow.GetTitle();
 
             Assert.AreEqual(actualTitle, "SourceTree");
