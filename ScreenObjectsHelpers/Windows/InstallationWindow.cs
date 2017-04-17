@@ -9,6 +9,7 @@ using TestStack.White;
 using System.Windows.Automation;
 using TestStack.White.UIItems.ListBoxItems;
 using ScreenObjectsHelpers.Helpers;
+using ScreenObjectsHelpers.Windows.ToolbarTabs;
 
 namespace ScreenObjectsHelpers.Windows
 {
@@ -194,14 +195,14 @@ namespace ScreenObjectsHelpers.Windows
             return new ErrorDialogWindow(this, errorDialog);
         }
 
-        public NewTabWindow SkipSetup()
+        public LocalTab SkipSetup()
         {
             ClickOnButton(SkipSetupButton);
             Window mainWindow = Utils.FindNewWindow("SourceTree");
-            return new NewTabWindow(mainWindow);
+            return new LocalTab(mainWindow);
         }
 
-        public NewTabWindow ClickContinueAtTheLatestStepButton()
+        public LocalTab ClickContinueAtTheLatestStepButton()
         {
             try
             {
@@ -212,7 +213,7 @@ namespace ScreenObjectsHelpers.Windows
                 // Empty, expect that Configuration window is closed (the latest step in configuration, clone) and SourceTree is opened 
             }
             Window sourceTreeWindow = Utils.FindNewWindow("SourceTree");
-            return new NewTabWindow(sourceTreeWindow);
+            return new LocalTab(sourceTreeWindow);
         }
 
         public IgnoreFileDialogWindow GetInstallGlobalIgnoreFileDialogWindow()
@@ -243,7 +244,7 @@ namespace ScreenObjectsHelpers.Windows
             int secondToWait = 20;
             while (repositories.Count == 0 && countLoop < secondToWait)
             {
-                ThreadWait(1000);
+                Utils.ThreadWait(1000);
                 countLoop++;
                 repositories = RepoListView.Items;
             }
