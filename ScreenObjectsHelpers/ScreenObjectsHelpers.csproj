@@ -97,11 +97,15 @@
     <Compile Include="Helpers\ScreenshotsTaker.cs" />
     <Compile Include="Helpers\Utils.cs" />
     <Compile Include="Helpers\WindowsFilesHelper.cs" />
+    <Compile Include="Helpers\ConstantsList.cs" />
+    <Compile Include="Helpers\ScreenshotsTaker.cs" />
+    <Compile Include="Helpers\Utils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Windows\AuthenticationWindow.cs" />
     <Compile Include="Windows\DownloadHgWindow.cs" />
     <Compile Include="Windows\AboutWindow.cs" />
     <Compile Include="Windows\BasicWindow.cs" />
+    <Compile Include="Windows\EditCustomActionWindow.cs" />
     <Compile Include="Windows\InstallationWindow.cs" />
     <Compile Include="Windows\MenuFolder\ActionMenu\ActionsMenu.cs" />
     <Compile Include="Windows\MenuFolder\ActionMenu\ResolveConflict.cs" />
@@ -112,7 +116,7 @@
     <Compile Include="Windows\MenuFolder\FileMenu.cs" />
     <Compile Include="Windows\MenuFolder\MenuBar.cs" />
     <Compile Include="Windows\NewTabWindow.cs" />
-    <Compile Include="Windows\Options\CustomActions.cs" />
+    <Compile Include="Windows\Options\CustomActionsTab.cs" />
     <Compile Include="Windows\Options\NetworkTab.cs" />
     <Compile Include="Windows\Options\MercurialTab.cs" />
     <Compile Include="Windows\Options\DiffTab.cs" />
@@ -131,6 +135,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

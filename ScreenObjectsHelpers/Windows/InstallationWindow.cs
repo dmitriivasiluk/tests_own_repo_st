@@ -123,7 +123,7 @@ namespace ScreenObjectsHelpers.Windows
             var secondPass = 0;
             while (currentProcent < InstallTollsProgressBar.Maximum)
             {
-                ThreadWait(1000);
+                Utils.ThreadWait(1000);
                 secondPass++;
                 currentProcent = InstallTollsProgressBar.Value;
                 if (secondPass > 180) // pass 3 minutes

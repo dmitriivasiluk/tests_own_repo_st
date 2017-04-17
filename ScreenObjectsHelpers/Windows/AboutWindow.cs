@@ -1,4 +1,5 @@
-﻿using ScreenObjectsHelpers.Windows.ToolbarTabs;
+﻿using ScreenObjectsHelpers.Helpers;
+using ScreenObjectsHelpers.Windows.ToolbarTabs;
 using System;
 using System.Windows.Automation;
 using TestStack.White.UIItems;
@@ -34,7 +35,7 @@ namespace ScreenObjectsHelpers.Windows
         {
             get
             {
-                var controlElement = AboutWindowContainer.GetElement(SearchCriteria.ByText("Version 2.0.15.1").AndControlType(ControlType.Text));
+                var controlElement = AboutWindowContainer.GetElement(SearchCriteria.ByText(ConstantsList.appVersion).AndControlType(ControlType.Text));
                 return controlElement != null ? new TextBox(controlElement, AboutWindowContainer.ActionListener) : null;
             }
         }
