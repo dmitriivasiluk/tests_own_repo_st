@@ -14,17 +14,15 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         }
 
         #region UIElements
-        public override UIItem ToolbarTabButton => MainWindow.Get<UIItem>(SearchCriteria.ByText("Clone"));
+        public override UIItem ToolbarTabButton => MainWindow.Get<UIItem>(SearchCriteria.ByText("Clone"));        
         public Label RemoteAccountLabel => MainWindow.Get<Label>(SearchCriteria.ByAutomationId("remote account"));
         public TextBox SourcePathTextBox => MainWindow.Get<TextBox>(SearchCriteria.ByAutomationId("SourceTextBox"));
         private Button DetailsButton => MainWindow.Get<Button>(SearchCriteria.ByText("Details..."));
-
         private UIItem NoPathUrlSuppliedText => MainWindow.Get<UIItem>(SearchCriteria.ByText("No path / URL supplied"));
         private UIItem NotValidSourcePathText => MainWindow.Get<UIItem>(SearchCriteria.ByText("This is not a valid source path / URL"));
         private UIItem CheckingSourceText => MainWindow.Get<UIItem>(SearchCriteria.ByText("Checking source..."));
         private UIItem GitRepoValidText => MainWindow.Get<UIItem>(SearchCriteria.ByText("This is a Git repository"));
         private UIItem MercurialRepoValidText => MainWindow.Get<UIItem>(SearchCriteria.ByText("This is a Mercurial repository"));
-
         public ComboBox LocalFolderComboBox => MainWindow.Get<ComboBox>(SearchCriteria.ByAutomationId("CloneBookmarksFolderList"));
         public Button CloneButton => MainWindow.Get<Button>(SearchCriteria.ByText("Clone"));
         public Button AdvancedOptionsButton => MainWindow.Get<Button>(SearchCriteria.ByAutomationId("HeaderSite"));
@@ -93,24 +91,35 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
             NameTextBox.Focus();
         }
 
-        public string ValidateMercurialLink()
-        {
-            ValidateRepoLinkEnableCloneButton();
-
-            if (MercurialRepoValidText.Enabled)
-            {
-                return ConstantsList.mercurial;
-            }
-            return null;
-        }
-
         public string ValidateGitLink()
         {
             ValidateRepoLinkEnableCloneButton();
 
             if (GitRepoValidText.Enabled)
             {
-                return ConstantsList.git;
+                return ConstantsList.gitRepoType;
+            }
+            return null;
+        }
+
+        public string ValidateMercurialLink()
+        {
+            ValidateRepoLinkEnableCloneButton();
+
+            if (MercurialRepoValidText.Enabled)
+            {
+                return ConstantsList.mercurialRepoType;
+            }
+            return null;
+        }
+
+        public string ValidateInvalidLink()
+        {
+            ValidateRepoLinkEnableCloneButton();
+
+            if (NotValidSourcePathText.Enabled)
+            {
+                return ConstantsList.notValidRepoLink;
             }
             return null;
         }
@@ -128,6 +137,7 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
             if (IsCloneButtonEnabled())
             {
                 CloneButton.Click();
+                Utils.ThreadWait(3000);
             }
         }
         #endregion

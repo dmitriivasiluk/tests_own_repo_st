@@ -9,6 +9,13 @@ namespace AutomationTestsSolution.Tests
 {
     class HelpMenuTests : BasicTest
     {
+        [SetUp]
+        public override void SetUp()
+        {
+            base.SetUp();
+
+            base.RunAndAttachToSourceTree();
+        }
 
         [Test]
         public void AboutWindowTest()

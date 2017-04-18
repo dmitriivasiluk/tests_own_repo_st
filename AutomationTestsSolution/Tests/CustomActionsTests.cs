@@ -19,6 +19,8 @@ namespace AutomationTestsSolution.Tests
             RestoreFile(customActionsFilePath);
             File.WriteAllText(customActionsFilePath, resourceName);
             base.SetUp();
+
+            base.RunAndAttachToSourceTree();
         }
 
         [Test]

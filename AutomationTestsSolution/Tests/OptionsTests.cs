@@ -8,6 +8,14 @@ namespace AutomationTestsSolution.Tests
 {
     class OptionsTests : BasicTest
     {
+        [SetUp]
+        public override void SetUp()
+        {
+            base.SetUp();
+
+            base.RunAndAttachToSourceTree();
+        }
+
         [Test]
         public void CheckForUpdatesTest()
         {
