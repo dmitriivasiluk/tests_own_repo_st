@@ -195,27 +195,20 @@ namespace ScreenObjectsHelpers.Windows
             return new ErrorDialogWindow(this, errorDialog);
         }
 
-        public SSHKey SkipSetup()
+        public LocalTab SkipSetup()
         {
             ClickOnButton(SkipSetupButton);
-            Window sshkeyWindow = Desktop.Instance.Windows().FirstOrDefault(c =>
+            Window mercurialWindow = Utils.FindNewWindow("SourceTree: Mercurial not found");
+            if (mercurialWindow != null)
             {
-                var found = false;
-                try
-                {
-                    var item = c.Get<Button>(SearchCriteria.ByText("Yes"));
-                    found = true;
-                }
-                catch (Exception)
-                {
-                    // ignored
-                }
-                return c.IsModal == false && found;
-            }); // Login window is opened without Name (title), so it is best way to find a window.
-            return new SSHKey(sshkeyWindow);
+                Button IDontWantUseMercurial = mercurialWindow.Get<Button>(SearchCriteria.ByAutomationId("CommandLink_2003"));
+                IDontWantUseMercurial.Click();
+            }
+            Window mainWindow = Utils.FindNewWindow("SourceTree");
+            return new LocalTab(mainWindow);
         }
 
-        public SSHKey ClickContinueAtTheLatestStepButton()
+        public LocalTab ClickContinueAtTheLatestStepButton()
         {
             try
             {
@@ -225,21 +218,8 @@ namespace ScreenObjectsHelpers.Windows
             {
                 // Empty, expect that Configuration window is closed (the latest step in configuration, clone) and SourceTree is opened 
             }
-            Window sshkeyWindow = Desktop.Instance.Windows().FirstOrDefault(c =>
-            {
-                var found = false;
-                try
-                {
-                    var item = c.Get<Button>(SearchCriteria.ByText("Yes"));
-                    found = true;
-                }
-                catch (Exception)
-                {
-                    // ignored
-                }
-                return c.IsModal == false && found;
-            }); // Login window is opened without Name (title), so it is best way to find a window.
-            return new SSHKey(sshkeyWindow);
+            Window mainWindow = Utils.FindNewWindow("SourceTree");
+            return new LocalTab(mainWindow);
         }
 
         public IgnoreFileDialogWindow GetInstallGlobalIgnoreFileDialogWindow()

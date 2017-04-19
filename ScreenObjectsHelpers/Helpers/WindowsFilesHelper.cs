@@ -14,17 +14,27 @@ namespace ScreenObjectsHelpers.Helpers
             Directory.CreateDirectory(path);
         }
 
-        public static void RemoveFolderRecursivelyByPath(string path)
+        public static void RemoveFolderRecursivelyByPath(string target_dir)
         {
-            try
+            if (!Directory.Exists(target_dir))
             {
-                Directory.Delete(path, true);
+                return;
             }
-            catch (DirectoryNotFoundException)
+            string[] files = Directory.GetFiles(target_dir);
+            string[] dirs = Directory.GetDirectories(target_dir);
+
+            foreach (string file in files)
             {
-                // Empty
+                File.SetAttributes(file, FileAttributes.Normal);
+                File.Delete(file);
             }
 
+            foreach (string dir in dirs)
+            {
+                RemoveFolderRecursivelyByPath(dir);
+            }
+
+            Directory.Delete(target_dir, false);
         }
 
         public static bool IsGitRepositoryByPath(string path)

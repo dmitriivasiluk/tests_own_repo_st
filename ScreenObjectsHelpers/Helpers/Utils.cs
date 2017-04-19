@@ -19,7 +19,8 @@ namespace ScreenObjectsHelpers.Helpers
         public static Window FindNewWindow(string nameOfWindow, int testCount = 30)
         {
             Window window = Desktop.Instance.Windows().FirstOrDefault(x => x.Name == nameOfWindow);
-            while (window == null && testCount < 30)
+            int count = 0;
+            while (window == null && count < testCount)
             {
                 try
                 {
@@ -34,7 +35,7 @@ namespace ScreenObjectsHelpers.Helpers
                     window = null;
                 }
                 Thread.Sleep(1000);
-                testCount++;
+                count++;
             }
             return window;
         }

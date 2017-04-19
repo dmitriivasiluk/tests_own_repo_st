@@ -17,7 +17,7 @@ namespace AutomationTestsSolution.Tests
     /// 3. OAuth access to GitHub using credentials from tests
     /// 4. OAuth access to BitBucket using credentials from tests
     /// 5. Browser's autocomplete pop-up is disabled (Save password using IE in Authorization window to Atlassian)
-    /// 6. Putty agent doesn't have any ssh keys
+    /// 6. Putty agent is running on computer (when it is running, there is no prompt about adding ssh key)
     /// 7. There are global ignore files (Git/Mercurial) on computers
     /// </summary>
     class WelcomeWizardTests : BasicTestInstallation
@@ -277,46 +277,11 @@ namespace AutomationTestsSolution.Tests
 
             installWindow.ClickContinueButton();
 
-            SSHKey sshWindow = installWindow.SkipSetup();
-            LocalTab mainWindow = sshWindow.clickNoButton();
+            LocalTab mainWindow = installWindow.SkipSetup();
 
             string actualTitle = mainWindow.GetTitle();
 
             Assert.AreEqual(actualTitle, expectedTitle);
-        }
-
-        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "bitbucketfaketest", "123BitBucketFake", @"%USERPROFILE%\Documents")]
-        public void InstallGlobalIgnoreFileTest(
-            string atlassianLoginEmail,
-            string atlassianPassword,
-            string bitBucketLogin,
-            string bitbucketPassword,
-            string defaultPath)
-        {
-            InstallationWindow installWindow = new InstallationWindow(MainWindow);
-            installWindow.CheckLicenceAgreementCheckbox();
-            installWindow.ClickContinueButton();
-            AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
-            
-            installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
-
-            installWindow.ClickContinueButton();
-
-            installWindow.FillBasicAuthenticationBitbucket(bitBucketLogin, bitbucketPassword);
-
-            installWindow.ClickContinueButton(); // step remotes
-
-            installWindow.WaitCompleteInstallToolsProgressBar();
-
-            installWindow.ClickContinueButton(); // step install tools
-
-            IgnoreFileDialogWindow dialogWindow = installWindow.GetInstallGlobalIgnoreFileDialogWindow();
-            dialogWindow.ClickYesButton();
-
-            bool isGitIgnoreExistOnComputer = File.Exists(defaultPath + "/.gitignore_global");
-
-            Assert.IsTrue(isGitIgnoreExistOnComputer);
-
         }
 
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "githubfaketesting", "123GitHubFake", "github-public", @"Documents\CloneBasicGitHub")]
@@ -355,6 +320,7 @@ namespace AutomationTestsSolution.Tests
 
             installWindow.ClickContinueButton();
 
+            Utils.ThreadWait(10000); // Time for cloning 
             bool actualIsRepositoryCloned = WindowsFilesHelper.IsGitRepositoryByPath(pathToNewFolder);
 
             Assert.IsTrue(actualIsRepositoryCloned);
@@ -448,7 +414,7 @@ namespace AutomationTestsSolution.Tests
         /// <summary>
         /// Verify that you have permission to access SourceTreeForWindows by atlassian to BitBucket account.
         /// </summary>
-        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "bitbucket-public", @"%USERPROFILE%\Documents\CloneOAuthBitBucket")]
+        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "bitbucket-public", @"Documents\CloneOAuthBitBucket")]
         public void CloneBitBucketRepositoryUsingOAuthTest(
             string atlassianLoginEmail,
             string atlassianPassword,
@@ -569,12 +535,12 @@ namespace AutomationTestsSolution.Tests
 
         }
 
-        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "githubfaketesting", "123GitHubFake", "github-public", @"Documents\OpenSourceTree")]
+        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "bitbucketfaketest", "123BitBucketFake", "bitbucket-public", @"Documents\OpenSourceTree")]
         public void SourceTreeOpensAfterFinishConfiguration(
             string atlassianLoginEmail,
             string atlassianPassword,
-            string gitHubLogin,
-            string gitHubPassword,
+            string bitbucketbLogin,
+            string bitbucketPassword,
             string nameOfRepo,
             string subFolderInUserProfile)
         {
@@ -592,7 +558,7 @@ namespace AutomationTestsSolution.Tests
 
             installWindow.ClickContinueButton();
 
-            installWindow.FillBasicAuthenticationGithub(gitHubLogin, gitHubPassword);
+            installWindow.FillBasicAuthenticationBitbucket(bitbucketbLogin, bitbucketPassword);
 
             installWindow.ClickContinueButton();
 
@@ -606,8 +572,7 @@ namespace AutomationTestsSolution.Tests
 
             installWindow.ClickContinueButton();
 
-            SSHKey key = installWindow.ClickContinueAtTheLatestStepButton();
-            LocalTab mainWindow = key.clickNoButton();
+            LocalTab mainWindow = installWindow.ClickContinueAtTheLatestStepButton();
             
             string actualTitle = mainWindow.GetTitle();
 
