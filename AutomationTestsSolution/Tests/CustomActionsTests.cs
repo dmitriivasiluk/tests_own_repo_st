@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using ScreenObjectsHelpers.Helpers;
-using ScreenObjectsHelpers.Windows;
 using ScreenObjectsHelpers.Windows.Options;
 using ScreenObjectsHelpers.Windows.MenuFolder;
 using ScreenObjectsHelpers.Windows.ToolbarTabs;
@@ -19,8 +18,6 @@ namespace AutomationTestsSolution.Tests
             RestoreFile(customActionsFilePath);
             File.WriteAllText(customActionsFilePath, resourceName);
             base.SetUp();
-
-            base.RunAndAttachToSourceTree();
         }
 
         [Test]

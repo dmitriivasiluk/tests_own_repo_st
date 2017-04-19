@@ -26,9 +26,7 @@ namespace AutomationTestsSolution.Tests
             Utils.RemoveDirectory(pathToClonedGitRepo);
             Utils.RemoveDirectory(pathToClonedMercurialRepo);
 
-            base.SetUp();
-
-            base.RunAndAttachToSourceTree();
+            base.SetUp();           
         }
 
         [TearDown]

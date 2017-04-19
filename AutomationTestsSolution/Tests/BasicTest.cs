@@ -16,7 +16,7 @@ namespace AutomationTestsSolution.Tests
         protected string sourceTreeExePath;
         protected string sourceTreeVersion;
         protected string sourceTreeUserConfigPath;
-        protected string sourceTreeDataPath;
+        protected string sourceTreeDataPath = Environment.ExpandEnvironmentVariables(ConstantsList.pathToDataFolder);
         protected Process sourceTreeProcess;
         private string testDataFolder;
         private string emptyAutomationFolder = Environment.ExpandEnvironmentVariables(ConstantsList.emptyAutomationFolder);
@@ -28,15 +28,35 @@ namespace AutomationTestsSolution.Tests
         [SetUp]
         public virtual void SetUp()
         {
+            BackupConfigs();
+            UseTestConfigs(sourceTreeDataPath);
+            RunAndAttachToSourceTree();
+        }
+
+        protected void UseTestConfigs(string dataFolder)
+        {
             testDataFolder = Path.Combine(TestContext.CurrentContext.TestDirectory, @"../../TestData");
 
+            var testAccountsJson = Path.Combine(testDataFolder, ConstantsList.accountsJson);
+            var sourceTreeAccountsJsonPath = Path.Combine(dataFolder, ConstantsList.accountsJson);            
+
+            SetFile(testAccountsJson, sourceTreeAccountsJsonPath);
+
+            var testUserConfig = Path.Combine(testDataFolder, ConstantsList.userConfig);
+
+            SetFile(testUserConfig, sourceTreeUserConfigPath);
+
+            Utils.ThreadWait(2000);
+        }
+
+        protected void BackupConfigs()
+        {
             sourceTreeVersion = exeAndVersion.Item2;
             sourceTreeUserConfigPath = FindSourceTreeUserConfig(sourceTreeVersion);
 
-            sourceTreeDataPath = Environment.ExpandEnvironmentVariables(ConstantsList.pathToDataFolder);
+            BackupFile(sourceTreeUserConfigPath);
 
-            SetUserConfig(sourceTreeUserConfigPath);
-            SetData(sourceTreeDataPath);
+            BackupData(sourceTreeDataPath);
 
             Utils.ThreadWait(2000);
         }
@@ -49,13 +69,11 @@ namespace AutomationTestsSolution.Tests
             AttachToSourceTree();
         }
 
-        private void SetData(string dataFolder)
+        private void BackupData(string dataFolder)
         {
             BackupFile(Path.Combine(dataFolder, ConstantsList.bookmarksXml));
             BackupFile(Path.Combine(dataFolder, ConstantsList.opentabsXml));
-            BackupFile(Path.Combine(dataFolder, ConstantsList.accountsJson));
-            var testAccountsJson = Path.Combine(testDataFolder, ConstantsList.accountsJson);
-            SetFile(testAccountsJson, Path.Combine(dataFolder, ConstantsList.accountsJson));
+            BackupFile(Path.Combine(dataFolder, ConstantsList.accountsJson));            
         }
 
         private void SetFile(string sourceFile, string targetFile)
@@ -67,6 +85,7 @@ namespace AutomationTestsSolution.Tests
         {
             RestoreFile(Path.Combine(dataFolder, ConstantsList.bookmarksXml));
             RestoreFile(Path.Combine(dataFolder, ConstantsList.opentabsXml));
+            RestoreAccount(Path.Combine(sourceTreeDataPath, ConstantsList.accountsJson));
         }
 
         private void BackupFile(string fileName)
@@ -88,19 +107,6 @@ namespace AutomationTestsSolution.Tests
             {
                 File.Move(fileName + BackupSuffix, fileName);
             }
-        }
-
-        private void SetUserConfig(string userConfig)
-        {
-            BackupFile(userConfig);
-
-            var testUserConfig = Path.Combine(testDataFolder, ConstantsList.userConfig);
-            SetFile(testUserConfig, sourceTreeUserConfigPath);
-        }
-
-        private void RestoreUserConfig(string userConfig)
-        {
-            RestoreFile(userConfig);
         }
 
         private void RestoreAccount(string account)
@@ -193,9 +199,8 @@ namespace AutomationTestsSolution.Tests
 
             Utils.ThreadWait(2000);
 
-            RestoreUserConfig(sourceTreeUserConfigPath);
-            RestoreData(sourceTreeDataPath);
-            RestoreAccount(Path.Combine(sourceTreeDataPath, ConstantsList.accountsJson));
+            RestoreFile(sourceTreeUserConfigPath);
+            RestoreData(sourceTreeDataPath);            
         }
 
         public void ifSourceTreeOpened()

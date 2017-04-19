@@ -2,21 +2,12 @@
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows;
 using ScreenObjectsHelpers.Windows.MenuFolder;
-using ScreenObjectsHelpers.Windows.Options;
 using ScreenObjectsHelpers.Windows.ToolbarTabs;
 
 namespace AutomationTestsSolution.Tests
 {
     class HelpMenuTests : BasicTest
     {
-        [SetUp]
-        public override void SetUp()
-        {
-            base.SetUp();
-
-            base.RunAndAttachToSourceTree();
-        }
-
         [Test]
         public void AboutWindowTest()
         {

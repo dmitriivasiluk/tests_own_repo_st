@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using ScreenObjectsHelpers.Windows;
 using ScreenObjectsHelpers.Windows.Options;
 using ScreenObjectsHelpers.Windows.MenuFolder;
 using ScreenObjectsHelpers.Windows.ToolbarTabs;
@@ -8,14 +7,6 @@ namespace AutomationTestsSolution.Tests
 {
     class OptionsTests : BasicTest
     {
-        [SetUp]
-        public override void SetUp()
-        {
-            base.SetUp();
-
-            base.RunAndAttachToSourceTree();
-        }
-
         [Test]
         public void CheckForUpdatesTest()
         {
