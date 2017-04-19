@@ -68,7 +68,7 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
             }
         }
 
-        public bool isTestGitRepoBookmarkAdded()
+        public bool IsTestGitRepoBookmarkAdded()
         {
             if (TestGitRepoBookmark != null)
             {
@@ -78,7 +78,7 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
             return false;
         }
 
-        public bool isTestHgRepoBookmarkAdded()
+        public bool IsTestHgRepoBookmarkAdded()
         {
             if (TestHgRepoBookmark != null)
             {

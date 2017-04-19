@@ -127,7 +127,7 @@ namespace AutomationTestsSolution.Tests
             cloneTab.ValidateRepoLinkEnableCloneButton();
             cloneTab.ClickCloneButton();
             var localtab = mainWindow.OpenTab<LocalTab>();
-            var bookmarkAdded = localtab.isTestGitRepoBookmarkAdded();
+            var bookmarkAdded = localtab.IsTestGitRepoBookmarkAdded();
             Assert.IsTrue(bookmarkAdded);
         }
 
@@ -141,7 +141,7 @@ namespace AutomationTestsSolution.Tests
             cloneTab.ValidateRepoLinkEnableCloneButton();
             cloneTab.ClickCloneButton();
             var localtab = mainWindow.OpenTab<LocalTab>();
-            var bookmarkAdded = localtab.isTestHgRepoBookmarkAdded();
+            var bookmarkAdded = localtab.IsTestHgRepoBookmarkAdded();
             Assert.IsTrue(bookmarkAdded);
         }
     }
