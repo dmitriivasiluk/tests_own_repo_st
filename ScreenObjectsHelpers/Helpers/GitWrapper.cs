@@ -26,7 +26,7 @@ namespace ScreenObjectsHelpers.Helpers
             {
                 Directory.CreateDirectory(pathToRepository);
             }
-            if (!WindowsFilesHelper.IsGitRepositoryByPath(pathToRepository))
+            if (!Utils.IsFolderGit(pathToRepository))
             {
                 Repository.Init(pathToRepository);
             }

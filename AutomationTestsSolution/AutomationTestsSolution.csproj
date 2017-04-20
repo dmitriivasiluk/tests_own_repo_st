@@ -80,7 +80,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Tests\BasicTest.cs" />
-    <Compile Include="Tests\BasicTestInstallation.cs" />
     <Compile Include="Tests\HelpMenuTests.cs" />
     <Compile Include="Tests\CustomActionsTests.cs" />
     <Compile Include="Tests\ToolbarTabsCloneTests.cs" />

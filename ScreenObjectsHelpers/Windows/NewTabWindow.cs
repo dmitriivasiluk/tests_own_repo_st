@@ -15,9 +15,10 @@ namespace ScreenObjectsHelpers.Windows
         private UIItemContainer newTab;
         public NewTabWindow(Window mainWindow) : base(mainWindow)
         {
-            if (GotItButton != null)
+            Button getItButton = GotItButton;
+            if (getItButton != null && getItButton.Visible)
             {
-                ClickOnButton(GotItButton);
+                ClickOnButton(getItButton);
             }
             OpenToolbarTab();
         }

@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Automation;
 using TestStack.White;
 using TestStack.White.UIItems.WindowItems;
 using TestStack.White.UIItems;
-
+using System.Linq;
 
 namespace ScreenObjectsHelpers.Helpers
 {
@@ -52,31 +49,55 @@ namespace ScreenObjectsHelpers.Helpers
             }
         }
 
-
         public static void RemoveFile(string path)
         {
-            try
+            if (File.Exists(path))
             {
-                File.Delete(path);
+                try
+                {
+                    File.Delete(path);
+                }
+                catch (IOException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
-            catch (IOException e)
-            {
-                Console.WriteLine(e.Message);                
-            }
-
         }
 
         public static void RemoveDirectory(string path)
         {
-            try
+            if (!Directory.Exists(path))
             {
-                Directory.Delete(path, true);
+                return;
             }
-            catch (IOException e)
+            string[] files = Directory.GetFiles(path);
+            string[] dirs = Directory.GetDirectories(path);
+
+            foreach (string file in files)
             {
-                Console.WriteLine(e.Message);
+                File.SetAttributes(file, FileAttributes.Normal);
+                File.Delete(file);
             }
 
+            foreach (string dir in dirs)
+            {
+                RemoveDirectory(dir);
+            }
+
+            Directory.Delete(path, false);
+
+        }
+
+        public static bool IsFolderGit(string path)
+        {
+            string pathToDotGitFolder = Path.Combine(path, ConstantsList.dotGitFolder);
+            return Directory.Exists(pathToDotGitFolder);
+        }
+
+        public static bool IsFolderMercurial(string path)
+        {
+            string pathToDotGitFolder = Path.Combine(path, ConstantsList.dotHgFolder);
+            return Directory.Exists(pathToDotGitFolder);
         }
     }
 }

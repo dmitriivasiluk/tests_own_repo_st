@@ -20,9 +20,24 @@ namespace AutomationTestsSolution.Tests
     /// 6. Putty agent is running on computer (when it is running, there is no prompt about adding ssh key)
     /// 7. There are global ignore files (Git/Mercurial) on computers
     /// </summary>
-    class WelcomeWizardTests : BasicTestInstallation
+    class WelcomeWizardTests : BasicTest
     {
-       
+
+        [SetUp]
+        public override void SetUp()
+        {
+            BackupConfigs();
+            RunSourceTree();
+            AttachToWelcomeWizardSourceTree();
+        }
+
+        private void AttachToWelcomeWizardSourceTree()
+        {
+            MainWindow = null;
+            Utils.ThreadWait(8000); // time for unzip some packages before configuration
+            MainWindow = Utils.FindNewWindow("Welcome");
+        }
+
         [TestCase]
         public void ContinueButtonIsNotActiveTest()
         {
@@ -295,7 +310,7 @@ namespace AutomationTestsSolution.Tests
         {
             string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             string pathToNewFolder = Path.Combine(userProfile, subFolderInUserProfile);
-            WindowsFilesHelper.RemoveFolderRecursivelyByPath(pathToNewFolder);
+            Utils.RemoveDirectory(pathToNewFolder);
 
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
@@ -315,13 +330,13 @@ namespace AutomationTestsSolution.Tests
             installWindow.ClickContinueButton(); // step install tools
 
             installWindow.SelectRepositoryByName(nameOfRepo);
-            WindowsFilesHelper.CreateFolderByPath(pathToNewFolder);
+            Directory.CreateDirectory(pathToNewFolder);
             installWindow.BrowseDestinationPath(pathToNewFolder);
 
             installWindow.ClickContinueButton();
 
             Utils.ThreadWait(10000); // Time for cloning 
-            bool actualIsRepositoryCloned = WindowsFilesHelper.IsGitRepositoryByPath(pathToNewFolder);
+            bool actualIsRepositoryCloned = Utils.IsFolderGit(pathToNewFolder);
 
             Assert.IsTrue(actualIsRepositoryCloned);
         }
@@ -337,7 +352,7 @@ namespace AutomationTestsSolution.Tests
         {
             string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             string pathToNewFolder = Path.Combine(userProfile, subFolderInUserProfile);
-            WindowsFilesHelper.RemoveFolderRecursivelyByPath(pathToNewFolder);
+            Utils.RemoveDirectory(pathToNewFolder);
 
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
@@ -357,13 +372,14 @@ namespace AutomationTestsSolution.Tests
             installWindow.ClickContinueButton(); // step install tools
 
             installWindow.SelectRepositoryByName(nameOfRepo);
-            WindowsFilesHelper.CreateFolderByPath(pathToNewFolder);
+            Directory.CreateDirectory(pathToNewFolder);
+
             installWindow.BrowseDestinationPath(pathToNewFolder);
 
             installWindow.ClickContinueButton();
 
             Thread.Sleep(2000); 
-            bool actialIsRepositoryCloned = WindowsFilesHelper.IsGitRepositoryByPath(pathToNewFolder);
+            bool actialIsRepositoryCloned = Utils.IsFolderGit(pathToNewFolder);
 
             Assert.IsTrue(actialIsRepositoryCloned);
         }
@@ -380,7 +396,7 @@ namespace AutomationTestsSolution.Tests
         {
             string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             string pathToNewFolder = Path.Combine(userProfile, subFolderInUserProfile);
-            WindowsFilesHelper.RemoveFolderRecursivelyByPath(pathToNewFolder);
+            Utils.RemoveDirectory(pathToNewFolder);
 
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
@@ -400,13 +416,13 @@ namespace AutomationTestsSolution.Tests
             installWindow.ClickContinueButton(); // step install tools
 
             installWindow.SelectRepositoryByName(nameOfRepo);
-            WindowsFilesHelper.CreateFolderByPath(pathToNewFolder);
+            Directory.CreateDirectory(pathToNewFolder);
             installWindow.BrowseDestinationPath(pathToNewFolder);
 
             installWindow.ClickContinueButton();
 
             Thread.Sleep(2000);
-            bool actialIsRepositoryCloned = WindowsFilesHelper.IsGitRepositoryByPath(pathToNewFolder);
+            bool actialIsRepositoryCloned = Utils.IsFolderGit(pathToNewFolder);
 
             Assert.IsTrue(actialIsRepositoryCloned);
         }
@@ -424,7 +440,7 @@ namespace AutomationTestsSolution.Tests
         {
             string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             string pathToNewFolder = Path.Combine(userProfile, subFolderInUserProfile);
-            WindowsFilesHelper.RemoveFolderRecursivelyByPath(pathToNewFolder);
+            Utils.RemoveDirectory(pathToNewFolder);
 
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
@@ -444,13 +460,13 @@ namespace AutomationTestsSolution.Tests
             installWindow.ClickContinueButton(); // step install tools
 
             installWindow.SelectRepositoryByName(nameOfRepo);
-            WindowsFilesHelper.CreateFolderByPath(pathToNewFolder);
+            Directory.CreateDirectory(pathToNewFolder);
             installWindow.BrowseDestinationPath(pathToNewFolder);
 
             installWindow.ClickContinueButton();
 
             Thread.Sleep(2000);
-            bool actialIsRepositoryCloned = WindowsFilesHelper.IsGitRepositoryByPath(pathToNewFolder);
+            bool actialIsRepositoryCloned = Utils.IsFolderGit(pathToNewFolder);
 
             Assert.IsTrue(actialIsRepositoryCloned);
         }
@@ -467,7 +483,7 @@ namespace AutomationTestsSolution.Tests
         {
             string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             string pathToNewFolder = Path.Combine(userProfile, subFolderInUserProfile);
-            WindowsFilesHelper.RemoveFolderRecursivelyByPath(pathToNewFolder);
+            Utils.RemoveDirectory(pathToNewFolder);
 
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
@@ -489,7 +505,7 @@ namespace AutomationTestsSolution.Tests
             //installWindow.ClickContinueButton(); // step install tools
 
             //installWindow.SelectRepositoryByName(nameOfRepo);
-            //WindowsFilesHelper.CreateFolderByPath(pathToNewFolder);
+            //Directory.CreateDirectory(pathToNewFolder);
             //installWindow.BrowseDestinationPath(pathToNewFolder);
 
             //installWindow.ClickContinueButton();
@@ -547,7 +563,7 @@ namespace AutomationTestsSolution.Tests
             // Pre-condition
             string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             string pathToNewFolder = Path.Combine(userProfile, subFolderInUserProfile);
-            WindowsFilesHelper.RemoveFolderRecursivelyByPath(pathToNewFolder);
+            Utils.RemoveDirectory(pathToNewFolder);
 
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
@@ -567,7 +583,7 @@ namespace AutomationTestsSolution.Tests
             installWindow.ClickContinueButton();
 
             installWindow.SelectRepositoryByName(nameOfRepo);
-            WindowsFilesHelper.CreateFolderByPath(pathToNewFolder);
+            Directory.CreateDirectory(pathToNewFolder);
             installWindow.BrowseDestinationPath(pathToNewFolder);
 
             installWindow.ClickContinueButton();

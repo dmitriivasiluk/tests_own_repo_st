@@ -2,10 +2,10 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using TestStack.White;
 using NUnit.Framework;
 using TestStack.White.UIItems.WindowItems;
+using ScreenObjectsHelpers.Helpers;
 
 namespace AutomationTestsSolution.Tests
 {
@@ -16,58 +16,88 @@ namespace AutomationTestsSolution.Tests
         protected string sourceTreeExePath;
         protected string sourceTreeVersion;
         protected string sourceTreeUserConfigPath;
-        protected string sourceTreeDataPath;
+        protected string sourceTreeDataPath = Environment.ExpandEnvironmentVariables(ConstantsList.pathToDataFolder);
         protected Process sourceTreeProcess;
         private string testDataFolder;
+        private string emptyAutomationFolder = Environment.ExpandEnvironmentVariables(ConstantsList.emptyAutomationFolder);
 
-        private readonly string sourceTreeTypeEnvVar = Environment.GetEnvironmentVariable("ST_UI_TEST_TYPE"); // "Beta", "Alpha" ....
+        private Tuple<string, string> exeAndVersion = FindSourceTree();
+
+        private static readonly string sourceTreeTypeEnvVar = Environment.GetEnvironmentVariable("ST_UI_TEST_TYPE"); // "Beta", "Alpha" ....
 
         [SetUp]
         public virtual void SetUp()
         {
+            BackupConfigs();
+            UseTestConfigs(sourceTreeDataPath);
+            RunAndAttachToSourceTree();
+        }
+
+        protected void UseTestConfigs(string dataFolder)
+        {
             testDataFolder = Path.Combine(TestContext.CurrentContext.TestDirectory, @"../../TestData");
-            var exeAndVersion = FindSourceTree();
-            sourceTreeExePath = exeAndVersion.Item1;
+
+            var testAccountsJson = Path.Combine(testDataFolder, ConstantsList.accountsJson);
+            var sourceTreeAccountsJsonPath = Path.Combine(dataFolder, ConstantsList.accountsJson);            
+
+            SetFile(testAccountsJson, sourceTreeAccountsJsonPath);
+
+            var testUserConfig = Path.Combine(testDataFolder, ConstantsList.userConfig);
+
+            SetFile(testUserConfig, sourceTreeUserConfigPath);
+
+            Utils.ThreadWait(2000);
+        }
+
+        protected void BackupConfigs()
+        {
             sourceTreeVersion = exeAndVersion.Item2;
-            //sourceTreeUserConfigPath = FindSourceTreeUserConfig(sourceTreeVersion);
-            
-            sourceTreeDataPath = FindSourceTreeData();
+            sourceTreeUserConfigPath = FindSourceTreeUserConfig(sourceTreeVersion);
 
-            SetUserConfig(sourceTreeUserConfigPath);
-            //SetData(sourceTreeDataPath);
+            BackupFile(sourceTreeUserConfigPath);
 
-            RunSourceTree(sourceTreeExePath);
+            BackupData(sourceTreeDataPath);
 
+            Utils.ThreadWait(2000);
+        }
+
+        protected void RunAndAttachToSourceTree()
+        {
+            RunSourceTree();
             AttachToSourceTree();
         }
-       
-        private void SetData(string dataFolder)
+
+        protected void RunSourceTree()
         {
-            BackupFile(Path.Combine(dataFolder, "bookmarks.xml"));
-            BackupFile(Path.Combine(dataFolder, "opentabs.xml"));
-            BackupFile(Path.Combine(dataFolder, "accounts.json"));
-            var testAccountsJson = Path.Combine(testDataFolder, "accounts.json");
-            SetFile(testAccountsJson, Path.Combine(dataFolder, "accounts.json"));
+            sourceTreeExePath = exeAndVersion.Item1;
+            RunSourceTree(sourceTreeExePath);
         }
-        
+       
+
+        private void BackupData(string dataFolder)
+        {
+            BackupFile(Path.Combine(dataFolder, ConstantsList.bookmarksXml));
+            BackupFile(Path.Combine(dataFolder, ConstantsList.opentabsXml));
+            BackupFile(Path.Combine(dataFolder, ConstantsList.accountsJson));            
+        }
+
         private void SetFile(string sourceFile, string targetFile)
         {
             File.Copy(sourceFile, targetFile);
         }
-        
+
         private void RestoreData(string dataFolder)
         {
-            RestoreFile(Path.Combine(dataFolder, "bookmarks.xml"));
-            RestoreFile(Path.Combine(dataFolder, "opentabs.xml"));
+            RestoreFile(Path.Combine(dataFolder, ConstantsList.bookmarksXml));
+            RestoreFile(Path.Combine(dataFolder, ConstantsList.opentabsXml));
+            RestoreAccount(Path.Combine(sourceTreeDataPath, ConstantsList.accountsJson));
         }
 
         private void BackupFile(string fileName)
         {
-            if (File.Exists(fileName + BackupSuffix))
-            {
-                File.Delete(fileName + BackupSuffix);
-            }
 
+            Utils.RemoveFile(fileName + BackupSuffix);
+            Utils.ThreadWait(2000);
             if (File.Exists(fileName))
             {
                 File.Move(fileName, fileName + BackupSuffix);
@@ -76,10 +106,7 @@ namespace AutomationTestsSolution.Tests
 
         protected void RestoreFile(string fileName)
         {
-            if (File.Exists(fileName))
-            {
-                File.Delete(fileName);
-            }
+            Utils.RemoveFile(fileName);
 
             if (File.Exists(fileName + BackupSuffix))
             {
@@ -87,26 +114,15 @@ namespace AutomationTestsSolution.Tests
             }
         }
 
-        private void SetUserConfig(string userConfig)
+        private void RestoreAccount(string account)
         {
-            BackupFile(userConfig);
+            RestoreFile(account);
         }
 
-        private void RestoreUserConfig(string userConfig)
-        {
-            RestoreFile(userConfig);
-        }
-
-        private string FindSourceTreeData()
-        {
-            //return Environment.ExpandEnvironmentVariables(@"%localappdata%\Atlassian\SourceTreeBeta");
-            return Environment.ExpandEnvironmentVariables(@"%localappdata%\Atlassian\SourceTree");
-        }
-      
         private string FindSourceTreeUserConfig(string version)
         {
             var sourceTreeInstallParentDir =
-                Environment.ExpandEnvironmentVariables(@"%localappdata%\Atlassian");
+                Environment.ExpandEnvironmentVariables(ConstantsList.pathToAtlassianFolder);
             var userConfigDirectories = Directory.GetDirectories(sourceTreeInstallParentDir, version,
                     SearchOption.AllDirectories);
             if (userConfigDirectories.Count(d => !d.Contains("vshost")) != 1)
@@ -116,19 +132,13 @@ namespace AutomationTestsSolution.Tests
 
             Array.Sort(userConfigDirectories);
             var folder = userConfigDirectories.Last(d => !d.Contains("vshost"));
-            return Path.Combine(folder, "user.config");
+            return Path.Combine(folder, ConstantsList.userConfig);
         }
 
         protected void AttachToSourceTree()
         {
             MainWindow = null;
-            int testCount = 0;
-            while (!sourceTreeProcess.HasExited && MainWindow == null && testCount < 30)
-            {
-                MainWindow = Desktop.Instance.Windows().FirstOrDefault(x => x.Name == "SourceTree");
-                Thread.Sleep(1000);
-                testCount++;
-            }
+            MainWindow = Utils.FindNewWindow("SourceTree");
         }
 
         protected void RunSourceTree(string sourceTreeExe)
@@ -138,19 +148,18 @@ namespace AutomationTestsSolution.Tests
             psi.RedirectStandardOutput = true;
             psi.RedirectStandardError = true;
             psi.UseShellExecute = false;
-            var path = Environment.ExpandEnvironmentVariables(@"%localappdata%\EmptyDirectoryForAutomation");
-            Directory.CreateDirectory(path);
-            psi.WorkingDirectory = path;
+            Directory.CreateDirectory(emptyAutomationFolder);
+            psi.WorkingDirectory = emptyAutomationFolder;
             sourceTreeProcess = new Process();
             sourceTreeProcess.StartInfo = psi;
 
             sourceTreeProcess.Start();
         }
 
-        protected Tuple<string, string> FindSourceTree()
+        protected static Tuple<string, string> FindSourceTree()
         {
             // Allowing Environment Variables to override defaults  lets us test against GA, Beta, Alpha with runtime changes etc.
-            var sourceTreeType =  string.IsNullOrWhiteSpace(sourceTreeTypeEnvVar) ? string.Empty : sourceTreeTypeEnvVar;
+            var sourceTreeType = string.IsNullOrWhiteSpace(sourceTreeTypeEnvVar) ? string.Empty : sourceTreeTypeEnvVar;
 
             var sourceTreeInstallParentDir =
                 //Environment.ExpandEnvironmentVariables(@"%localappdata%\SourceTreeBeta" + sourceTreeType);
@@ -187,9 +196,11 @@ namespace AutomationTestsSolution.Tests
                 sourceTreeProcess.Close();
             }
 
-            RestoreUserConfig(sourceTreeUserConfigPath);
-            RestoreData(sourceTreeDataPath);
-        }
+            Utils.ThreadWait(2000);
 
+            RestoreFile(sourceTreeUserConfigPath);
+            RestoreData(sourceTreeDataPath);            
+
+        }
     }
 }
