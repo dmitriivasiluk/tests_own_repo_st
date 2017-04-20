@@ -19,6 +19,7 @@ namespace ScreenObjectsHelpers.Windows.Options
         {
             get;
         }
+
         public UIItemContainer OptionsWindowContainer
         {
             get;

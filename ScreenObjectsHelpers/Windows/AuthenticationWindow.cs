@@ -14,11 +14,11 @@ using static TestStack.White.WindowsAPI.KeyboardInput;
 
 namespace ScreenObjectsHelpers.Windows
 {
-    public class AuthorizationWindow : BasicWindow
+    public class AuthenticationWindow : BasicWindow
     {
         private readonly Window authorizationWindow;
 
-        public AuthorizationWindow(Window mainWindow, Window authorizationWindow) : base(mainWindow)
+        public AuthenticationWindow(Window mainWindow, Window authorizationWindow) : base(mainWindow)
         {
             this.authorizationWindow = authorizationWindow;
             ValidateWindow();

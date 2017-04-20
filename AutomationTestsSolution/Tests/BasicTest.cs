@@ -63,11 +63,16 @@ namespace AutomationTestsSolution.Tests
 
         protected void RunAndAttachToSourceTree()
         {
-            sourceTreeExePath = exeAndVersion.Item1;
-
-            RunSourceTree(sourceTreeExePath);
+            RunSourceTree();
             AttachToSourceTree();
         }
+
+        protected void RunSourceTree()
+        {
+            sourceTreeExePath = exeAndVersion.Item1;
+            RunSourceTree(sourceTreeExePath);
+        }
+       
 
         private void BackupData(string dataFolder)
         {
@@ -133,13 +138,7 @@ namespace AutomationTestsSolution.Tests
         protected void AttachToSourceTree()
         {
             MainWindow = null;
-            int testCount = 0;
-            while (!sourceTreeProcess.HasExited && MainWindow == null && testCount < 30)
-            {
-                MainWindow = Desktop.Instance.Windows().FirstOrDefault(x => x.Name == "SourceTree");
-                Utils.ThreadWait(1000);
-                testCount++;
-            }
+            MainWindow = Utils.FindNewWindow("SourceTree");
         }
 
         protected void RunSourceTree(string sourceTreeExe)
@@ -201,10 +200,6 @@ namespace AutomationTestsSolution.Tests
 
             RestoreFile(sourceTreeUserConfigPath);
             RestoreData(sourceTreeDataPath);            
-        }
-
-        public void ifSourceTreeOpened()
-        {
 
         }
     }
