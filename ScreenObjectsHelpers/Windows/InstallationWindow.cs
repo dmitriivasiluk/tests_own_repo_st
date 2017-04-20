@@ -198,7 +198,7 @@ namespace ScreenObjectsHelpers.Windows
         public LocalTab SkipSetup()
         {
             ClickOnButton(SkipSetupButton);
-            Window mercurialWindow = Utils.FindNewWindow("SourceTree: Mercurial not found");
+            Window mercurialWindow = Utils.FindNewWindow("SourceTree: Mercurial not found", 10);
             if (mercurialWindow != null)
             {
                 Button IDontWantUseMercurial = mercurialWindow.Get<Button>(SearchCriteria.ByAutomationId("CommandLink_2003"));
@@ -240,7 +240,7 @@ namespace ScreenObjectsHelpers.Windows
                     return;
                 }
             }
-            throw new ElementNotAvailableException($"This {repoName} is not founded");
+            throw new ElementNotAvailableException($"This {repoName} is not found");
         }
 
         private void WaitListRemoteIsLoaded()

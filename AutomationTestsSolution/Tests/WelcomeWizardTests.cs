@@ -379,9 +379,9 @@ namespace AutomationTestsSolution.Tests
             installWindow.ClickContinueButton();
 
             Thread.Sleep(2000); 
-            bool actialIsRepositoryCloned = Utils.IsFolderGit(pathToNewFolder);
+            bool isRepositoryCloned = Utils.IsFolderGit(pathToNewFolder);
 
-            Assert.IsTrue(actialIsRepositoryCloned);
+            Assert.IsTrue(isRepositoryCloned);
         }
 
         /// <summary>
@@ -422,9 +422,9 @@ namespace AutomationTestsSolution.Tests
             installWindow.ClickContinueButton();
 
             Thread.Sleep(2000);
-            bool actialIsRepositoryCloned = Utils.IsFolderGit(pathToNewFolder);
+            bool isRepositoryCloned = Utils.IsFolderGit(pathToNewFolder);
 
-            Assert.IsTrue(actialIsRepositoryCloned);
+            Assert.IsTrue(isRepositoryCloned);
         }
 
         /// <summary>
@@ -466,9 +466,9 @@ namespace AutomationTestsSolution.Tests
             installWindow.ClickContinueButton();
 
             Thread.Sleep(2000);
-            bool actialIsRepositoryCloned = Utils.IsFolderGit(pathToNewFolder);
+            bool isRepositoryCloned = Utils.IsFolderGit(pathToNewFolder);
 
-            Assert.IsTrue(actialIsRepositoryCloned);
+            Assert.IsTrue(isRepositoryCloned);
         }
 
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "https://Server.com.ua", "incorrectLogin", "incorrectPassword", "bitbucket-public", @"Documents\CloneBasicBitBucketServer")]
@@ -511,9 +511,9 @@ namespace AutomationTestsSolution.Tests
             //installWindow.ClickContinueButton();
 
             //Thread.Sleep(2000);
-            //bool actialIsRepositoryCloned = WindowsFilesHelper.IsGitRepositoryByPath(pathToNewFolder);
+            //bool isRepositoryCloned = WindowsFilesHelper.IsGitRepositoryByPath(pathToNewFolder);
 
-            //Assert.IsTrue(actialIsRepositoryCloned);
+            //Assert.IsTrue(isRepositoryCloned);
         }
 
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "githubfaketesting", "123GitHubFake", "github-public")]
