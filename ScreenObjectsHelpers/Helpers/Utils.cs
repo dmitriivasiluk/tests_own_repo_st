@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using TestStack.White.UIItems;
 
 namespace ScreenObjectsHelpers.Helpers
 {
@@ -23,30 +18,46 @@ namespace ScreenObjectsHelpers.Helpers
             }
         }
 
-
         public static void RemoveFile(string path)
         {
-            try
+            if (File.Exists(path))
             {
-                File.Delete(path);
+                try
+                {
+                    File.Delete(path);
+                }
+                catch (IOException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
-            catch (IOException e)
-            {
-                Console.WriteLine(e.Message);                
-            }
-
         }
 
         public static void RemoveDirectory(string path)
         {
-            try
+            if (Directory.Exists(path))
             {
-                Directory.Delete(path, true);
+                try
+                {
+                    Directory.Delete(path, true);
+                }
+                catch (IOException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
-            catch (IOException e)
-            {
-                Console.WriteLine(e.Message);
-            }
+        }
+
+        public static bool IsFolderGit(string path)
+        {
+            string pathToDotGitFolder = Path.Combine(path, ConstantsList.dotGitFolder);
+            return Directory.Exists(pathToDotGitFolder);
+        }
+
+        public static bool IsFolderMercurial(string path)
+        {
+            string pathToDotGitFolder = Path.Combine(path, ConstantsList.dotHgFolder);
+            return Directory.Exists(pathToDotGitFolder);
         }
     }
 }

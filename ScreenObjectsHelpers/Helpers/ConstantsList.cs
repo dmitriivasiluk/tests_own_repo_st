@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace ScreenObjectsHelpers.Helpers
 {
     public class ConstantsList
@@ -14,12 +13,35 @@ namespace ScreenObjectsHelpers.Helpers
         public const string editedCustomActionName = "editedCustomAction";
         public const string customActionToBeDeleted = "customActionToBeEdited";
 
+        //Constants for BasicTest
+        public const string emptyAutomationFolder = @"%localappdata%\EmptyFolderForAutomation";
+        public const string pathToDataFolder = @"%localappdata%\Atlassian\SourceTree\";
+        public const string pathToAtlassianFolder = @"%localappdata%\Atlassian";
+        public const string userConfig = "user.config";
+        public const string bookmarksXml = "bookmarks.xml";
+        public const string opentabsXml = "opentabs.xml";
+        public const string accountsJson = "accounts.json";
+
         //Constants for Clone Tab tests
-        public const string pathToTestRepoDirectory = @"%userprofile%\Documents\test_bb_git_publ_che";
-        public const string pathToBookmarks = @"%localappdata%\Atlassian\SourceTree\bookmarks.xml";
-        public const string GitRepoLink = "https://github.com/GitHubNoTwoStepVerification/test_gh_git_publ_che.git";
-        public const string MercurialRepoLink = "https://UserAccountNo2FA@bitbucket.org/UserAccountNo2FA/test_bb_hg_publ_che";
-        public const string git = "Git";
-        public const string mercurial = "Mercurial";
+        public const string gitRepoType = "Git";
+        public const string mercurialRepoType = "Mercurial";
+
+            //CloneTab: link validation tests
+        public const string gitRepoLink = "https://github.com/GitHubNoTwoStepVerification/test_gh_git_publ_che.git";
+        public const string mercurialRepoLink = "https://UserAccountNo2FA@bitbucket.org/UserAccountNo2FA/test_bb_hg_publ_che";
+        public const string notValidRepoLink = "https://vcxzwsx@bitbucket.org/vcxzwsx/vcxzwsx.jit";
+
+            //CloneTab: clone tests
+        public const string gitRepoToClone = "https://UserAccountNo2FA@bitbucket.org/UserAccountNo2FA/test_bbgitrepotoclone.git";
+        public const string pathToClonedGitRepo = @"%userprofile%\Documents\test_bbgitrepotoclone";
+        public const string testGitRepoBookmarkName = "test_bbgitrepotoclone";
+
+        public const string mercurialRepoToClone = "https://UserAccountNo2FA@bitbucket.org/UserAccountNo2FA/test_bbmercurialrepotoclone";
+        public const string pathToClonedMercurialRepo = @"%userprofile%\Documents\test_bbmercurialrepotoclone";
+        public const string testHgRepoBookmarkName = "test_bbmercurialrepotoclone";        
+
+        //Constants for Clone tests (clone tab and welcome wizard)
+        public const string dotGitFolder = ".git";
+        public const string dotHgFolder = ".hg";
     }
 }
