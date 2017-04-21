@@ -199,8 +199,7 @@ namespace AutomationTestsSolution.Tests
             Utils.ThreadWait(2000);
 
             RestoreFile(sourceTreeUserConfigPath);
-            RestoreData(sourceTreeDataPath);            
-
+            RestoreData(sourceTreeDataPath);
         }
     }
 }

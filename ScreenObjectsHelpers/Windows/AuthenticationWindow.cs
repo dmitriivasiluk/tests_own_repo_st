@@ -43,10 +43,10 @@ namespace ScreenObjectsHelpers.Windows
             // Need to reimplement in future. 
             Utils.ThreadWait(1000);
             Keyboard.Instance.Enter(loginEmail);
-            ClickOnButton(NextButton);
+            ClickButton(NextButton);
             Utils.ThreadWait(1000);
             Keyboard.Instance.Enter(password);
-            ClickOnButton(NextButton);
+            ClickButton(NextButton);
             Utils.ThreadWait(1000);
             Keyboard.Instance.PressSpecialKey(SpecialKeys.RETURN);
             Utils.ThreadWait(8000);

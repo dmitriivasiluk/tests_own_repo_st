@@ -18,7 +18,7 @@ namespace ScreenObjectsHelpers.Windows
             Button gotItButton = GotItButton;
             if (gotItButton != null && gotItButton.Visible)
             {
-                ClickOnButton(gotItButton);
+                ClickButton(gotItButton);
             }
             OpenToolbarTab();
         }
@@ -59,7 +59,7 @@ namespace ScreenObjectsHelpers.Windows
         {
             if (ToolbarTabButton == null)
             {
-                ClickOnButton(NewTabButton);
+                ClickButton(NewTabButton);
             }
             ToolbarTabButton.Click();
         }

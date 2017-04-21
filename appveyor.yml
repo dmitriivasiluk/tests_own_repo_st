@@ -13,11 +13,9 @@ before_build:
     
     nuget restore
     
-    curl -o %localappdata%\RDP.7z https://transfer.sh/8UGDg/RDP_18.7z
+    curl -o %localappdata%\RDP.7z https://transfer.sh/k3QWp/RD_19v_21.04.7z
     
-    7z e C:\Users\appveyor\AppData\Local\rdp.7z -y -oC:\Users\appveyor\AppData\Local -spf  
-     
-    %localappdata%\SourceTree\app-2.0.18.1\tools\putty\pageant.exe 
+    7z e C:\Users\appveyor\AppData\Local\rdp.7z -y -oC:\Users\appveyor\AppData\Local -spf
 build:
   verbosity: minimal
 after_test:

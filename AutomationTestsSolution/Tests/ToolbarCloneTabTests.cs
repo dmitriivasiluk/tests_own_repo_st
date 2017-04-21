@@ -5,7 +5,7 @@ using ScreenObjectsHelpers.Windows.ToolbarTabs;
 
 namespace AutomationTestsSolution.Tests
 {
-    class ToolbarTabsCloneTests : BasicTest
+    class ToolbarCloneTabTests : BasicTest
     {
         #region Test Variables
         string gitRepoToClone = ConstantsList.gitRepoToClone;
@@ -23,8 +23,7 @@ namespace AutomationTestsSolution.Tests
         [SetUp]
         public override void SetUp()
         {
-            Utils.RemoveDirectory(pathToClonedGitRepo);
-            Utils.RemoveDirectory(pathToClonedMercurialRepo);
+            RemoveTestFolders();
 
             base.SetUp();           
         }
@@ -36,6 +35,11 @@ namespace AutomationTestsSolution.Tests
 
             Utils.ThreadWait(2000);
 
+            RemoveTestFolders();
+        }
+
+        private void RemoveTestFolders()
+        {
             Utils.RemoveDirectory(pathToClonedGitRepo);
             Utils.RemoveDirectory(pathToClonedMercurialRepo);
         }
@@ -48,7 +52,7 @@ namespace AutomationTestsSolution.Tests
 
             cloneTab.SourcePathTextBox.Enter(ConstantsList.gitRepoLink);
 
-            Assert.AreEqual(cloneTab.ValidateGitLink(), ConstantsList.gitRepoType);
+            Assert.AreEqual(cloneTab.GetGitValidationMessage(), ConstantsList.gitRepoType);
         }
 
         [Test]
@@ -59,7 +63,7 @@ namespace AutomationTestsSolution.Tests
 
             cloneTab.SourcePathTextBox.Enter(ConstantsList.mercurialRepoLink);
 
-            Assert.AreEqual(cloneTab.ValidateMercurialLink(), ConstantsList.mercurialRepoType);
+            Assert.AreEqual(cloneTab.GetMercurialValidationMessage(), ConstantsList.mercurialRepoType);
         }
 
         [Test]
@@ -70,7 +74,7 @@ namespace AutomationTestsSolution.Tests
 
             cloneTab.SourcePathTextBox.Enter(ConstantsList.notValidRepoLink);
 
-            Assert.AreEqual(cloneTab.ValidateInvalidLink(), ConstantsList.notValidRepoLink);
+            Assert.AreEqual(cloneTab.GetInvalidRepoMessage(), ConstantsList.invalidFolder);
         }
 
         [Test]
@@ -95,9 +99,9 @@ namespace AutomationTestsSolution.Tests
             cloneTab.ValidateRepoLinkEnableCloneButton();
             cloneTab.ClickCloneButton();
 
-            bool isDotGitExistByPath = Utils.IsFolderGit(pathToClonedGitRepo);
+            var isFolderInitialized = GitWrapper.GetRepositoryByPath(pathToClonedGitRepo);            
 
-            Assert.IsTrue(isDotGitExistByPath);
+            Assert.IsNotNull(isFolderInitialized);
         }
 
         [Test]

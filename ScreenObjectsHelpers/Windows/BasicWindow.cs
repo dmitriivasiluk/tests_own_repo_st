@@ -21,10 +21,10 @@ namespace ScreenObjectsHelpers.Windows
 
         public Window MainWindow { get; private set; }
 
-        public void ClickOnButton(Button button)
+        public void ClickButton(Button button)
         {
             WaitWhileElementAvaliable(button);
-            if (button.Enabled)
+            if (button.Enabled && button.Visible)
             {
                 button.Click();
             }
@@ -34,7 +34,7 @@ namespace ScreenObjectsHelpers.Windows
             }
         }
 
-        public void ClickOnButtonAfterElementVisible(Button Button)
+        public void ClickButtonAfterElementVisible(Button Button)
         {
             WaitWhileElementAvaliable(Button).Click();
         }
@@ -130,6 +130,4 @@ namespace ScreenObjectsHelpers.Windows
             }
         }
     }
-
 }
-

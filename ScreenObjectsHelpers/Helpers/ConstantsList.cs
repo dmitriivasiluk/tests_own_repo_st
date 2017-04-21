@@ -43,5 +43,11 @@ namespace ScreenObjectsHelpers.Helpers
         //Constants for Clone tests (clone tab and welcome wizard)
         public const string dotGitFolder = ".git";
         public const string dotHgFolder = ".hg";
+        public const string invalidFolder = "notValid";
+        public const string emptyPath = "emptyPath";
+
+        //Constants for Add Tab tests
+        public const string emptyFolderForAddTest = @"%userprofile%\Documents\TEST_Empty_AddTab";
+        public const string gitInitFolderForAddTest = @"%userprofile%\Documents\TEST_GitInit_AddTab";
     }
 }

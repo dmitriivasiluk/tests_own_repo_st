@@ -53,12 +53,12 @@ namespace ScreenObjectsHelpers.Windows
         #region Methods
         public void ClickContinueButton()
         {
-            ClickOnButton(ContinueButton);
+            ClickButton(ContinueButton);
         }
 
         public AuthenticationWindow ClickUseExistingAccount()
         {
-            ClickOnButton(UseExistingAccount);
+            ClickButton(UseExistingAccount);
             Window authenticationWindow = Desktop.Instance.Windows().FirstOrDefault(c =>
             {
                 var found = false;
@@ -197,7 +197,7 @@ namespace ScreenObjectsHelpers.Windows
 
         public LocalTab SkipSetup()
         {
-            ClickOnButton(SkipSetupButton);
+            ClickButton(SkipSetupButton);
             Window mercurialWindow = Utils.FindNewWindow("SourceTree: Mercurial not found", 10);
             if (mercurialWindow != null)
             {
@@ -212,7 +212,7 @@ namespace ScreenObjectsHelpers.Windows
         {
             try
             {
-                ClickOnButton(ContinueButton);
+                ClickButton(ContinueButton);
             }
             catch (TimeoutException)
             {
@@ -258,7 +258,7 @@ namespace ScreenObjectsHelpers.Windows
 
         public void BrowseDestinationPath(string path)
         {
-            ClickOnButton(BrowseDestinationPathButton);
+            ClickButton(BrowseDestinationPathButton);
             SearchCriteria searchCriteria = SearchCriteria.ByText("Select Destination Path");
             var selectDestinationWindow = this.WaitMdiChildAppears(searchCriteria, 10);
             var browseWindow = new BrowseDestinationPath(this, selectDestinationWindow);

@@ -49,7 +49,7 @@ namespace ScreenObjectsHelpers.Windows.Options
         #region Methods        
         public ProxyAuthenticationWindow OpenUsernameAndPassword()
         {
-            ClickOnButton(UsernameAndPasswordButton);
+            ClickButton(UsernameAndPasswordButton);
             var proxyAuthenticationWindow = MainWindow.MdiChild(SearchCriteria.ByText("Authenticate"));
             return new ProxyAuthenticationWindow(MainWindow, OptionsWindowContainer, proxyAuthenticationWindow);
         }

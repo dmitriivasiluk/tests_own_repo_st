@@ -91,35 +91,35 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
             NameTextBox.Focus();
         }
 
-        public string ValidateGitLink()
+        public string GetGitValidationMessage()
         {
             ValidateRepoLinkEnableCloneButton();
 
-            if (GitRepoValidText.Enabled)
+            if (GitRepoValidText.Enabled && GitRepoValidText.Visible)
             {
                 return ConstantsList.gitRepoType;
             }
             return null;
         }
 
-        public string ValidateMercurialLink()
+        public string GetMercurialValidationMessage()
         {
             ValidateRepoLinkEnableCloneButton();
 
-            if (MercurialRepoValidText.Enabled)
+            if (MercurialRepoValidText.Enabled && MercurialRepoValidText.Visible)
             {
                 return ConstantsList.mercurialRepoType;
             }
             return null;
         }
 
-        public string ValidateInvalidLink()
+        public string GetInvalidRepoMessage()
         {
             ValidateRepoLinkEnableCloneButton();
 
-            if (NotValidSourcePathText.Enabled)
+            if (NotValidSourcePathText.Enabled && NotValidSourcePathText.Visible)
             {
-                return ConstantsList.notValidRepoLink;
+                return ConstantsList.invalidFolder;
             }
             return null;
         }
