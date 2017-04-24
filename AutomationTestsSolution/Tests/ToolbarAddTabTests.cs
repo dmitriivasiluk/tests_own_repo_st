@@ -47,8 +47,7 @@ namespace AutomationTestsSolution.Tests
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
             AddTab addTab = mainWindow.OpenTab<AddTab>();
-            var a = pathToTestFolder;
-            addTab.WorkingCopyPathTextBox.Enter(a);
+            addTab.WorkingCopyPathTextBox.Enter(pathToTestFolder);
 
             Assert.AreEqual(addTab.GetGitValidationMessage(), ConstantsList.gitRepoType);
         }
