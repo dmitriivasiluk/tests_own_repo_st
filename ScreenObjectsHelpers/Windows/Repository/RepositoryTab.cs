@@ -18,13 +18,6 @@ namespace ScreenObjectsHelpers.Windows.Repository
             Console.WriteLine("WAIT FOR OPENING TAB");
         }
         #region UIItems
-        //public override UIItem ToolbarTabButton
-        //{
-        //    get
-        //    {
-        //        throw new NotImplementedException();
-        //    }
-        //}
         public Button CommitButton => MainWindow.Get<Button>(SearchCriteria.ByText("Commit"));
         public Button PushButton => MainWindow.Get<Button>(SearchCriteria.ByText("Push"));
         public Button PullButton => MainWindow.Get<Button>(SearchCriteria.ByText("Pull"));
