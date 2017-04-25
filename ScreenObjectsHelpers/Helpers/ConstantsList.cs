@@ -49,5 +49,7 @@ namespace ScreenObjectsHelpers.Helpers
         //Constants for Add Tab tests
         public const string emptyFolderForAddTest = @"%userprofile%\Documents\TEST_Empty_AddTab";
         public const string gitInitFolderForAddTest = @"%userprofile%\Documents\TEST_GitInit_AddTab";
+        public const string hgInitFolderForAddTest = @"%userprofile%\Documents\TEST_HgInit_AddTab";
+        public const string pathToEmbeddedHg = @"%localappdata%\Atlassian\SourceTree\hg_local\hg.exe";
     }
 }
