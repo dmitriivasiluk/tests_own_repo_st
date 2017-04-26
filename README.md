@@ -1,5 +1,7 @@
 # Automation QA Application
 
+[![Build status](https://ci.appveyor.com/api/projects/status/2awompskpxxxh2fs?svg=true)](https://ci.appveyor.com/project/icherednyk/sourcetreeqaautomation)
+
 ## Quick Start
 
 ### clone git repository
