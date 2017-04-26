@@ -49,8 +49,8 @@ namespace AutomationTestsSolution.Tests
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
-
-            cloneTab.SourcePathTextBox.Enter(ConstantsList.gitRepoLink);
+            
+            cloneTab.SourcePathTextBox.SetValue(ConstantsList.gitRepoLink);
 
             Assert.AreEqual(cloneTab.GetGitValidationMessage(), ConstantsList.gitRepoType);
         }
@@ -61,7 +61,7 @@ namespace AutomationTestsSolution.Tests
             LocalTab mainWindow = new LocalTab(MainWindow);
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
-            cloneTab.SourcePathTextBox.Enter(ConstantsList.mercurialRepoLink);
+            cloneTab.SourcePathTextBox.SetValue(ConstantsList.mercurialRepoLink);
 
             Assert.AreEqual(cloneTab.GetMercurialValidationMessage(), ConstantsList.mercurialRepoType);
         }
@@ -72,7 +72,7 @@ namespace AutomationTestsSolution.Tests
             LocalTab mainWindow = new LocalTab(MainWindow);
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
-            cloneTab.SourcePathTextBox.Enter(ConstantsList.notValidRepoLink);
+            cloneTab.SourcePathTextBox.SetValue(ConstantsList.notValidRepoLink);
 
             Assert.AreEqual(cloneTab.GetInvalidRepoMessage(), ConstantsList.invalidFolder);
         }
@@ -83,7 +83,7 @@ namespace AutomationTestsSolution.Tests
             LocalTab mainWindow = new LocalTab(MainWindow);
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
-            cloneTab.SourcePathTextBox.Enter(ConstantsList.gitRepoLink);
+            cloneTab.SourcePathTextBox.SetValue(ConstantsList.gitRepoLink);
             cloneTab.ValidateRepoLinkEnableCloneButton();
 
             Assert.IsTrue(cloneTab.IsCloneButtonEnabled());
@@ -95,7 +95,7 @@ namespace AutomationTestsSolution.Tests
             LocalTab mainWindow = new LocalTab(MainWindow);
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
-            cloneTab.SourcePathTextBox.Enter(gitRepoToClone);
+            cloneTab.SourcePathTextBox.SetValue(gitRepoToClone);
             cloneTab.ValidateRepoLinkEnableCloneButton();
             cloneTab.ClickCloneButton();
 
@@ -110,7 +110,8 @@ namespace AutomationTestsSolution.Tests
             LocalTab mainWindow = new LocalTab(MainWindow);
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
-            cloneTab.SourcePathTextBox.Enter(mercurialRepoToClone);
+            cloneTab.SourcePathTextBox.SetValue(mercurialRepoToClone);
+
             cloneTab.ValidateRepoLinkEnableCloneButton();
             cloneTab.ClickCloneButton();
 
@@ -125,7 +126,7 @@ namespace AutomationTestsSolution.Tests
             LocalTab mainWindow = new LocalTab(MainWindow);
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
-            cloneTab.SourcePathTextBox.Enter(gitRepoToClone);
+            cloneTab.SourcePathTextBox.SetValue(gitRepoToClone);
             cloneTab.ValidateRepoLinkEnableCloneButton();
             cloneTab.ClickCloneButton();
             var localtab = mainWindow.OpenTab<LocalTab>();
@@ -139,7 +140,7 @@ namespace AutomationTestsSolution.Tests
             LocalTab mainWindow = new LocalTab(MainWindow);
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
-            cloneTab.SourcePathTextBox.Enter(mercurialRepoToClone);
+            cloneTab.SourcePathTextBox.SetValue(mercurialRepoToClone);
             cloneTab.ValidateRepoLinkEnableCloneButton();
             cloneTab.ClickCloneButton();
             var localtab = mainWindow.OpenTab<LocalTab>();
