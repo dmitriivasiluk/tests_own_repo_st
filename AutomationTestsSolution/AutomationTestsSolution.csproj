@@ -87,6 +87,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Tests\BasicTest.cs" />
+    <Compile Include="Tests\GitFlowInitialiseTests.cs" />
     <Compile Include="Tests\HelpMenuTests.cs" />
     <Compile Include="Tests\CustomActionsTests.cs" />
     <Compile Include="Tests\ToolbarAddTabTests.cs" />
@@ -95,7 +96,6 @@
     <Compile Include="Tests\OptionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="build.fsx" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
