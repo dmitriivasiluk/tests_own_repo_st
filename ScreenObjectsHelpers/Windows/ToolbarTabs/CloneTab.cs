@@ -4,6 +4,7 @@ using TestStack.White.UIItems.ListBoxItems;
 using TestStack.White.UIItems.Finders;
 using System.Windows.Automation;
 using ScreenObjectsHelpers.Helpers;
+using ScreenObjectsHelpers.Windows.Repository;
 
 namespace ScreenObjectsHelpers.Windows.ToolbarTabs
 {
@@ -132,13 +133,14 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         }
 
         //TODO return repository tab
-        public void ClickCloneButton()
+        public RepositoryTab ClickCloneButton()
         {
             if (IsCloneButtonEnabled())
             {
                 CloneButton.Click();
                 Utils.ThreadWait(3000);
             }
+            return new RepositoryTab(MainWindow);
         }
         #endregion
     }
