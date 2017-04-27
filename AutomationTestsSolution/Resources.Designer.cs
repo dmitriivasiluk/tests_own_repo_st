@@ -76,5 +76,17 @@ namespace AutomationTestsSolution {
                 return ResourceManager.GetString("customactions", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///&lt;ArrayOfString xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
+        ///  &lt;string&gt;%userprofile%\Documents\test_bbgitrepotoclone&lt;/string&gt;
+        ///&lt;/ArrayOfString&gt;.
+        /// </summary>
+        internal static string opentabs_for_clear_repo {
+            get {
+                return ResourceManager.GetString("opentabs_for_clear_repo", resourceCulture);
+            }
+        }
     }
 }

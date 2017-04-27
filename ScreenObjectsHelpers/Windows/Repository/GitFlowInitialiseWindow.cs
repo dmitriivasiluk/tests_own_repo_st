@@ -27,9 +27,9 @@ namespace ScreenObjectsHelpers.Windows.Repository
         public TextBox ReleaseBranch => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(4));
         public TextBox HotfixBranch => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(5));
         public TextBox VersionTag => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(6));
-        public TextBox OKButton => MainWindow.Get<TextBox>(SearchCriteria.ByText("OK"));
-        public TextBox CancelButton => MainWindow.Get<TextBox>(SearchCriteria.ByText("Cancel"));
-        public TextBox UseDefaultsButton => MainWindow.Get<TextBox>(SearchCriteria.ByText("UseDefaults"));
+        public Button OKButton => MainWindow.Get<Button>(SearchCriteria.ByText("OK"));
+        public Button CancelButton => MainWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
+        public Button UseDefaultsButton => MainWindow.Get<Button>(SearchCriteria.ByText("Use Defaults"));
         #endregion
 
         #region Methods
@@ -58,6 +58,13 @@ namespace ScreenObjectsHelpers.Windows.Repository
         {
             textbox.Focus();
             Keyboard.Instance.Enter(content);
+        }
+        public bool IsDefaultBranchNameCorrect(TextBox textbox, string condition)
+        {
+            if (textbox.Text == condition)
+                return true;
+            else
+                return false;
         }
         #endregion
 
