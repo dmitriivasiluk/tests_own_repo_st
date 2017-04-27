@@ -1,6 +1,8 @@
-# Automation QA Application
+### SourceTree QA Automation project ###
 
 [![Build status](https://ci.appveyor.com/api/projects/status/2awompskpxxxh2fs?svg=true)](https://ci.appveyor.com/project/icherednyk/sourcetreeqaautomation)
+
+[![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr/atlassian/sourcetreeqaautomation.svg)](https://bitbucket.org/atlassian/sourcetreeqaautomation/pull-requests/)
 
 ## Quick Start
 

@@ -9,7 +9,9 @@ before_build:
 
     %windir%\system32\reg.exe import Disable_Explorer_Auto_Complete_popup.reg
 
-    set PATH=C:\Program Files\Git\mingw64\bin;%PATH%    
+    set PATH=C:\Program Files\Git\mingw64\bin;%PATH%
+
+    git config --global core.excludesfile "%USERPROFILE%\.gitignore_global"    
     
     nuget restore
     
