@@ -4,7 +4,7 @@ namespace ScreenObjectsHelpers.Helpers
     public class ConstantsList
     {
         //Constants for Help Menu (about window) tests
-        public const string appVersion = "Version 2.0.18.1";
+        public const string appVersion = "Version 2.0.19.1";
         public const string copyrightCaption = "Copyright Atlassian 2012-2017. All Rights Reserved.";
         public const string aboutWindowHeader = "About SourceTree";
 
@@ -21,6 +21,7 @@ namespace ScreenObjectsHelpers.Helpers
         public const string bookmarksXml = "bookmarks.xml";
         public const string opentabsXml = "opentabs.xml";
         public const string accountsJson = "accounts.json";
+        public const string currentUserProfile = "%userprofile%";
 
         //Constants for Clone Tab tests
         public const string gitRepoType = "Git";
@@ -49,5 +50,12 @@ namespace ScreenObjectsHelpers.Helpers
         //Constants for Add Tab tests
         public const string emptyFolderForAddTest = @"%userprofile%\Documents\TEST_Empty_AddTab";
         public const string gitInitFolderForAddTest = @"%userprofile%\Documents\TEST_GitInit_AddTab";
+
+        //Constants for GitFlow Initialise window
+        public const string defaultProductionBranch = "master";
+        public const string defaultDevelopmentBranch = "develop";
+        public const string defaultFeatureBranch = "feature/";
+        public const string defaultReleaseBranch = "release/";
+        public const string defaultHotfixBranch = "hotfix/";
     }
 }
