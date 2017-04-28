@@ -6,6 +6,7 @@ using ScreenObjectsHelpers.Windows.ToolbarTabs;
 using System.IO;
 using System;
 using ScreenObjectsHelpers.Windows.Repository;
+using LibGit2Sharp;
 
 namespace AutomationTestsSolution.Tests
 {
@@ -27,8 +28,10 @@ namespace AutomationTestsSolution.Tests
         {
             base.BackupConfigs();
             base.UseTestConfigs(sourceTreeDataPath);
-            
-            GitWrapper git = new GitWrapper(pathToClonedGitRepo, testData, testData);
+
+            //GitWrapper git = new GitWrapper(pathToClonedGitRepo, testData, testData);
+            CreateTestFolders();
+            Repository.Init(pathToClonedGitRepo);
             resourceName = resourceName.Replace(userprofileToBeReplaced, currentUserProfile);
             File.WriteAllText(openTabsPath, resourceName);
             base.RunAndAttachToSourceTree();
@@ -41,6 +44,10 @@ namespace AutomationTestsSolution.Tests
             base.TearDown();
 
             Utils.RemoveDirectory(pathToClonedGitRepo);
+        }
+        private void CreateTestFolders()
+        {
+            Directory.CreateDirectory(pathToClonedGitRepo);
         }
 
         [Test]
