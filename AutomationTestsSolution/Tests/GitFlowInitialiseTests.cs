@@ -39,6 +39,7 @@ namespace AutomationTestsSolution.Tests
         {
             gitFlowInitWindow.ClickCancelButton();
             base.TearDown();
+
             Utils.RemoveDirectory(pathToClonedGitRepo);
         }
 
