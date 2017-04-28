@@ -19,7 +19,7 @@ namespace AutomationTestsSolution.Tests
             string appVersion = aboutWindow.GetAppVersion();
             Assert.AreEqual(aboutWindowHeader, ConstantsList.aboutWindowHeader);
             Assert.AreEqual(copyrightCaption, ConstantsList.copyrightCaption);
-            Assert.AreEqual(appVersion, ConstantsList.appVersion);
+            Assert.That(appVersion, Does.Contain(GetSourceTreeVersion()));
         }
     }
 }

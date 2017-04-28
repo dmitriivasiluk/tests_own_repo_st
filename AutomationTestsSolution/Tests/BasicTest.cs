@@ -134,6 +134,14 @@ namespace AutomationTestsSolution.Tests
             return Path.Combine(folder, ConstantsList.userConfig);
         }
 
+        public string GetSourceTreeVersion()
+        {
+            var pathToConfig = FindSourceTreeUserConfig(sourceTreeVersion);
+            var version = Path.GetDirectoryName(pathToConfig).Split('\\').LastOrDefault();
+
+            return version;
+        }
+
         protected void AttachToSourceTree()
         {
             MainWindow = null;
