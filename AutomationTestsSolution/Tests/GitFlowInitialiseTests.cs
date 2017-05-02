@@ -26,6 +26,7 @@ namespace AutomationTestsSolution.Tests
         [SetUp]
         public override void SetUp()
         {
+            RemoveTestFolders();
             base.BackupConfigs();
             base.UseTestConfigs(sourceTreeDataPath);
 
@@ -42,14 +43,17 @@ namespace AutomationTestsSolution.Tests
         {
             gitFlowInitWindow.ClickCancelButton();
             base.TearDown();
-
-            Utils.RemoveDirectory(pathToClonedGitRepo);
+            Utils.ThreadWait(2000);
+            RemoveTestFolders();
         }
         private void CreateTestFolders()
         {
             Directory.CreateDirectory(pathToClonedGitRepo);
         }
-
+        private void RemoveTestFolders()
+        {
+            Utils.RemoveDirectory(pathToClonedGitRepo);
+        }
         [Test]
         public void CheckUseDefaultsButtonResetTextboxesTest()
         {
