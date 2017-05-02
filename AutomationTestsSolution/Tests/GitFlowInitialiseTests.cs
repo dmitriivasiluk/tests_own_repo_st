@@ -27,14 +27,13 @@ namespace AutomationTestsSolution.Tests
         public override void SetUp()
         {
             RemoveTestFolders();
-            base.BackupConfigs();
-            base.UseTestConfigs(sourceTreeDataPath);
-
-            //GitWrapper git = new GitWrapper(pathToClonedGitRepo, testData, testData);
             CreateTestFolders();
             Repository.Init(pathToClonedGitRepo);
+            base.BackupConfigs();
+            base.UseTestConfigs(sourceTreeDataPath);
             resourceName = resourceName.Replace(userprofileToBeReplaced, currentUserProfile);
             File.WriteAllText(openTabsPath, resourceName);
+            Utils.ThreadWait(2000);
             base.RunAndAttachToSourceTree();
         }
 
@@ -58,6 +57,7 @@ namespace AutomationTestsSolution.Tests
         public void CheckUseDefaultsButtonResetTextboxesTest()
         {
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
+            Utils.ThreadWait(4000);
             gitFlowInitWindow = mainWindow.ClickGitFlowButton();
 
             gitFlowInitWindow.SetTextboxContent(gitFlowInitWindow.ProductionBranchTextbox, testString);
