@@ -81,6 +81,7 @@ namespace AutomationTestsSolution.Tests
         public void CheckWhetherDefaultBranchNamesCorrect()
         {
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
+            Utils.ThreadWait(4000);
             gitFlowInitWindow = mainWindow.ClickGitFlowButton();
 
             Assert.IsTrue(gitFlowInitWindow.TextboxDefaultContent(gitFlowInitWindow.ProductionBranchTextbox, ConstantsList.defaultProductionBranch));
