@@ -1,8 +1,5 @@
 ﻿using NUnit.Framework;
 using ScreenObjectsHelpers.Helpers;
-using ScreenObjectsHelpers.Windows.Options;
-using ScreenObjectsHelpers.Windows.MenuFolder;
-using ScreenObjectsHelpers.Windows.ToolbarTabs;
 using System.IO;
 using System;
 using ScreenObjectsHelpers.Windows.Repository;
