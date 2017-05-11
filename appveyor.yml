@@ -1,9 +1,11 @@
-
 os: Unstable
 
 version: 1.0.{build}
 init:
-- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+init:
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+install:
+- ps: Start-FileDownload https://bitbucket.org/atlassian/sourcetreeqaautomation/downloads/19v_03.May.7z 'C:\Users\appveyor\AppData\Local\ST_Local.7z'
 before_build:
 - cmd: >-
 
@@ -17,11 +19,9 @@ before_build:
     
     nuget restore
     
-    curl -o %localappdata%\ST_Local.7z https://transfer.sh/zdF7y/19v_03.May.7z
-    
     7z e C:\Users\appveyor\AppData\Local\ST_Local.7z -y -oC:\Users\appveyor\AppData\Local -spf
     
-    curl -o %localappdata%\configs.7z https://transfer.sh/xfIAw/configs_03.May.7z
+    curl -o %localappdata%\configs.7z https://transfer.sh/FaaGw/configs_04.May.7z
     
     7z e C:\Users\appveyor\AppData\Local\configs.7z -y -oC:\Users\appveyor\AppData\Local -spf
 
@@ -30,6 +30,10 @@ before_build:
     %windir%\system32\reg.exe import %localappdata%\configs\Disable_Explorer_Auto_Complete_popup.reg
 
     %localappdata%\configs\SeleniumAuth.exe
+    
+    curl -o %userprofile%\Documents\ignore.7z https://transfer.sh/8LfXY/global_ignore_04.May.7z
+    
+    7z e C:\Users\appveyor\Documents\ignore.7z -y -oC:\Users\appveyor\Documents -spf
 build:
   verbosity: minimal
 after_test:
