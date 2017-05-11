@@ -1,151 +1,151 @@
-﻿//using System;
-//using NUnit.Framework;
-//using ScreenObjectsHelpers.Helpers;
-//using ScreenObjectsHelpers.Windows.ToolbarTabs;
+﻿using System;
+using NUnit.Framework;
+using ScreenObjectsHelpers.Helpers;
+using ScreenObjectsHelpers.Windows.ToolbarTabs;
 
-//namespace AutomationTestsSolution.Tests
-//{
-//    class ToolbarCloneTabTests : BasicTest
-//    {
-//        #region Test Variables
-//        string gitRepoToClone = ConstantsList.gitRepoToClone;
-//        string pathToClonedGitRepo = Environment.ExpandEnvironmentVariables(ConstantsList.pathToClonedGitRepo);
-//        string mercurialRepoToClone = ConstantsList.mercurialRepoToClone;
-//        string pathToClonedMercurialRepo = Environment.ExpandEnvironmentVariables(ConstantsList.pathToClonedMercurialRepo);
-//        #endregion
+namespace AutomationTestsSolution.Tests
+{
+    class ToolbarCloneTabTests : BasicTest
+    {
+        #region Test Variables
+        string gitRepoToClone = ConstantsList.gitRepoToClone;
+        string pathToClonedGitRepo = Environment.ExpandEnvironmentVariables(ConstantsList.pathToClonedGitRepo);
+        string mercurialRepoToClone = ConstantsList.mercurialRepoToClone;
+        string pathToClonedMercurialRepo = Environment.ExpandEnvironmentVariables(ConstantsList.pathToClonedMercurialRepo);
+        #endregion
 
-//        /// <summary>        
-//        /// Pre-conditions: 
-//        /// Test repo folders are removed
-//        /// Mercurial is installed
-//        /// 2.0 Welcome - Disabled
-//        /// </summary>
-//        [SetUp]
-//        public override void SetUp()
-//        {
-//            RemoveTestFolders();
+        /// <summary>        
+        /// Pre-conditions: 
+        /// Test repo folders are removed
+        /// Mercurial is installed
+        /// 2.0 Welcome - Disabled
+        /// </summary>
+        [SetUp]
+        public override void SetUp()
+        {
+            RemoveTestFolders();
 
-//            base.SetUp();           
-//        }
+            base.SetUp();
+        }
 
-//        [TearDown]
-//        public override void TearDown()
-//        {
-//            base.TearDown();
+        [TearDown]
+        public override void TearDown()
+        {
+            base.TearDown();
 
-//            Utils.ThreadWait(2000);
+            Utils.ThreadWait(2000);
 
-//            RemoveTestFolders();
-//        }
+            RemoveTestFolders();
+        }
 
-//        private void RemoveTestFolders()
-//        {
-//            Utils.RemoveDirectory(pathToClonedGitRepo);
-//            Utils.RemoveDirectory(pathToClonedMercurialRepo);
-//        }
+        private void RemoveTestFolders()
+        {
+            Utils.RemoveDirectory(pathToClonedGitRepo);
+            Utils.RemoveDirectory(pathToClonedMercurialRepo);
+        }
 
-//        [Test]
-//        public void ValidateGitRepoLinkTest()
-//        {
-//            LocalTab mainWindow = new LocalTab(MainWindow);
-//            CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
-            
-//            cloneTab.SourcePathTextBox.SetValue(ConstantsList.gitRepoLink);
+        [Test]
+        public void ValidateGitRepoLinkTest()
+        {
+            LocalTab mainWindow = new LocalTab(MainWindow);
+            CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
-//            Assert.AreEqual(cloneTab.GetGitValidationMessage(), ConstantsList.gitRepoType);
-//        }
+            cloneTab.SourcePathTextBox.SetValue(ConstantsList.gitRepoLink);
 
-//        [Test]
-//        public void ValidateMercurialRepoLinkTest() // Mercurial should be installed
-//        {
-//            LocalTab mainWindow = new LocalTab(MainWindow);
-//            CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
+            Assert.AreEqual(cloneTab.GetGitValidationMessage(), ConstantsList.gitRepoType);
+        }
 
-//            cloneTab.SourcePathTextBox.SetValue(ConstantsList.mercurialRepoLink);
+        [Test]
+        public void ValidateMercurialRepoLinkTest() // Mercurial should be installed
+        {
+            LocalTab mainWindow = new LocalTab(MainWindow);
+            CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
-//            Assert.AreEqual(cloneTab.GetMercurialValidationMessage(), ConstantsList.mercurialRepoType);
-//        }
+            cloneTab.SourcePathTextBox.SetValue(ConstantsList.mercurialRepoLink);
 
-//        [Test]
-//        public void ValidateInvalidRepoLinkTest()
-//        {
-//            LocalTab mainWindow = new LocalTab(MainWindow);
-//            CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
+            Assert.AreEqual(cloneTab.GetMercurialValidationMessage(), ConstantsList.mercurialRepoType);
+        }
 
-//            cloneTab.SourcePathTextBox.SetValue(ConstantsList.notValidRepoLink);
+        [Test]
+        public void ValidateInvalidRepoLinkTest()
+        {
+            LocalTab mainWindow = new LocalTab(MainWindow);
+            CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
-//            Assert.AreEqual(cloneTab.GetInvalidRepoMessage(), ConstantsList.invalidFolder);
-//        }
+            cloneTab.SourcePathTextBox.SetValue(ConstantsList.notValidRepoLink);
 
-//        [Test]
-//        public void CheckCloneButtonEnabledTest()
-//        {
-//            LocalTab mainWindow = new LocalTab(MainWindow);
-//            CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
+            Assert.AreEqual(cloneTab.GetInvalidRepoMessage(), ConstantsList.invalidFolder);
+        }
 
-//            cloneTab.SourcePathTextBox.SetValue(ConstantsList.gitRepoLink);
-//            cloneTab.ValidateRepoLinkEnableCloneButton();
+        [Test]
+        public void CheckCloneButtonEnabledTest()
+        {
+            LocalTab mainWindow = new LocalTab(MainWindow);
+            CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
-//            Assert.IsTrue(cloneTab.IsCloneButtonEnabled());
-//        }
+            cloneTab.SourcePathTextBox.SetValue(ConstantsList.gitRepoLink);
+            cloneTab.ValidateRepoLinkEnableCloneButton();
 
-//        [Test]
-//        public void CheckCloneGitRepoTest()
-//        {
-//            LocalTab mainWindow = new LocalTab(MainWindow);
-//            CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
+            Assert.IsTrue(cloneTab.IsCloneButtonEnabled());
+        }
 
-//            cloneTab.SourcePathTextBox.SetValue(gitRepoToClone);
-//            cloneTab.ValidateRepoLinkEnableCloneButton();
-//            cloneTab.ClickCloneButton();
+        [Test]
+        public void CheckCloneGitRepoTest()
+        {
+            LocalTab mainWindow = new LocalTab(MainWindow);
+            CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
-//            var isFolderInitialized = GitWrapper.GetRepositoryByPath(pathToClonedGitRepo);            
+            cloneTab.SourcePathTextBox.SetValue(gitRepoToClone);
+            cloneTab.ValidateRepoLinkEnableCloneButton();
+            cloneTab.ClickCloneButton();
 
-//            Assert.IsNotNull(isFolderInitialized);
-//        }
+            var isFolderInitialized = GitWrapper.GetRepositoryByPath(pathToClonedGitRepo);
 
-//        [Test]
-//        public void CheckCloneMercurialRepoTest()  // Mercurial should be installed
-//        {
-//            LocalTab mainWindow = new LocalTab(MainWindow);
-//            CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
+            Assert.IsNotNull(isFolderInitialized);
+        }
 
-//            cloneTab.SourcePathTextBox.SetValue(mercurialRepoToClone);
+        [Test]
+        public void CheckCloneMercurialRepoTest()  // Mercurial should be installed
+        {
+            LocalTab mainWindow = new LocalTab(MainWindow);
+            CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
-//            cloneTab.ValidateRepoLinkEnableCloneButton();
-//            cloneTab.ClickCloneButton();
+            cloneTab.SourcePathTextBox.SetValue(mercurialRepoToClone);
 
-//            bool isDotHgExistByPath = Utils.IsFolderMercurial(pathToClonedMercurialRepo);
+            cloneTab.ValidateRepoLinkEnableCloneButton();
+            cloneTab.ClickCloneButton();
 
-//            Assert.IsTrue(isDotHgExistByPath);
-//        }
+            bool isDotHgExistByPath = Utils.IsFolderMercurial(pathToClonedMercurialRepo);
 
-//        [Test]
-//        public void CheckBookmarkAppearedAfterGitRepoClonedTest()
-//        {
-//            LocalTab mainWindow = new LocalTab(MainWindow);
-//            CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
+            Assert.IsTrue(isDotHgExistByPath);
+        }
 
-//            cloneTab.SourcePathTextBox.SetValue(gitRepoToClone);
-//            cloneTab.ValidateRepoLinkEnableCloneButton();
-//            cloneTab.ClickCloneButton();
-//            var localtab = mainWindow.OpenTab<LocalTab>();
-//            var bookmarkAdded = localtab.IsTestGitRepoBookmarkAdded();
-//            Assert.IsTrue(bookmarkAdded);
-//        }
+        [Test]
+        public void CheckBookmarkAppearedAfterGitRepoClonedTest()
+        {
+            LocalTab mainWindow = new LocalTab(MainWindow);
+            CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
-//        [Test]
-//        public void CheckBookmarkAppearedAfterHgRepoClonedTest()  // Mercurial should be installed
-//        {
-//            LocalTab mainWindow = new LocalTab(MainWindow);
-//            CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
+            cloneTab.SourcePathTextBox.SetValue(gitRepoToClone);
+            cloneTab.ValidateRepoLinkEnableCloneButton();
+            cloneTab.ClickCloneButton();
+            var localtab = mainWindow.OpenTab<LocalTab>();
+            var bookmarkAdded = localtab.IsTestGitRepoBookmarkAdded();
+            Assert.IsTrue(bookmarkAdded);
+        }
 
-//            cloneTab.SourcePathTextBox.SetValue(mercurialRepoToClone);
-//            cloneTab.ValidateRepoLinkEnableCloneButton();
-//            cloneTab.ClickCloneButton();
-//            var localtab = mainWindow.OpenTab<LocalTab>();
-//            var bookmarkAdded = localtab.IsTestHgRepoBookmarkAdded();
-//            Assert.IsTrue(bookmarkAdded);
-//        }
-//    }
-//}
+        [Test]
+        public void CheckBookmarkAppearedAfterHgRepoClonedTest()  // Mercurial should be installed
+        {
+            LocalTab mainWindow = new LocalTab(MainWindow);
+            CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
+
+            cloneTab.SourcePathTextBox.SetValue(mercurialRepoToClone);
+            cloneTab.ValidateRepoLinkEnableCloneButton();
+            cloneTab.ClickCloneButton();
+            var localtab = mainWindow.OpenTab<LocalTab>();
+            var bookmarkAdded = localtab.IsTestHgRepoBookmarkAdded();
+            Assert.IsTrue(bookmarkAdded);
+        }
+    }
+}
