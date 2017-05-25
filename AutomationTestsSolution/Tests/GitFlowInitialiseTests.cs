@@ -1,9 +1,9 @@
-﻿using NUnit.Framework;
+﻿using LibGit2Sharp;
+using NUnit.Framework;
 using ScreenObjectsHelpers.Helpers;
 using System.IO;
 using System;
 using ScreenObjectsHelpers.Windows.Repository;
-using LibGit2Sharp;
 
 namespace AutomationTestsSolution.Tests
 {
@@ -12,10 +12,12 @@ namespace AutomationTestsSolution.Tests
         #region Test Variables
         private string pathToClonedGitRepo = Environment.ExpandEnvironmentVariables(ConstantsList.pathToClonedGitRepo);
         private string currentUserProfile = Environment.ExpandEnvironmentVariables(ConstantsList.currentUserProfile);
+        
+        // opentabs configuration
         private string openTabsPath = Environment.ExpandEnvironmentVariables(Path.Combine(ConstantsList.pathToDataFolder, ConstantsList.opentabsXml));
         private string resourceName = Resources.opentabs_for_clear_repo;
+
         private string userprofileToBeReplaced = ConstantsList.currentUserProfile;
-        private string testData = "test@atlassian.com";
         private string testString = "123";
         private GitFlowInitialiseWindow gitFlowInitWindow;
         #endregion
@@ -23,14 +25,13 @@ namespace AutomationTestsSolution.Tests
         [SetUp]
         public override void SetUp()
         {
-            RemoveTestFolders();
-            CreateTestFolders();
+            RemoveTestFolder();
+            CreateTestFolder();
             Repository.Init(pathToClonedGitRepo);
             base.BackupConfigs();
-            base.UseTestConfigs(sourceTreeDataPath);
+            base.UseTestConfigAndAccountJson(sourceTreeDataPath);
             resourceName = resourceName.Replace(userprofileToBeReplaced, currentUserProfile);
             File.WriteAllText(openTabsPath, resourceName);
-            Utils.ThreadWait(2000);
             base.RunAndAttachToSourceTree();
         }
 
@@ -39,31 +40,25 @@ namespace AutomationTestsSolution.Tests
         {
             gitFlowInitWindow.ClickCancelButton();
             base.TearDown();
-            Utils.ThreadWait(2000);
-            RemoveTestFolders();
+            RemoveTestFolder();
         }
-        private void CreateTestFolders()
+        private void CreateTestFolder()
         {
             Directory.CreateDirectory(pathToClonedGitRepo);
         }
-        private void RemoveTestFolders()
+        private void RemoveTestFolder()
         {
             Utils.RemoveDirectory(pathToClonedGitRepo);
         }
+
         [Test]
+        [Category ("GitFlow")]
         public void CheckUseDefaultsButtonResetTextboxesTest()
         {
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
-            Utils.ThreadWait(4000);
             gitFlowInitWindow = mainWindow.ClickGitFlowButton();
 
-            gitFlowInitWindow.SetTextboxContent(gitFlowInitWindow.ProductionBranchTextbox, testString);
-            gitFlowInitWindow.SetTextboxContent(gitFlowInitWindow.DevelopmentBranchTextbox, testString);
-            gitFlowInitWindow.SetTextboxContent(gitFlowInitWindow.FeatureBranchTextbox, testString);
-            gitFlowInitWindow.SetTextboxContent(gitFlowInitWindow.ReleaseBranchTextbox, testString);
-            gitFlowInitWindow.SetTextboxContent(gitFlowInitWindow.HotfixBranchTextbox, testString);
-            gitFlowInitWindow.SetTextboxContent(gitFlowInitWindow.VersionTagTextbox, testString);
-
+            gitFlowInitWindow.SetAllTextboxes(testString);
             gitFlowInitWindow.ClickUseDefaultsButton();
 
             Assert.IsTrue(gitFlowInitWindow.IsDefaultBranchNameCorrect(gitFlowInitWindow.ProductionBranchTextbox, ConstantsList.defaultProductionBranch));
@@ -75,10 +70,10 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
+        [Category("GitFlow")]
         public void CheckWhetherDefaultBranchNamesCorrect()
         {
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
-            Utils.ThreadWait(4000);
             gitFlowInitWindow = mainWindow.ClickGitFlowButton();
 
             Assert.IsTrue(gitFlowInitWindow.TextboxDefaultContent(gitFlowInitWindow.ProductionBranchTextbox, ConstantsList.defaultProductionBranch));
