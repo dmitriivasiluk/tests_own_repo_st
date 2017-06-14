@@ -1,0 +1,116 @@
+ScreenObjectsHelpers/obj/Debug/ScreenObjectsHelpers.csproj.FileListAbsolute.txt
+packages/NUnit.ConsoleRunner.3.6.0/tools/nunit.engine.api.xml
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+*.tmp
+*.exe
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+build/
+[Bb]in/
+[Oo]bj/
+packages/ 
+
+*_i.c
+*_p.c
+*.ilk
+*.meta
+*.obj
+*.pch
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*.log
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.log
+*.scc
+
+# OS generated files #
+.DS_Store*
+Icon?
+
+# Visual C++ cache files
+ipch/
+*.aps
+*.ncb
+*.opensdf
+*.sdf
+*.cachefile
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+
+# Guidance Automation Toolkit
+*.gpState
+
+# ReSharper is a .NET coding add-in
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# TeamCity is a build add-in
+_TeamCity*
+
+# DotCover is a Code Coverage Tool
+*.dotCover
+
+# Others
+*.Cache
+ClientBin/
+[Ss]tyle[Cc]op.*
+~$*
+*~
+*.dbmdl
+*.[Pp]ublish.xml
+*.pfx
+*.publishsettings
+modulesbin/
+tempbin/
+
+# vim
+*.txt~
+*.swp
+*.swo
+
+# Remainings from resolvings conflicts in Source Control
+*.orig
+
+# =========================
+# Windows detritus
+# =========================
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Visual Studio 2014 CTP
+**/*.sln.ide
+
+# Visual Studio temp something
+.vs/
+
+# Fake Logs
+AutomationTestsSolution/.fake/

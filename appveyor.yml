@@ -1,0 +1,42 @@
+
+os: Unstable
+
+version: 1.0.{build}
+init:
+- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+install:
+- ps:  >-
+
+    Start-FileDownload https://bitbucket.org/atlassian/sourcetreeqaautomation/downloads/2.1.2.4.7z 'C:\Users\appveyor\AppData\Local\sourcetree.7z'
+    
+    Start-FileDownload https://bitbucket.org/atlassian/sourcetreeqaautomation/downloads/configs.7z 'C:\Users\appveyor\AppData\Local\configs.7z'
+    
+    Start-FileDownload https://bitbucket.org/atlassian/sourcetreeqaautomation/downloads/global_ignore.7z 'C:\Users\appveyor\Documents\ignore.7z'
+    
+before_build:
+- cmd: >-
+
+    set PATH=C:\Program Files\Git\mingw64\bin;%PATH%
+
+    git config --global core.excludesfile "%USERPROFILE%\.gitignore_global"
+
+    git config --global user.email test@atlassian.com
+    
+    git config --global user.name QAAutomation
+    
+    nuget restore
+    
+    7z e C:\Users\appveyor\AppData\Local\sourcetree.7z -y -oC:\Users\appveyor\AppData\Local -spf       
+    
+    7z e C:\Users\appveyor\AppData\Local\configs.7z -y -oC:\Users\appveyor\AppData\Local -spf    
+    
+    7z e C:\Users\appveyor\Documents\ignore.7z -y -oC:\Users\appveyor\Documents -spf
+build:
+  verbosity: minimal
+after_test:
+- cmd: >-
+
+    7z a %APPVEYOR_BUILD_FOLDER%\screenshot.7z C:\Users\appveyor\Documents\*.jpg    
+artifacts:
+ - path: screenshot.7z
+   name: screenshot
